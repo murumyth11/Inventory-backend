@@ -9,5 +9,5 @@ import com.vminventory.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-
+	List<Product> findById(int id);
 }

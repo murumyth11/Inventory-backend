@@ -1,6 +1,7 @@
 package com.vminventory.serviceImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ProductServiceImp implements ProductService{
 
 
 	public Product updateProduct(int id,Product product) {
-		Product prod=productRepo.findById(id).get();
+		Product prod=(Product) productRepo.findById(id).get(0);
 		prod.setProductId(product.getProductId());
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());
@@ -46,6 +47,13 @@ public class ProductServiceImp implements ProductService{
 	public void deleteProduct(int id) {
 	
 		 productRepo.deleteById(id);
+	}
+
+
+	@Override
+	public List<Product> getoneById(int id) {
+		// TODO Auto-generated method stub
+		return productRepo.findById(id);
 	}
 
 	
