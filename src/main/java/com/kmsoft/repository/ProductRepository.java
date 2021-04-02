@@ -1,9 +1,11 @@
-package com.vminventory.repository;
+package com.kmsoft.repository;
+
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vminventory.model.Product;
+import com.kmsoft.model.Product;
 
 
 

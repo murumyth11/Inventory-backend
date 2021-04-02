@@ -1,10 +1,8 @@
-package com.vminventory.service;
+package com.kmsoft.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import com.vminventory.model.Product;
+import com.kmsoft.model.Product;
 
 
 
