@@ -9,11 +9,11 @@
 		<version>2.4.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.vminventory</groupId>
-	<artifactId>inventory</artifactId>
+	<groupId>com.kmsoft</groupId>
+	<artifactId>kmsoftISoft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>inventory</name>
-	<description>Demo project for Spring Boot</description>
+	<description>KMSOFT ISOFT</description>
 
 	<properties>
 		<java.version>11</java.version>
