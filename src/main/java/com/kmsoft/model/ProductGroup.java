@@ -22,7 +22,7 @@ public class ProductGroup {
 	@Column(name = "productGroupName")
 	String productGroupName;
 
-	@OneToMany(mappedBy = "productgroup")
+	/*@OneToMany(mappedBy = "productgroup")
 	List<Product> products =new ArrayList<>();
 
 	public List<Product> getProducts() {
@@ -31,7 +31,7 @@ public class ProductGroup {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
+	}*/
 
 	public int getProductGroupId() {
 		return productGroupId;
