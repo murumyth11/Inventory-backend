@@ -1,23 +1,37 @@
 package com.kmsoft.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="ProductGroup")
 public class ProductGroup {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int productGroupId;
 
-	
-@Column(name="productGroupName")
+	@Column(name = "productGroupName")
 	String productGroupName;
+
+	@OneToMany(mappedBy = "productgroup")
+	List<Product> products =new ArrayList<>();
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
 
 	public int getProductGroupId() {
 		return productGroupId;
@@ -34,6 +48,7 @@ public class ProductGroup {
 	public void setProductGroupName(String productGroupName) {
 		this.productGroupName = productGroupName;
 	}
+
 	public ProductGroup(int productGroupId, String productGroupName) {
 		super();
 		this.productGroupId = productGroupId;

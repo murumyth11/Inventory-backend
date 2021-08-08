@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,19 @@ public class Product {
 	
 	@Column(name="productType")
 	String productType;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="productGroupFk",referencedColumnName = "productGroupId")
+	ProductGroup productgroup;
+
+	public ProductGroup getProductgroup() {
+		return productgroup;
+	}
+
+	public void setProductgroup(ProductGroup productgroup) {
+		this.productgroup = productgroup;
+	}
 
 	public Product() {
 		super();

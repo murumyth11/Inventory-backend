@@ -68,5 +68,13 @@ public class ProductDetailsController {
 	public List<ProductGroup> getAllProductGroup(){
 		return pgRepo.findAll();
 	}
+	 
+	@CrossOrigin(origins = "http://localhost:4200")	
+	@PostMapping("/productgroup")	
+	public ProductGroup createpg(@RequestBody ProductGroup productgroup)
+	{
+		return pgRepo.save(productgroup);
+	}
+	
 }
 
