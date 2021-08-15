@@ -21,6 +21,18 @@ public class ProductGroup {
 
 	@Column(name = "productGroupName")
 	String productGroupName;
+	
+	@Column(name="description")
+	String description;
+	
+	@Column(name="unit")
+	String unit;
+	
+	@Column(name="manufacturer")
+	String manufacturer;
+	
+	@Column(name="brand")
+	String brand;
 
 	/*@OneToMany(mappedBy = "productgroup")
 	List<Product> products =new ArrayList<>();
@@ -32,6 +44,38 @@ public class ProductGroup {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}*/
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
 	public int getProductGroupId() {
 		return productGroupId;
@@ -49,11 +93,7 @@ public class ProductGroup {
 		this.productGroupName = productGroupName;
 	}
 
-	public ProductGroup(int productGroupId, String productGroupName) {
-		super();
-		this.productGroupId = productGroupId;
-		this.productGroupName = productGroupName;
-	}
+	
 
 	public ProductGroup() {
 		super();
