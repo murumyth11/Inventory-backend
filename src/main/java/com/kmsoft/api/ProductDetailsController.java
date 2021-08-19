@@ -1,6 +1,7 @@
 package com.kmsoft.api;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
+import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
 import com.kmsoft.service.ProductService;
 
@@ -26,6 +29,9 @@ public class ProductDetailsController {
 	
 	@Autowired
 	ProductGroupRepository pgRepo;
+	
+	@Autowired
+	ManufacturerRepository manufRepo;
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/products")
@@ -74,6 +80,33 @@ public class ProductDetailsController {
 	public ProductGroup createpg(@RequestBody ProductGroup productgroup)
 	{
 		return pgRepo.save(productgroup);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("/productgroup/{id}")
+	public void deleteProductgroup(@PathVariable Integer id)
+	{
+		pgRepo.deleteById(id);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")	
+	@PostMapping("/manufacturer")
+	public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
+		return manufRepo.save(manufacturer);
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/manufacturer")
+	public List<Manufacturer> getManufacturer(){
+		return  manufRepo.findAll();
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("/manufacturer/{id}")
+	public void deleteManufacturer(@PathVariable Integer id)
+	{
+		manufRepo.deleteById(id);
 	}
 	
 }
