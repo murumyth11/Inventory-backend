@@ -3,13 +3,18 @@ package com.kmsoft.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="ProductGroup")
@@ -34,16 +39,17 @@ public class ProductGroup {
 	@Column(name="brand")
 	String brand;
 
-	/*@OneToMany(mappedBy = "productgroup")
+	@OneToMany(mappedBy="productgroup",cascade=CascadeType.ALL, fetch=FetchType.EAGER ,orphanRemoval = true)
 	List<Product> products =new ArrayList<>();
 
+	@JsonBackReference
 	public List<Product> getProducts() {
 		return products;
 	}
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}*/
+	}
 
 	public String getDescription() {
 		return description;

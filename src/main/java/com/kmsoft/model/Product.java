@@ -2,14 +2,22 @@ package com.kmsoft.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Product")
@@ -36,10 +44,13 @@ public class Product {
 	
 	
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER )
+	
 	@JoinColumn(name="productGroupFk",referencedColumnName = "productGroupId")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	ProductGroup productgroup;
 
+	@JsonManagedReference
 	public ProductGroup getProductgroup() {
 		return productgroup;
 	}
