@@ -44,9 +44,7 @@ public class Product {
 	String productType;
 
 	@ManyToOne
-
 	@JoinColumn(name = "productGroupFk", referencedColumnName = "productGroupId")
-
 	ProductGroup productgroup;
 
 	public ProductGroup getProductgroup() {

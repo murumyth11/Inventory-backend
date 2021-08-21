@@ -15,10 +15,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="ProductGroup")
+@Table(name = "ProductGroup")
+@JsonIgnoreProperties({ "product" })
 public class ProductGroup {
 
 	@Id
@@ -27,24 +29,29 @@ public class ProductGroup {
 
 	@Column(name = "productGroupName")
 	String productGroupName;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	String description;
-	
-	@Column(name="unit")
+
+	@Column(name = "unit")
 	String unit;
-	
-	@Column(name="manufacturer")
+
+	@Column(name = "manufacturer")
 	String manufacturer;
-	
-	@Column(name="brand")
+
+	@Column(name = "brand")
 	String brand;
 
-	
-	
+	@OneToMany(mappedBy = "productgroup", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	List<Product> product = new ArrayList();
 
-	
-	
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
 
 	public String getDescription() {
 		return description;
@@ -93,8 +100,6 @@ public class ProductGroup {
 	public void setProductGroupName(String productGroupName) {
 		this.productGroupName = productGroupName;
 	}
-
-	
 
 	public ProductGroup() {
 		super();
