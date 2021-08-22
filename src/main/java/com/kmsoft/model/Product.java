@@ -36,16 +36,115 @@ public class Product {
 
 	@Column(name = "productQuantity")
 	int productQuantity;
+	
+	@Column(name="weight")
+	int weight;
+	
+	public int getWeight() {
+		return weight;
+	}
 
-	@Column(name = "productPrice")
-	BigDecimal productPrice;
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	@Column(name="dimension")
+	String dimension;
 
+	public String getDimension() {
+		return dimension;
+	}
+
+	public void setDimension(String dimension) {
+		this.dimension = dimension;
+	}
+
+	@Column(name="unit")
+	String unit;
+	
+
+	@Column(name = "costPrice")
+	BigDecimal costPrice;
+	
+	@Column(name="sellingPrice")
+    BigDecimal sellingPrice;
+	
+	
+	
+	@Column(name="manufacturer")
+	String manufacturer;
+	
+	@Column(name="brand")
+	String brand;
+	
+	@Column(name="manufacturePartNumber")
+	String manufacturePartNumber;
+	
+	@Column(name="universalProductCode")
+	String universalProductCode;
+	
+	
 	@Column(name = "productType")
 	String productType;
 
 	@ManyToOne
 	@JoinColumn(name = "productGroupFk", referencedColumnName = "productGroupId")
 	ProductGroup productgroup;
+
+	
+	public BigDecimal getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(BigDecimal costPrice) {
+		this.costPrice = costPrice;
+	}
+
+	public BigDecimal getSellingPrice() {
+		return sellingPrice;
+	}
+
+	public void setSellingPrice(BigDecimal sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+
+	
+
+	
+
+	
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getManufacturePartNumber() {
+		return manufacturePartNumber;
+	}
+
+	public void setManufacturePartNumber(String manufacturePartNumber) {
+		this.manufacturePartNumber = manufacturePartNumber;
+	}
+
+	public String getUniversalProductCode() {
+		return universalProductCode;
+	}
+
+	public void setUniversalProductCode(String universalProductCode) {
+		this.universalProductCode = universalProductCode;
+	}
+
 
 	public ProductGroup getProductgroup() {
 		return productgroup;
@@ -92,13 +191,7 @@ public class Product {
 		this.productQuantity = productQuantity;
 	}
 
-	public BigDecimal getProductPrice() {
-		return productPrice;
-	}
 
-	public void setProductPrice(BigDecimal productPrice) {
-		this.productPrice = productPrice;
-	}
 
 	public String getProductType() {
 		return productType;
@@ -108,14 +201,21 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public Product(int productId, String productKey, String productName, int productQuantity, BigDecimal productPrice,
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public Product(int productId, String productKey, String productName, int productQuantity, 
 			String productType) {
 		super();
 		this.productId = productId;
 		this.productKey = productKey;
 		this.productName = productName;
 		this.productQuantity = productQuantity;
-		this.productPrice = productPrice;
 		this.productType = productType;
 	}
 

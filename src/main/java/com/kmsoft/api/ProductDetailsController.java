@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kmsoft.model.Brand;
 import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
+import com.kmsoft.repository.BrandRepository;
 import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
 import com.kmsoft.service.ProductService;
@@ -32,6 +34,9 @@ public class ProductDetailsController {
 	
 	@Autowired
 	ManufacturerRepository manufRepo;
+	
+	@Autowired
+	BrandRepository brandRepo;
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/products")
@@ -107,6 +112,21 @@ public class ProductDetailsController {
 	public void deleteManufacturer(@PathVariable Integer id)
 	{
 		manufRepo.deleteById(id);
+	}
+	
+	@PostMapping("/brand")
+	public Brand createBand(@RequestBody Brand brand ) {
+		
+		return brandRepo.save(brand);
+		
+	}
+	@GetMapping("/brand")
+	public List<Brand> getBrand(){
+		return brandRepo.findAll();
+		}
+	@DeleteMapping("/brand/{id}")
+	public void deleteBrand(@PathVariable Integer id) {
+		brandRepo.deleteById(id);
 	}
 	
 }
