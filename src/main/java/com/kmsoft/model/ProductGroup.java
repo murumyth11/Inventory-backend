@@ -43,7 +43,7 @@ public class ProductGroup {
 	String brand;
 
 	@OneToMany(mappedBy = "productgroup", cascade = { CascadeType.ALL }, orphanRemoval = true)
-	List<Product> product = new ArrayList();
+	List<Product> product = new ArrayList<Product>();
 
 	public List<Product> getProduct() {
 		return product;
@@ -52,6 +52,8 @@ public class ProductGroup {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+	
+	
 
 	public String getDescription() {
 		return description;

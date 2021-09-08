@@ -1,5 +1,6 @@
 package com.kmsoft.api;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -18,9 +19,12 @@ import com.kmsoft.model.Brand;
 import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
+import com.kmsoft.model.ProductUpdateHistory;
 import com.kmsoft.repository.BrandRepository;
 import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
+import com.kmsoft.repository.ProductRepository;
+import com.kmsoft.repository.ProductUpdateHistoryRepository;
 import com.kmsoft.service.ProductService;
 
 @RestController
@@ -30,6 +34,9 @@ public class ProductDetailsController {
 	ProductService productservice;
 	
 	@Autowired
+	ProductRepository prepo;
+	
+	@Autowired
 	ProductGroupRepository pgRepo;
 	
 	@Autowired
@@ -37,6 +44,10 @@ public class ProductDetailsController {
 	
 	@Autowired
 	BrandRepository brandRepo;
+	
+	@Autowired
+	ProductUpdateHistoryRepository PrdtUpdtHstRepo;
+	
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/products")
@@ -51,7 +62,7 @@ public class ProductDetailsController {
 	}
 
 	// save product
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@PostMapping("/products")
 	public Product createProduct(@RequestBody Product product) {
 		return productservice.createProduct(product);
@@ -59,6 +70,7 @@ public class ProductDetailsController {
 	}
 
 	// update product
+	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/products/{id}")
 	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
@@ -73,6 +85,16 @@ public class ProductDetailsController {
 	{
 	  productservice.deleteProduct(id);
 	}
+	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@DeleteMapping("/products/{ids}")
+//	
+//	public void deleteSProduct(@PathVariable Integer[] ids)
+//	{
+//		prepo.deleteUsersWithIds(Arrays.asList(ids));
+//	}
+	
+	
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/productgroup")
@@ -114,20 +136,37 @@ public class ProductDetailsController {
 		manufRepo.deleteById(id);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/brand")
 	public Brand createBand(@RequestBody Brand brand ) {
 		
 		return brandRepo.save(brand);
 		
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/brand")
 	public List<Brand> getBrand(){
 		return brandRepo.findAll();
 		}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/brand/{id}")
 	public void deleteBrand(@PathVariable Integer id) {
 		brandRepo.deleteById(id);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/puh")
+	public ProductUpdateHistory createProductUpdateHistory(@RequestBody ProductUpdateHistory productupdtHst) {
+		return PrdtUpdtHstRepo.save(productupdtHst);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/puh")
+	public List<ProductUpdateHistory> getPuh(){
+		return PrdtUpdtHstRepo.findAll();
+		}
 	
 }
 

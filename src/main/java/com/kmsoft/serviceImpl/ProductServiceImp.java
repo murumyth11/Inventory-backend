@@ -30,14 +30,14 @@ public class ProductServiceImp implements ProductService{
 
 
 	public Product updateProduct(int id,Product product) {
-		Product prod=(Product) productRepo.findById(id).get(0);
+		Product prod= productRepo.findById(id).get(0);
 		prod.setProductId(product.getProductId());
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());
-		prod.setProductQuantity(product.getProductQuantity());
-		prod.setProductType(product.getProductType());
+		prod.setProductQuantity(product.getProductQuantity()+prod.getProductQuantity());
+	
 		
-		return productRepo.saveAndFlush(product);
+		return productRepo.saveAndFlush(prod);
 	}
 
 

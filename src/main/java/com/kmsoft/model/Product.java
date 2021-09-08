@@ -1,6 +1,9 @@
 package com.kmsoft.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,17 +14,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Product")
+@JsonIgnoreProperties({ "productUpdateHistory" })
 public class Product {
 
 	@Id
@@ -35,11 +44,25 @@ public class Product {
 	String productName;
 
 	@Column(name = "productQuantity")
-	int productQuantity;
+	int productQuantity=0;
 	
 	@Column(name="weight")
 	int weight;
 	
+	@Column(name="entryDate")
+//	@Temporal(TemporalType.TIMESTAMP)
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
+    private String createDate;
+		
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
 	public int getWeight() {
 		return weight;
 	}
@@ -90,8 +113,23 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "productGroupFk", referencedColumnName = "productGroupId")
 	ProductGroup productgroup;
+	
+	@OneToMany(mappedBy="product",cascade = CascadeType.ALL,
+        orphanRemoval = true)
+	
+		List<ProductUpdateHistory> productUpdateHistory=new ArrayList<ProductUpdateHistory>();
 
 	
+	
+
+	public List<ProductUpdateHistory> getProductUpdateHistory() {
+		return productUpdateHistory;
+	}
+
+	public void setProductUpdateHistory(List<ProductUpdateHistory> productUpdateHistory) {
+		this.productUpdateHistory = productUpdateHistory;
+	}
+
 	public BigDecimal getCostPrice() {
 		return costPrice;
 	}
@@ -188,7 +226,9 @@ public class Product {
 	}
 
 	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
+		
+		this.productQuantity=productQuantity;
+		
 	}
 
 
@@ -217,6 +257,7 @@ public class Product {
 		this.productName = productName;
 		this.productQuantity = productQuantity;
 		this.productType = productType;
+		
 	}
 
 }
