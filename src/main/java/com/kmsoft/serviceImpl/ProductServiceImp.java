@@ -35,7 +35,16 @@ public class ProductServiceImp implements ProductService{
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());
 		prod.setProductQuantity(product.getProductQuantity()+prod.getProductQuantity());
-	
+		prod.setBrand(product.getBrand());
+		prod.setManufacturer(product.getManufacturer());
+		prod.setCostPrice(product.getCostPrice());
+		prod.setSellingPrice(product.getSellingPrice());
+		prod.setDimension(product.getDimension());
+		prod.setManufacturePartNumber(product.getManufacturePartNumber());
+		prod.setProductgroup(product.getProductgroup());
+	    prod.setUnit(product.getUnit());
+	    prod.setUniversalProductCode(product.getUniversalProductCode());
+	    prod.setWeight(product.getWeight());
 		
 		return productRepo.saveAndFlush(prod);
 	}
