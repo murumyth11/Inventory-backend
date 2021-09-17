@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kmsoft.model.Billproduct;
 import com.kmsoft.model.Product;
 import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.service.ProductService;
@@ -62,7 +63,7 @@ public class ProductServiceImp implements ProductService{
 		// TODO Auto-generated method stub
 		return productRepo.findById(id);
 	}
-
+ 
 	
 
 }
