@@ -1,42 +1,61 @@
 package com.kmsoft.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="billproduct")
+
 public class Billproduct {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	int billproductId;
 	
-	@OneToOne()
-	@JoinColumn(name="fk")
-	Product product;
+	@ManyToOne
+	@JoinColumn(name="productFk",referencedColumnName = "productId")
 	
+	Product name;
+	
+	
+
 	@Column(name="quantity")
 	int quantity;
 	
 	@Column(name="discount")
 	int discount;
 	
+	public Product getName() {
+		return name;
+	}
+
+	public void setName(Product name) {
+		this.name = name;
+	}
+
+	@Column(name="rate")
+	int rate;
+	
 	@Column(name="amount")
 	int amount;
 
-	public Product getProduct() {
-		return product;
-	}
+	
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+	
 
 	public int getQuantity() {
 		return quantity;
@@ -61,7 +80,21 @@ public class Billproduct {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
+	public int getBillproductId() {
+		return billproductId;
+	}
+
+	public void setBillproductId(int billproductId) {
+		this.billproductId = billproductId;
+	}
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
 	
 	
 

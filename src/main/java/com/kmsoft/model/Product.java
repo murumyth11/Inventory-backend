@@ -30,7 +30,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Product")
-@JsonIgnoreProperties({ "productUpdateHistory" })
+@JsonIgnoreProperties({ "productUpdateHistory","billproduct" })
+
 public class Product {
 
 	@Id
@@ -53,6 +54,9 @@ public class Product {
 //	@Temporal(TemporalType.TIMESTAMP)
 //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
     private String createDate;
+	
+	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL }, orphanRemoval = true)
+		public List<Billproduct> billproduct=new ArrayList<Billproduct>();
 		
 
 	public String getCreateDate() {

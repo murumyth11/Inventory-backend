@@ -43,21 +43,5 @@ public class CustomerController {
 	{
 		customerRepo.deleteById(id);
 	}
-	
-	@CrossOrigin("*")
-	@PostMapping("/bill")
-	public Billproduct createBill(@RequestBody Billproduct bill) {
-		return billRepo.save(bill);
-	}
-	
-	@CrossOrigin("*")
-	@GetMapping("/bill")
-	public List<Billproduct> getBill() {
-		return  billRepo.findAll();
-	}
-	
-	
-	
-	
-	
+		
 }
