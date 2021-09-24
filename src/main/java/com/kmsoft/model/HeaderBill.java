@@ -33,6 +33,39 @@ public class HeaderBill {
 	@Column(name="date")
 	String date;
 	
+	@Column(name="subtotal")
+	int subttotal;
+	
+	@Column(name="adjustment")
+	int adjustment;
+	
+	@Column(name="billnotes")
+	String billnotes;
+
+	public String getBillnotes() {
+		return billnotes;
+	}
+
+	public void setBillnotes(String billnotes) {
+		this.billnotes = billnotes;
+	}
+
+	public int getSubttotal() {
+		return subttotal;
+	}
+
+	public void setSubttotal(int subttotal) {
+		this.subttotal = subttotal;
+	}
+
+	public int getAdjustment() {
+		return adjustment;
+	}
+
+	public void setAdjustment(int adjustment) {
+		this.adjustment = adjustment;
+	}
+
 	@Column(name="total")
 	int total;
 	
