@@ -1,5 +1,8 @@
 package com.kmsoft.model;
 
+
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="HeaderBill")
@@ -30,11 +37,14 @@ public class HeaderBill {
 	@Column(name="invoice")
 	String invoice;
 	
-	@Column(name="date")
-	String date;
+	@Column(name="date" ,columnDefinition="DATETIME")
+	
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
+	LocalDateTime date;
 	
 	@Column(name="subtotal")
-	int subttotal;
+	int subtotal;
 	
 	@Column(name="adjustment")
 	int adjustment;
@@ -50,12 +60,12 @@ public class HeaderBill {
 		this.billnotes = billnotes;
 	}
 
-	public int getSubttotal() {
-		return subttotal;
+	public int getSubtotal() {
+		return subtotal;
 	}
 
-	public void setSubttotal(int subttotal) {
-		this.subttotal = subttotal;
+	public void setSubtotal(int subtotal) {
+		this.subtotal = subtotal;
 	}
 
 	public int getAdjustment() {
@@ -103,11 +113,11 @@ public class HeaderBill {
 		this.invoice = invoice;
 	}
 
-	public String getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
