@@ -1,10 +1,14 @@
 package com.kmsoft.api;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +51,12 @@ public class BillController {
 	@GetMapping("/headerbill")
 	public List<HeaderBill> getheaderBill(){
 		return headerbillRepo.findAll();
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/headerbill/{startDate}/{endDate}")
+	public List<HeaderBill> getData_between(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate, @PathVariable   @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate) {
+	   
+		return headerbillRepo.getAllBetweenDates(startDate,endDate);
 	}
 }
