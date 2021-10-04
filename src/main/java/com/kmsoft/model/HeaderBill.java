@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.Nullable;
 
 @Entity
 @Table(name="HeaderBill")
@@ -51,6 +52,29 @@ public class HeaderBill {
 	
 	@Column(name="billnotes")
 	String billnotes;
+	
+	
+	@Column(name="totalitems")
+	int totalitems;
+	
+	@Column(name="totalquantity")
+	int totalquantity;
+
+	public int getTotalquantity() {
+		return totalquantity;
+	}
+
+	public void setTotalquantity(int totalquantity) {
+		this.totalquantity = totalquantity;
+	}
+
+	public int getTotalitems() {
+		return totalitems;
+	}
+
+	public void setTotalitems(int totalitems) {
+		this.totalitems = totalitems;
+	}
 
 	public String getBillnotes() {
 		return billnotes;
