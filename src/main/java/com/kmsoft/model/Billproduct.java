@@ -36,6 +36,9 @@ public class Billproduct {
 	@Column(name="quantity")
 	int quantity;
 	
+	@Column(name="unit")
+	String unit;
+	
 	@Column(name="discount")
 	int discount;
 	
@@ -56,6 +59,14 @@ public class Billproduct {
 	
 
 	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 
 	public int getQuantity() {
 		return quantity;

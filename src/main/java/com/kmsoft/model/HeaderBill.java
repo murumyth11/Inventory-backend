@@ -59,6 +59,17 @@ public class HeaderBill {
 	
 	@Column(name="totalquantity")
 	int totalquantity;
+	
+	@Column(name="isdraft")
+    int isdraft;
+	
+	public int getIsdraft() {
+		return isdraft;
+	}
+
+	public void setIsdraft(int isdraft) {
+		this.isdraft = isdraft;
+	}
 
 	public int getTotalquantity() {
 		return totalquantity;

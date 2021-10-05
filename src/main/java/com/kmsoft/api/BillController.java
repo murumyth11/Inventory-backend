@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +59,18 @@ public class BillController {
 	public List<HeaderBill> getData_between(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate, @PathVariable   @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate) {
 	   
 		return headerbillRepo.getAllBetweenDates(startDate,endDate);
+	}
+	@CrossOrigin("*")
+	@GetMapping("/headerbill/draft")
+	public List<HeaderBill> getdraftbill() {
+	   
+		return headerbillRepo.getDraftBill();
+	}
+	
+	@CrossOrigin("*")
+	@DeleteMapping("/headerbill/draft/{id}")
+	public void deleteCustomer(@PathVariable Integer id)
+	{
+		headerbillRepo.deleteById(id);
 	}
 }
