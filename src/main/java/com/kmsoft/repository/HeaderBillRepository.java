@@ -17,4 +17,9 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	
 	@Query(value="SELECT * FROM Header_bill WHERE isdraft=1",nativeQuery=true)
 	List<HeaderBill> getDraftBill();
+
+	@Query(value="SELECT * FROM Header_bill WHERE date LIKE %:date% AND isdraft=0",nativeQuery=true)
+	List<HeaderBill> getbillbydate(@Param("date") String date);
+	
+	
 }

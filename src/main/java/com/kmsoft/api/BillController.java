@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kmsoft.model.Billproduct;
@@ -72,5 +73,11 @@ public class BillController {
 	public void deleteCustomer(@PathVariable Integer id)
 	{
 		headerbillRepo.deleteById(id);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/headerbill/bydate/{date}")
+	public List<HeaderBill> getbillbydate(@PathVariable String date){
+		return headerbillRepo.getbillbydate(date);
 	}
 }

@@ -35,6 +35,17 @@ public class  ProductUpdateHistory {
 	public void setUpdateQuantity(int updateQuantity) {
 		this.updateQuantity = updateQuantity;
 	}
+    
+	@Column(name="updateFrom")
+	String updateFrom;
+	
+	public String getUpdateFrom() {
+		return updateFrom;
+	}
+
+	public void setUpdateFrom(String updateFrom) {
+		this.updateFrom = updateFrom;
+	}
 
 	@ManyToOne
 	@JoinColumn(name="productFk",referencedColumnName = "productId")
