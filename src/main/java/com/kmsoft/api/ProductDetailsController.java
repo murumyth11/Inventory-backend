@@ -168,5 +168,11 @@ public class ProductDetailsController {
 		return PrdtUpdtHstRepo.findAll();
 		}
 	
+	@CrossOrigin("*")
+	@GetMapping("/products/{productlike}")
+	public List<Product> getproductlike(@PathVariable String productlike){
+		return prepo.getProductLike(productlike);
+	}
+	
 }
 

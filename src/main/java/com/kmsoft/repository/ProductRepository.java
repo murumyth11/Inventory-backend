@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.kmsoft.model.Product;
@@ -15,5 +16,6 @@ import com.kmsoft.model.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findById(int id);
 	
-	
+	@Query(value="SELECT * FROM product WHERE product_name LIKE %:productlike%",nativeQuery = true)
+	List<Product> getProductLike(@Param("productlike") String productlike);
 }
