@@ -10,7 +10,7 @@ import com.kmsoft.model.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
-	@Query(value="SELECT * FROM  customer WHERE customer_name like %:custlike%",nativeQuery = true)
+	@Query(value="SELECT * FROM  customer WHERE customer_phone LIKE %:custlike%",nativeQuery = true)
 	List<Customer> getCustomerLike(@Param("custlike")  String custlike);
 
 }

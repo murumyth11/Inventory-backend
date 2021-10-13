@@ -28,7 +28,6 @@ public class Billproduct {
 	
 	@ManyToOne
 	@JoinColumn(name="productFk",referencedColumnName = "productId")
-	
 	Product name;
 	
 	

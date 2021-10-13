@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,8 +40,6 @@ public class HeaderBill {
 	String invoice;
 	
 	@Column(name="date" ,columnDefinition="DATETIME")
-	
-	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime date;
 	
@@ -175,5 +174,17 @@ public class HeaderBill {
 	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name="headerbillFk")
 	public List<Billproduct> billdetails=new ArrayList<Billproduct>();
+	
+	@ManyToOne
+	@JoinColumn(name="customerFk",referencedColumnName = "customerId")
+	Customer customer;
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 }
