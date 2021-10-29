@@ -174,5 +174,11 @@ public class ProductDetailsController {
 		return prepo.getProductLike(productlike);
 	}
 	
+	@CrossOrigin("*")
+	@GetMapping("/products/lowstock")
+	public List<Product> getLowStock(){
+		return prepo.getLowStock();
+	}
+	
 }
 

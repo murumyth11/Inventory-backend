@@ -18,4 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	@Query(value="SELECT * FROM product WHERE product_name LIKE %:productlike%",nativeQuery = true)
 	List<Product> getProductLike(@Param("productlike") String productlike);
+	
+	@Query(value="SELECT * FROM product WHERE product_quantity <=10",nativeQuery=true)
+	List<Product> getLowStock();
 }

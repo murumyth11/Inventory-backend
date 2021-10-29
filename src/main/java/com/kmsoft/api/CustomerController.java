@@ -38,7 +38,7 @@ public class CustomerController {
 	}
 	
 	@CrossOrigin("*")
-	@DeleteMapping("/customers/{id}")
+	@DeleteMapping("/customer/{id}")
 	public void deleteCustomer(@PathVariable Integer id)
 	{
 		customerRepo.deleteById(id);
