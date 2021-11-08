@@ -4,11 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.kmsoft.model.HeaderBill;
+import com.kmsoft.model.Product;
 
 public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer> {
 
@@ -18,8 +21,18 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	@Query(value="SELECT * FROM Header_bill WHERE isdraft=1",nativeQuery=true)
 	List<HeaderBill> getDraftBill();
 
-	@Query(value="SELECT * FROM Header_bill WHERE date LIKE %:date% AND isdraft=0",nativeQuery=true)
+	@Query(value="SELECT * FROM header_bill WHERE date LIKE %:date% AND isdraft=0",nativeQuery=true)
 	List<HeaderBill> getbillbydate(@Param("date") String date);
 	
+	 Page<HeaderBill> findAll(Pageable pageable);
+		
+	 @Query(value="SELECT * FROM header_bill WHERE customer LIKE %:title%"+" OR invoice LIKE %:title% "
+	 +" OR subtotal LIKE %:title% "
+			 +" OR total LIKE %:title% "
+	 +" OR phone LIKE %:title% "
+				 ,nativeQuery = true)
+	 Page<HeaderBill> findByInvoiceContaining(String title,Pageable pageable);
 	
+	 @Query(value="SELECT MAX(invoice) FROM header_bill WHERE isdraft=0",nativeQuery=true)
+	 int getHeaderbillInvNo();
 }

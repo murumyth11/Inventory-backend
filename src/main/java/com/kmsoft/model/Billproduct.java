@@ -41,6 +41,17 @@ public class Billproduct {
 	@Column(name="discount")
 	int discount;
 	
+	@Column(name="discountType")
+	String discountType;
+	
+	public String getDiscountType() {
+		return discountType;
+	}
+
+	public void setDiscountType(String discountType) {
+		this.discountType = discountType;
+	}
+
 	public Product getName() {
 		return name;
 	}

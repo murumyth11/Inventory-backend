@@ -1,10 +1,16 @@
 package com.kmsoft.api;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kmsoft.model.Brand;
@@ -48,12 +55,12 @@ public class ProductDetailsController {
 	@Autowired
 	ProductUpdateHistoryRepository PrdtUpdtHstRepo;
 	
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping("/products")
-	public List<Product> getAllProducts() {
-		return productservice.getAllProducts();
-	}
+//
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@RequestMapping("/products")
+//	public List<Product> getAllProducts() {
+//		return productservice.getAllProducts();
+//	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/products/{id}")
@@ -179,6 +186,46 @@ public class ProductDetailsController {
 	public List<Product> getLowStock(){
 		return prepo.getLowStock();
 	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/products/stockInHand")
+	public int getStockInHand() {
+		return prepo.getStockinHand();
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/products/stockSold")
+	public int getStockSold() {
+		return PrdtUpdtHstRepo.getSTockSold();
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/products/totalProductCount")
+	public int getTotalproductcount() {
+		return prepo.getTotalproduct();
+	}
+	
+	@CrossOrigin("*")
+	  @GetMapping("/prd")
+	  public Page<Product> getAllTutorials(
+	        @RequestParam(required = false) String title,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "2") int size
+	      ) {
+		  List<Product> tutorials = new ArrayList<Product>();
+	      Pageable paging = PageRequest.of(page, size);
+	      Page<Product> pageTuts;
+	      
+	      
+	      if(title==null)
+	      {pageTuts = prepo.findAll(paging);
+	      System.out.println(title);
+	      }
+	      else
+	      {pageTuts=prepo.findByProductNameContaining(title, paging);}
+	      return pageTuts;
+	     
+	  }
 	
 }
 

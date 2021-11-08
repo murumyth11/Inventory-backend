@@ -1,10 +1,14 @@
 package com.kmsoft.api;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kmsoft.model.Billproduct;
 import com.kmsoft.model.HeaderBill;
+import com.kmsoft.model.Product;
 import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.repository.HeaderBillRepository;
 
@@ -49,11 +54,28 @@ public class BillController {
 		
 	}
 	
+
 	@CrossOrigin("*")
-	@GetMapping("/headerbill")
-	public List<HeaderBill> getheaderBill(){
-		return headerbillRepo.findAll();
-	}
+	  @GetMapping("/headerbill")
+	  public Page<HeaderBill> getAllHeaderbills(
+	        @RequestParam(required = false) String title,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "2") int size
+	      ) {
+		  List<HeaderBill> tutorials = new ArrayList<HeaderBill>();
+	      Pageable paging = PageRequest.of(page, size);
+	      Page<HeaderBill> pageTuts;
+	      
+	      
+	      if(title==null)
+	      {pageTuts = headerbillRepo.findAll(paging);
+	      
+	      }
+	      else
+	      {pageTuts=headerbillRepo.findByInvoiceContaining(title, paging);}
+	      return pageTuts;
+	     
+	  }
 	
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/{startDate}/{endDate}")
@@ -79,5 +101,13 @@ public class BillController {
 	@GetMapping("/headerbill/bydate/{date}")
 	public List<HeaderBill> getbillbydate(@PathVariable String date){
 		return headerbillRepo.getbillbydate(date);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/headerbill/invoiceNo")
+	public int getInvoiceNumber()
+	{
+		System.out.println("hii");
+		return headerbillRepo.getHeaderbillInvNo();
 	}
 }
