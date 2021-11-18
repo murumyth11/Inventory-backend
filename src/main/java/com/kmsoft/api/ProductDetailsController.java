@@ -27,6 +27,7 @@ import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
 import com.kmsoft.model.ProductUpdateHistory;
+import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.repository.BrandRepository;
 import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
@@ -55,12 +56,15 @@ public class ProductDetailsController {
 	@Autowired
 	ProductUpdateHistoryRepository PrdtUpdtHstRepo;
 	
-//
-//	@CrossOrigin(origins = "http://localhost:4200")
-//	@RequestMapping("/products")
-//	public List<Product> getAllProducts() {
-//		return productservice.getAllProducts();
-//	}
+	@Autowired
+	BillproductRepository billproductRepo;
+	
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping("/products")
+	public List<Product> getAllProducts() {
+		return productservice.getAllProducts();
+	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/products/{id}")
@@ -79,9 +83,9 @@ public class ProductDetailsController {
 	// update product
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/products/{id}")
-	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
-		return productservice.updateProduct(id,product);
+	@PutMapping("/products/{name}")
+	public Product updateProduct(@PathVariable String name, @RequestBody Product product) {
+		return productservice.updateProduct(name,product);
 
 	}
 
@@ -227,5 +231,16 @@ public class ProductDetailsController {
 	     
 	  }
 	
+	@CrossOrigin("*")
+	@GetMapping("/soldquantity")
+	public Map<String,Number> getTotalSoldQuantity(@RequestParam() int id) {
+		System.out.println(id);
+		return  billproductRepo.getTotalSoldQuantity(id);
+	}
+	@CrossOrigin("*")
+	@RequestMapping("/updatequantity/{id}")
+	public void updateQuantity(@PathVariable int id,@RequestParam() String qty) {
+		prepo.updateProductQuantity(id,qty);
+	}
 }
 

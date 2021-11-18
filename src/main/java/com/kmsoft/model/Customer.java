@@ -23,7 +23,7 @@ public class Customer {
 	String customerName;
 	
 	@Column(name="customerPhone")
-	double customerPhone;
+	String customerPhone;
 	
 	@Column(name="customerEmail")
 	String customerEmail;
@@ -47,11 +47,11 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
-	public double getCustomerPhone() {
+	public String getCustomerPhone() {
 		return customerPhone;
 	}
 
-	public void setCustomerPhone(double customerPhone) {
+	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
 

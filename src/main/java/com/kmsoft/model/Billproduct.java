@@ -32,13 +32,24 @@ public class Billproduct {
 	
 	
 
-	@Column(name="quantity")
-	int quantity;
+	@Column(name="quantity",columnDefinition="DECIMAL(10,2)")
+	float quantity;
+	
+	@Column(name="convertedQuantity",columnDefinition="DECIMAL(10,2)")
+	float convertedQuantity;
 	
 	@Column(name="unit")
 	String unit;
 	
-	@Column(name="discount")
+	public float getConvertedQuantity() {
+		return convertedQuantity;
+	}
+
+	public void setConvertedQuantity(float convertedQuantity) {
+		this.convertedQuantity = convertedQuantity;
+	}
+
+	@Column(name="discount",columnDefinition="DECIMAL(10,2)")
 	int discount;
 	
 	@Column(name="discountType")
@@ -60,10 +71,10 @@ public class Billproduct {
 		this.name = name;
 	}
 
-	@Column(name="rate")
+	@Column(name="rate",columnDefinition="DECIMAL(10,2)")
 	int rate;
 	
-	@Column(name="amount")
+	@Column(name="amount",columnDefinition="DECIMAL(10,2)")
 	int amount;
 
 	
@@ -78,11 +89,11 @@ public class Billproduct {
 		this.unit = unit;
 	}
 
-	public int getQuantity() {
+	public float getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(float quantity) {
 		this.quantity = quantity;
 	}
 

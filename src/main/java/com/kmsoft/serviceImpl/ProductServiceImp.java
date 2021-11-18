@@ -30,11 +30,14 @@ public class ProductServiceImp implements ProductService{
 	}
 
 
-	public Product updateProduct(int id,Product product) {
-		Product prod= productRepo.findById(id).get(0);
+	public Product updateProduct(String name,Product product) {
+		Product prod= productRepo.findByProductName(name).get(0);
 		prod.setProductId(product.getProductId());
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());
+		System.out.println(prod.getProductQuantity());
+		System.out.println(product.getProductQuantity());
+	
 		prod.setProductQuantity(product.getProductQuantity()+prod.getProductQuantity());
 		prod.setBrand(product.getBrand());
 		prod.setManufacturer(product.getManufacturer());
@@ -43,7 +46,7 @@ public class ProductServiceImp implements ProductService{
 		prod.setDimension(product.getDimension());
 		prod.setManufacturePartNumber(product.getManufacturePartNumber());
 		prod.setProductgroup(product.getProductgroup());
-	    prod.setUnit(product.getUnit());
+	   // prod.setprimaryUnit(product.getPrimaryUnit());
 	    prod.setUniversalProductCode(product.getUniversalProductCode());
 	    prod.setWeight(product.getWeight());
 		

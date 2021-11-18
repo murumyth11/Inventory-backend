@@ -44,8 +44,8 @@ public class Product {
 	@Column(name = "productName")
 	String productName;
 
-	@Column(name = "productQuantity")
-	int productQuantity=0;
+	@Column(name = "productQuantity",columnDefinition="DECIMAL(10,2)")
+	float productQuantity=0;
 	
 	@Column(name="weight")
 	int weight;
@@ -86,9 +86,47 @@ public class Product {
 		this.dimension = dimension;
 	}
 
-	@Column(name="unit")
-	String unit;
+	@Column(name="primaryunit")
+	String primaryUnit;
 	
+	@Column(name="secondaryunit")
+	String secondaryUnit;
+	
+	@Column(name="unitconversion")
+	int unitConversion;
+	
+
+	public List<Billproduct> getBillproduct() {
+		return billproduct;
+	}
+
+	public void setBillproduct(List<Billproduct> billproduct) {
+		this.billproduct = billproduct;
+	}
+
+	public String getPrimaryUnit() {
+		return primaryUnit;
+	}
+
+	public void setPrimaryUnit(String primaryUnit) {
+		this.primaryUnit = primaryUnit;
+	}
+
+	public String getSecondaryUnit() {
+		return secondaryUnit;
+	}
+
+	public void setSecondaryUnit(String secondaryUnit) {
+		this.secondaryUnit = secondaryUnit;
+	}
+
+	public int getUnitConversion() {
+		return unitConversion;
+	}
+
+	public void setUnitConversion(int unitConversion) {
+		this.unitConversion = unitConversion;
+	}
 
 	@Column(name = "costPrice")
 	BigDecimal costPrice;
@@ -225,11 +263,11 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public int getProductQuantity() {
+	public float getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(int productQuantity) {
+	public void setProductQuantity(float productQuantity) {
 		
 		this.productQuantity=productQuantity;
 		
@@ -245,23 +283,36 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public String getUnit() {
-		return unit;
-	}
+	
 
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-	public Product(int productId, String productKey, String productName, int productQuantity, 
-			String productType) {
+	public Product(int productId, String productKey, String productName, int productQuantity, int weight,
+			String createDate, List<Billproduct> billproduct, String dimension, String primaryUnit,
+			String secondaryUnit, int unitConversion, BigDecimal costPrice, BigDecimal sellingPrice,
+			String manufacturer, String brand, String manufacturePartNumber, String universalProductCode,
+			String productType, ProductGroup productgroup, List<ProductUpdateHistory> productUpdateHistory) {
 		super();
 		this.productId = productId;
 		this.productKey = productKey;
 		this.productName = productName;
 		this.productQuantity = productQuantity;
+		this.weight = weight;
+		this.createDate = createDate;
+		this.billproduct = billproduct;
+		this.dimension = dimension;
+		this.primaryUnit = primaryUnit;
+		this.secondaryUnit = secondaryUnit;
+		this.unitConversion = unitConversion;
+		this.costPrice = costPrice;
+		this.sellingPrice = sellingPrice;
+		this.manufacturer = manufacturer;
+		this.brand = brand;
+		this.manufacturePartNumber = manufacturePartNumber;
+		this.universalProductCode = universalProductCode;
 		this.productType = productType;
-		
+		this.productgroup = productgroup;
+		this.productUpdateHistory = productUpdateHistory;
 	}
+
+
 
 }

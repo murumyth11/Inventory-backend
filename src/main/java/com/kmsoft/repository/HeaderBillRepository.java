@@ -3,6 +3,7 @@ package com.kmsoft.repository;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +16,12 @@ import com.kmsoft.model.Product;
 
 public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer> {
 
-	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate", nativeQuery = true)
-	List<HeaderBill> getAllBetweenDates(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate ORDER BY date DESC", nativeQuery = true)
+	Page<HeaderBill> getAllBetweenDates(@Param("startDate") Date startDate, @Param("endDate") Date endDate,Pageable pageable);
+	
+	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate AND "+" customer LIKE %:title%"
+			, nativeQuery = true)
+	Page<HeaderBill> getAllBetweenDatesContaining(@Param("startDate") Date startDate, @Param("endDate") Date endDate,String title,Pageable pageable);
 	
 	@Query(value="SELECT * FROM Header_bill WHERE isdraft=1",nativeQuery=true)
 	List<HeaderBill> getDraftBill();
@@ -24,15 +29,17 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	@Query(value="SELECT * FROM header_bill WHERE date LIKE %:date% AND isdraft=0",nativeQuery=true)
 	List<HeaderBill> getbillbydate(@Param("date") String date);
 	
-	 Page<HeaderBill> findAll(Pageable pageable);
+	 Page<HeaderBill> findAllByOrderByHeaderBillIdDesc(Pageable pageable);
 		
 	 @Query(value="SELECT * FROM header_bill WHERE customer LIKE %:title%"+" OR invoice LIKE %:title% "
 	 +" OR subtotal LIKE %:title% "
 			 +" OR total LIKE %:title% "
-	 +" OR phone LIKE %:title% "
+	 +" OR phone LIKE %:title% ORDER BY header_bill_id DESC"
 				 ,nativeQuery = true)
 	 Page<HeaderBill> findByInvoiceContaining(String title,Pageable pageable);
 	
 	 @Query(value="SELECT MAX(invoice) FROM header_bill WHERE isdraft=0",nativeQuery=true)
 	 int getHeaderbillInvNo();
+	 
+	
 }
