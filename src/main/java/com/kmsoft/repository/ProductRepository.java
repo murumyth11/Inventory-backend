@@ -1,6 +1,8 @@
 package com.kmsoft.repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +15,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.kmsoft.model.Product;
+import com.kmsoft.model.ProductUpdateHistory;
 
 
 
@@ -52,4 +55,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	  @Transactional 
 	@Query(value="update product set product_quantity=product_quantity-:qty where product_id=:id",nativeQuery=true)
 	void updateProductQuantity(int id,String qty);
+	@Query(value="select p.product_name as PNAME,ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity) as tpq,p.primaryunit as unit,ifnull(sum(b.converted_quantity),0) as"
+			+ " tqs,p.product_quantity as instock from product p left join billproduct b on p.product_id=b.product_fk group by product_id",countQuery =  "SELECT count(*) FROM product",nativeQuery=true)
+	Page<List<Map<String,Object>>> getInventoryReport(Pageable pageable);
+	
+	@Query(value="select p.product_name as PNAME,ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity) as tpq,p.primaryunit as unit,ifnull(sum(b.converted_quantity),0) as"
+			+ " tqs,p.product_quantity as instock from product p left join billproduct b on p.product_id=b.product_fk where p.product_name like %:title% group by product_id"
+			,countQuery =  "SELECT count(*) FROM product",nativeQuery=true)
+	Page<List<Map<String,Object>>> getInventoryReportTitle(String title,Pageable pageable);
+	
+	
+	
+	
 }

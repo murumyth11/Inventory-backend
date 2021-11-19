@@ -1,5 +1,9 @@
 package com.kmsoft.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,4 +13,12 @@ public interface ProductUpdateHistoryRepository extends JpaRepository<ProductUpd
 
 	@Query(value="SELECT sum(update_quantity) FROM product_update_history where update_from='bill'",nativeQuery=true)
 	int getSTockSold();
+	
+	@Query(value="select * from product_update_history where product_fk=:id order by update_date desc ",
+			countQuery =  "SELECT count(*) from product_update_history where product_fk=:id ",nativeQuery=true)
+	Page<List<ProductUpdateHistory>> findAllById(int id,Pageable pageable);
+	
+	@Query(value="select * from product_update_history where product_fk=:id and (update_date like %:title% or update_data like %:title% )order by update_date desc",
+			countQuery =  "SELECT count(*) from product_update_history where product_fk=:id",nativeQuery=true)
+	Page<List<ProductUpdateHistory>> findByUpdateDateContaining(String title,int id,Pageable pageable);
 }

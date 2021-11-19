@@ -2,6 +2,7 @@ package com.kmsoft.api;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -175,8 +177,26 @@ public class ProductDetailsController {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/puh")
-	public List<ProductUpdateHistory> getPuh(){
-		return PrdtUpdtHstRepo.findAll();
+	public Page<List<ProductUpdateHistory>> getPuh(
+		 @RequestParam(required = false) String title,
+		 @RequestParam() int id,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "2") int size
+	      ) {
+		 // List<ProductUpdateHistory[]> tutorials = new ArrayList<ProductUpdateHistory>();
+	      Pageable paging = PageRequest.of(page, size);
+	      Page<List<ProductUpdateHistory>> pageTuts;
+	      
+	      if(title==null)
+	     
+	      { pageTuts = PrdtUpdtHstRepo.findAllById(id,paging);
+	      System.out.println(title);
+	      return pageTuts;}
+	     
+	      else
+	      {pageTuts=PrdtUpdtHstRepo.findByUpdateDateContaining(title,id, paging);
+	      return pageTuts;}
+	     
 		}
 	
 	@CrossOrigin("*")
@@ -241,6 +261,35 @@ public class ProductDetailsController {
 	@RequestMapping("/updatequantity/{id}")
 	public void updateQuantity(@PathVariable int id,@RequestParam() String qty) {
 		prepo.updateProductQuantity(id,qty);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/inventoryReports")
+	public Page<List<Map<String, Object>>> getInventoryReport(
+		
+			@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+
+		 Page<List<Map<String, Object>>> data;
+		
+			 Pageable paging = PageRequest.of(page, size);
+			
+			
+			if (title == null) {
+				System.out.println("inventorynull");
+				
+				data= prepo.getInventoryReport(paging);
+				
+
+			} else {
+				System.out.println("inventory have title");
+				data = prepo.getInventoryReportTitle(title, paging);
+				
+			
+
+		} 
+		return data;
+
 	}
 }
 
