@@ -41,5 +41,12 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	 @Query(value="SELECT MAX(invoice) FROM header_bill WHERE isdraft=0",nativeQuery=true)
 	 int getHeaderbillInvNo();
 	 
+	 @Query(value="select count(*) as totalbill,sum(totalquantity) as totalqty,sum(total) as total,count(distinct customer_fk) as cust from header_bill "
+	 		+ "where date >= :startDate AND date <= :endDate AND isdraft=0",nativeQuery=true)
+	 Map<String,Object> getHeaderbillDetailsDate(Date startDate,Date endDate);
+	 
+	 @Query(value="select count(*) as totalbill,sum(totalquantity) as totalqty,sum(total) as total,count(distinct customer_fk) as cust from header_bill "
+		 		+ "where isdraft=0",nativeQuery=true)
+		 Map<String,Object> getHeaderbillDetails();
 	
 }

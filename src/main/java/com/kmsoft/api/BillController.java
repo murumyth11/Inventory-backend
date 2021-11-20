@@ -153,4 +153,16 @@ public class BillController {
 		return data;
 
 	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/headerbill/details")
+	public Map<String,Object> getHeaderBillDetails(@RequestParam(required = false)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startdate, @RequestParam(required = false
+	)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date enddate){
+		if(startdate==null && enddate==null) {
+			return headerbillRepo.getHeaderbillDetails();
+		}
+		else {
+		return headerbillRepo.getHeaderbillDetailsDate(startdate, enddate);
+		}
+	}
 }

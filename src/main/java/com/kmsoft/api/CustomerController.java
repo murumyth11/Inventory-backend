@@ -33,8 +33,12 @@ public class CustomerController {
 	
 	@CrossOrigin("*")
 	@PostMapping("/customers")
-	public Customer createCustomer(@RequestBody Customer customer) {
-		return customerRepo.save(customer);
+	public Customer createCustomer(@RequestBody Customer customer) throws Exception {
+		try {return customerRepo.save(customer);}
+		catch (Exception e) {
+			throw new Exception("customer with phone already exists");
+		}
+		
 	}
 
 //	@CrossOrigin("*")
@@ -75,6 +79,11 @@ public class CustomerController {
 	@GetMapping("/customers/{namelike}")
 	public List<Customer> getCustomerLike(@PathVariable String namelike){
 		return customerRepo.getCustomerLike(namelike);
+	}
+	@CrossOrigin(origins = "*")
+	@GetMapping("/customersPhone/{custPhone}")
+	public Customer getCustomerPhone(@PathVariable String custPhone){
+		return customerRepo.getCustomerPhone(custPhone);
 	}
 		
 }

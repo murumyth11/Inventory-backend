@@ -24,4 +24,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 							 ,nativeQuery = true)
 	 Page<Customer> findByCustomerNameContaining(String title,Pageable pageable);
 
+	 @Query(value="select * from customer where customer_phone=:custPhone",nativeQuery=true)
+	Customer getCustomerPhone(String custPhone);
+
 }
