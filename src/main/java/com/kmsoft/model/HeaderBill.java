@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,6 +63,39 @@ public class HeaderBill {
 	@Column(name="isdraft")
     int isdraft;
 	
+	@Column(name="creditAmount")
+	int creditAmount;
+	
+	@Column(name="balance")
+	int balance;
+	
+	@Column(name="status")
+	String status;
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getCreditAmount() {
+		return creditAmount;
+	}
+
+	public void setCreditAmount(int creditAmount) {
+		this.creditAmount = creditAmount;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
 	public int getIsdraft() {
 		return isdraft;
 	}
@@ -175,7 +209,7 @@ public class HeaderBill {
 	@JoinColumn(name="headerbillFk")
 	public List<Billproduct> billdetails=new ArrayList<Billproduct>();
 	
-	@ManyToOne
+	@ManyToOne( )
 	@JoinColumn(name="customerFk",referencedColumnName = "customerId")
 	Customer customer;
 

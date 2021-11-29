@@ -30,8 +30,8 @@ public class ProductServiceImp implements ProductService{
 	}
 
 
-	public Product updateProduct(String name,Product product) {
-		Product prod= productRepo.findByProductName(name).get(0);
+	public Product updateProduct(int id,Product product) {
+		Product prod= productRepo.findById(id).get(0);
 		prod.setProductId(product.getProductId());
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());

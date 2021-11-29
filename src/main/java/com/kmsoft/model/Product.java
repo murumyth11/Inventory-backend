@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -87,12 +88,15 @@ public class Product {
 	}
 
 	@Column(name="primaryunit")
+	
 	String primaryUnit;
 	
 	@Column(name="secondaryunit")
+	
 	String secondaryUnit;
 	
 	@Column(name="unitconversion")
+	
 	int unitConversion;
 	
 

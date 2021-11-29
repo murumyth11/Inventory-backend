@@ -34,7 +34,7 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	 @Query(value="SELECT * FROM header_bill WHERE customer LIKE %:title%"+" OR invoice LIKE %:title% "
 	 +" OR subtotal LIKE %:title% "
 			 +" OR total LIKE %:title% "
-	 +" OR phone LIKE %:title% ORDER BY header_bill_id DESC"
+	 +" OR phone LIKE %:title%  or status like  %:title%  or balance like %:title% ORDER BY header_bill_id DESC"
 				 ,nativeQuery = true)
 	 Page<HeaderBill> findByInvoiceContaining(String title,Pageable pageable);
 	

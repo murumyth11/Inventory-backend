@@ -78,6 +78,16 @@ public class ProductDetailsController {
 	@CrossOrigin(origins = "*")
 	@PostMapping("/products")
 	public Product createProduct(@RequestBody Product product) {
+		if(product.getPrimaryUnit()==null) {
+			product.setPrimaryUnit("qty");
+		}
+		if(product.getSecondaryUnit()==null) {
+			String su=product.getPrimaryUnit();
+			product.setSecondaryUnit("qty");
+		}
+		if(product.getUnitConversion()==0) {
+			product.setUnitConversion(1);
+		}
 		return productservice.createProduct(product);
 
 	}
@@ -85,9 +95,9 @@ public class ProductDetailsController {
 	// update product
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/products/{name}")
-	public Product updateProduct(@PathVariable String name, @RequestBody Product product) {
-		return productservice.updateProduct(name,product);
+	@PutMapping("/products/{id}")
+	public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
+		return productservice.updateProduct(id,product);
 
 	}
 
