@@ -9,7 +9,7 @@ public interface RegistrationService {
 	
 	public UserRegistration fetchByemail(String email);
 
-	public  UserRegistration findByUserEmailAndPassword(String tempemail, String temppassword) ;
+	public  UserRegistration findByUserNameAndPassword(String tempusername, String temppassword) ;
 		
 		
 	

@@ -19,12 +19,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.Nullable;
 
 @Entity
-@Table(name="HeaderBill")
+@Table(name="HeaderBill",uniqueConstraints={@UniqueConstraint(columnNames={"invoice"})})
 public class HeaderBill {
 	
 	@Id
@@ -72,6 +73,17 @@ public class HeaderBill {
 	@Column(name="status")
 	String status;
 	
+	@Column(name="billedBy")
+	String billedBy;
+	
+	public String getBilledBy() {
+		return billedBy;
+	}
+
+	public void setBilledBy(String billedBy) {
+		this.billedBy = billedBy;
+	}
+
 	public String getStatus() {
 		return status;
 	}

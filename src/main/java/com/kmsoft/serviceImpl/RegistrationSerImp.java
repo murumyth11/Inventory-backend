@@ -20,9 +20,9 @@ public class RegistrationSerImp implements RegistrationService {
 	}
 
 	@Override
-	public UserRegistration findByUserEmailAndPassword(String tempemail, String temppassword) {
+	public UserRegistration findByUserNameAndPassword(String tempemail, String temppassword) {
 		// TODO Auto-generated method stub
-		return registrationRepo.findByUserEmailAndPassword(tempemail, temppassword);
+		return registrationRepo.findByUserNameAndPassword(tempemail, temppassword);
 	}
 
 }
