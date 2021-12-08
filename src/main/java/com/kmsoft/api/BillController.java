@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kmsoft.model.BalanceUpdateHistory;
 import com.kmsoft.model.Billproduct;
 import com.kmsoft.model.HeaderBill;
 import com.kmsoft.model.Product;
+import com.kmsoft.repository.BalanceUpdateHistoryRepository;
 import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.repository.HeaderBillRepository;
 
@@ -38,6 +40,9 @@ public class BillController {
 	@Autowired
 	HeaderBillRepository headerbillRepo;
 
+	@Autowired
+	BalanceUpdateHistoryRepository balanceupdateRepo;
+	
 	@CrossOrigin("*")
 	@PostMapping("/billproduct")
 	public Billproduct createBillBody(@RequestBody Billproduct billProduct) {
@@ -172,4 +177,29 @@ public class BillController {
 	public HeaderBill updateHeaderBill(@PathVariable int id,@RequestBody HeaderBill headerbill) {
 		return headerbillRepo.saveAndFlush(headerbill);
 	}
+	
+	@CrossOrigin("*")
+	@PostMapping("/balanceupdate")
+	public  BalanceUpdateHistory saveBalanceUpdate(@RequestBody BalanceUpdateHistory balanceupdatehistory)
+	{ 
+		return balanceupdateRepo.save(balanceupdatehistory);
+	}
+	@CrossOrigin("*")
+	@GetMapping("/balanceupdate")
+	public Page<List<Map<String,Object>>> getBalanceUpdateHistory(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size)
+	{
+		
+		Page<List<Map<String,Object>>> data;
+		 Pageable paging = PageRequest.of(page, size);
+		if(title==null) {
+			data=balanceupdateRepo.findAllbuh(paging);
+		}
+		else {
+			data=balanceupdateRepo.getbySearch(title, paging);
+			
+		}
+		return data;
+	}
+	
 }

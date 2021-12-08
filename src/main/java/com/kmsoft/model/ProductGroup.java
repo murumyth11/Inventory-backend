@@ -42,7 +42,7 @@ public class ProductGroup {
 	@Column(name = "brand")
 	String brand;
 
-	@OneToMany(mappedBy = "productgroup", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToMany(mappedBy = "productgroup", cascade = { CascadeType.ALL })
 	List<Product> product = new ArrayList<Product>();
 
 	public List<Product> getProduct() {

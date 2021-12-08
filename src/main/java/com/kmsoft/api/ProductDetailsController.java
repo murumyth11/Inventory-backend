@@ -132,6 +132,13 @@ public class ProductDetailsController {
 		return pgRepo.save(productgroup);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")	
+	@PutMapping("/productgroup")	
+	public ProductGroup updatepg(@RequestBody ProductGroup productgroup)
+	{
+		return pgRepo.save(productgroup);
+	}
+	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/productgroup/{id}")
 	public void deleteProductgroup(@PathVariable Integer id)

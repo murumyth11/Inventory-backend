@@ -38,8 +38,12 @@ public class RegisterController {
 				throw new Exception("User with "+tempemail+"already exist");
 			}
 		}
+		
+		List<UserRegistration> userreg=registrationrepo.findAll();
+		
 		UserRegistration userobj=null;
-		userobj=registrationrepo.save(user);
+		if(userreg==null)
+		{userobj=registrationrepo.save(user);}
 		return userobj;
 		
 		
