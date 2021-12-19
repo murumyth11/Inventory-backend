@@ -25,4 +25,10 @@ public class RegistrationSerImp implements RegistrationService {
 		return registrationRepo.findByUserNameAndPassword(tempemail, temppassword);
 	}
 
+	@Override
+	public UserRegistration fetchByusername(String userName) {
+		// TODO Auto-generated method stub
+		return registrationRepo.findByUserName(userName);
+	}
+
 }

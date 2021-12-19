@@ -39,14 +39,35 @@ public class RegisterController {
 			}
 		}
 		
-		List<UserRegistration> userreg=registrationrepo.findAll();
+		UserRegistration userreg=registrationrepo.findById(1);
 		
 		UserRegistration userobj=null;
 		if(userreg==null)
 		{userobj=registrationrepo.save(user);}
+		else {
+			throw new Exception("user already registered");
+		}
 		return userobj;
 		
 		
+	}
+	
+	@CrossOrigin("*")
+	@PostMapping("/registerRole")
+	public UserRegistration registerRole(@RequestBody UserRegistration user) throws Exception{
+		String tempUserName=user.getUserName();
+if(tempUserName!=null && !"".equals(tempUserName)) {
+			
+			UserRegistration userObj=registerationService.fetchByusername(tempUserName);
+			if(userObj!=null) {
+				throw new Exception("User with "+tempUserName+"already exist");
+			}
+		}
+UserRegistration userobj=null;
+userobj=registrationrepo.save(user);
+return userobj;
+
+
 	}
 	
 	@CrossOrigin(origins = "*")
