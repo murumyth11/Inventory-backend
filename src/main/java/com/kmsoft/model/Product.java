@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int productId;
 
 	@Column(name = "productKey")

@@ -29,7 +29,7 @@ import com.sun.istack.Nullable;
 public class HeaderBill {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	int headerBillId;
 	
 	@Column(name="customer")
