@@ -118,9 +118,10 @@ public class BillController {
 	}
 
 	@CrossOrigin("*")
-	@GetMapping("/headerbill/bydate/{date}")
-	public List<HeaderBill> getbillbydate(@PathVariable String date) {
-		return headerbillRepo.getbillbydate(date);
+	@GetMapping("/headerbill/bydate/{startDate}/{endDate}")
+	public List<HeaderBill> getbillbydate(@PathVariable  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
+			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate ) {
+		return headerbillRepo.getbillbydate(startDate,endDate);
 	}
 
 	@CrossOrigin("*")

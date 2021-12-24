@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Billproduct {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int billproductId;
 	
 	@ManyToOne
@@ -77,9 +77,20 @@ public class Billproduct {
 	@Column(name="amount",columnDefinition="DECIMAL(10,2)")
 	int amount;
 
+	@Column(name="code")
+	String code;
+    
 	
 
 	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	public String getUnit() {
 		return unit;
@@ -126,6 +137,26 @@ public class Billproduct {
 
 	public void setRate(int rate) {
 		this.rate = rate;
+	}
+
+	public Billproduct(int billproductId, Product name, float quantity, float convertedQuantity, String unit,
+			int discount, String discountType, int rate, int amount, String code) {
+		super();
+		this.billproductId = billproductId;
+		this.name = name;
+		this.quantity = quantity;
+		this.convertedQuantity = convertedQuantity;
+		this.unit = unit;
+		this.discount = discount;
+		this.discountType = discountType;
+		this.rate = rate;
+		this.amount = amount;
+		this.code = code;
+	}
+
+	public Billproduct() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

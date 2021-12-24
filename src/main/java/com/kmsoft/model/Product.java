@@ -192,12 +192,7 @@ public class Product {
 		this.sellingPrice = sellingPrice;
 	}
 
-	
-
-	
-
-	
-	public String getManufacturer() {
+		public String getManufacturer() {
 		return manufacturer;
 	}
 

@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.Nullable;
+
 
 @Entity
 @Table(name="HeaderBill",uniqueConstraints={@UniqueConstraint(columnNames={"invoice"})})

@@ -28,7 +28,7 @@ public class InventoryApplication extends SpringBootServletInitializer {
 	static Date date;
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApplication.class, args);
-	//System.out.println(System.currentTimeMillis());
+	System.out.println(System.currentTimeMillis());
 		
 		
 	} 

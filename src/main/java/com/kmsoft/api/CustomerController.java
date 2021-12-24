@@ -75,12 +75,12 @@ public class CustomerController {
 		customerRepo.deleteById(id);
 	}
 	
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@GetMapping("/customers/{namelike}")
 	public List<Customer> getCustomerLike(@PathVariable String namelike){
 		return customerRepo.getCustomerLike(namelike);
 	}
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@GetMapping("/customersPhone/{custPhone}")
 	public Customer getCustomerPhone(@PathVariable String custPhone){
 		return customerRepo.getCustomerPhone(custPhone);

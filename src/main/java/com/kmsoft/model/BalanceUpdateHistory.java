@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class BalanceUpdateHistory {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int balanceUpdateHistoryId;
 	
 	@Column(name="balanceUpdateDate")

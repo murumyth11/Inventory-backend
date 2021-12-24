@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,14 @@ import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
 import com.kmsoft.model.ProductUpdateHistory;
+import com.kmsoft.model.ProductValidators;
 import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.repository.BrandRepository;
 import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
 import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.repository.ProductUpdateHistoryRepository;
+import com.kmsoft.repository.ProductValidatorsRepository;
 import com.kmsoft.service.ProductService;
 
 @RestController
@@ -61,21 +64,24 @@ public class ProductDetailsController {
 	@Autowired
 	BillproductRepository billproductRepo;
 	
+	@Autowired
+	ProductValidatorsRepository pvRepo;
+	
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@RequestMapping("/products")
 	public List<Product> getAllProducts() {
 		return productservice.getAllProducts();
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@RequestMapping("/products/{id}")
 	public List<Product> getProductsById(@PathVariable Integer id) {
 		return productservice.getoneById(id);
 	}
 
 	// save product
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@PostMapping("/products")
 	public Product createProduct(@RequestBody Product product) {
 		if(product.getPrimaryUnit()==null) {
@@ -94,14 +100,14 @@ public class ProductDetailsController {
 
 	// update product
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@PutMapping("/products/{id}")
 	public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
 		return productservice.updateProduct(id,product);
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@DeleteMapping("/products/{id}")
 	
 	public void deleteProduct(@PathVariable Integer id)
@@ -119,54 +125,54 @@ public class ProductDetailsController {
 	
 	
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@GetMapping("/productgroup")
 	public List<ProductGroup> getAllProductGroup(){
 		return pgRepo.findAll();
 	}
 	 
-	@CrossOrigin(origins = "http://localhost:4200")	
+	@CrossOrigin("*")	
 	@PostMapping("/productgroup")	
 	public ProductGroup createpg(@RequestBody ProductGroup productgroup)
 	{
 		return pgRepo.save(productgroup);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")	
+	@CrossOrigin("*")	
 	@PutMapping("/productgroup")	
 	public ProductGroup updatepg(@RequestBody ProductGroup productgroup)
 	{
 		return pgRepo.save(productgroup);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@DeleteMapping("/productgroup/{id}")
 	public void deleteProductgroup(@PathVariable Integer id)
 	{
 		pgRepo.deleteById(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")	
+	@CrossOrigin("*")	
 	@PostMapping("/manufacturer")
 	public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
 		return manufRepo.save(manufacturer);
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@GetMapping("/manufacturer")
 	public List<Manufacturer> getManufacturer(){
 		return  manufRepo.findAll();
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@DeleteMapping("/manufacturer/{id}")
 	public void deleteManufacturer(@PathVariable Integer id)
 	{
 		manufRepo.deleteById(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@PostMapping("/brand")
 	public Brand createBand(@RequestBody Brand brand ) {
 		
@@ -174,25 +180,25 @@ public class ProductDetailsController {
 		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@GetMapping("/brand")
 	public List<Brand> getBrand(){
 		return brandRepo.findAll();
 		}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@DeleteMapping("/brand/{id}")
 	public void deleteBrand(@PathVariable Integer id) {
 		brandRepo.deleteById(id);
 	}
 	
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@PostMapping("/puh")
 	public ProductUpdateHistory createProductUpdateHistory(@RequestBody ProductUpdateHistory productupdtHst) {
 		return PrdtUpdtHstRepo.save(productupdtHst);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin("*")
 	@GetMapping("/puh")
 	public Page<List<ProductUpdateHistory>> getPuh(
 		 @RequestParam(required = false) String title,
@@ -220,6 +226,12 @@ public class ProductDetailsController {
 	@GetMapping("/products/{productlike}")
 	public List<Product> getproductlike(@PathVariable String productlike){
 		return prepo.getProductLike(productlike);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/productKey/{productKeylike}")
+	public List<Product> getproductKeylike(@PathVariable String productKeylike){
+		return prepo.getProductKeyLike(productKeylike);
 	}
 	
 	@CrossOrigin("*")
@@ -308,5 +320,18 @@ public class ProductDetailsController {
 		return data;
 
 	}
+	
+	@CrossOrigin("*")
+	@PostMapping("/productValidators")
+	public ProductValidators createProductValidators(@RequestBody ProductValidators pv) {
+		return pvRepo.save(pv);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/productValidators")
+	public Optional<ProductValidators> getPv() {
+		return pvRepo.findById(1);
+	}
+	
 }
 

@@ -26,7 +26,7 @@ public class RegisterController {
 	@Autowired
 	RegistrationRepository registrationrepo;
 	
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@PostMapping("/register")
 	public UserRegistration registerUser(@RequestBody UserRegistration user) throws Exception {
 		
@@ -70,7 +70,7 @@ return userobj;
 
 	}
 	
-	@CrossOrigin(origins = "*")
+	@CrossOrigin("*")
 	@PostMapping("/login")
 	public UserRegistration login(@RequestBody UserRegistration user) throws Exception {
 	
