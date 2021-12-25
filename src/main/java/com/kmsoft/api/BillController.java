@@ -145,13 +145,13 @@ public class BillController {
 			
 			
 			if (title == null) {
-				System.out.println("null");
+				
 				
 				data= billproductRepo.getSaleByDateProduct(startDate, endDate,paging);
 				
 
 			} else {
-				System.out.println("havr title");
+				
 				data = billproductRepo.getSaleByDateProductTitle(startDate, endDate, title,paging);
 				
 			

@@ -77,7 +77,7 @@ return userobj;
 		String tempemail=user.getUserEmail();
 		String tempusername=user.getUserName();
 		String temppassword=user.getPassword();
-		System.out.println(tempusername);
+		
 		UserRegistration userObj=null;
 		if( temppassword!=null && tempusername!=null) {
 		 userObj=registerationService.findByUserNameAndPassword(tempusername, temppassword);}
