@@ -1,19 +1,13 @@
 package com.kmsoft.api;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kmsoft.model.Brand;
-import com.kmsoft.model.Manufacturer;
 import com.kmsoft.model.Product;
 import com.kmsoft.model.ProductGroup;
 import com.kmsoft.model.ProductUpdateHistory;
 import com.kmsoft.model.ProductValidators;
 import com.kmsoft.repository.BillproductRepository;
-import com.kmsoft.repository.BrandRepository;
-import com.kmsoft.repository.ManufacturerRepository;
 import com.kmsoft.repository.ProductGroupRepository;
-import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.repository.ProductUpdateHistoryRepository;
 import com.kmsoft.repository.ProductValidatorsRepository;
 import com.kmsoft.service.ProductService;
@@ -45,35 +34,18 @@ public class ProductDetailsController {
 
 	@Autowired
 	ProductService productservice;
+
 	
-	@Autowired
-	ProductRepository prepo;
-	
-	@Autowired
-	ProductGroupRepository pgRepo;
-	
-	@Autowired
-	ManufacturerRepository manufRepo;
-	
-	@Autowired
-	BrandRepository brandRepo;
-	
-	@Autowired
-	ProductUpdateHistoryRepository PrdtUpdtHstRepo;
-	
-	@Autowired
-	BillproductRepository billproductRepo;
-	
+
 	@Autowired
 	ProductValidatorsRepository pvRepo;
-	
 
 	@CrossOrigin("*")
 	@RequestMapping("/products")
 	public List<Product> getAllProducts() {
 		return productservice.getAllProducts();
 	}
-	
+
 	@CrossOrigin("*")
 	@RequestMapping("/products/{id}")
 	public List<Product> getProductsById(@PathVariable Integer id) {
@@ -84,254 +56,119 @@ public class ProductDetailsController {
 	@CrossOrigin("*")
 	@PostMapping("/products")
 	public Product createProduct(@RequestBody Product product) {
-		if(product.getPrimaryUnit()==null) {
+		if (product.getPrimaryUnit() == null) {
 			product.setPrimaryUnit("qty");
 		}
-		if(product.getSecondaryUnit()==null) {
-			String su=product.getPrimaryUnit();
+		if (product.getSecondaryUnit() == null) {
+			String su = product.getPrimaryUnit();
 			product.setSecondaryUnit("qty");
 		}
-		if(product.getUnitConversion()==0) {
+		if (product.getUnitConversion() == 0) {
 			product.setUnitConversion(1);
 		}
 		return productservice.createProduct(product);
 
 	}
 
-	// update product
-	
 	@CrossOrigin("*")
 	@PutMapping("/products/{id}")
 	public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
-		return productservice.updateProduct(id,product);
+		return productservice.updateProduct(id, product);
 
 	}
 
 	@CrossOrigin("*")
 	@DeleteMapping("/products/{id}")
-	
-	public void deleteProduct(@PathVariable Integer id)
-	{
-	  productservice.deleteProduct(id);
+
+	public void deleteProduct(@PathVariable Integer id) {
+		productservice.deleteProduct(id);
 	}
+
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
-//	@DeleteMapping("/products/{ids}")
-//	
-//	public void deleteSProduct(@PathVariable Integer[] ids)
-//	{
-//		prepo.deleteUsersWithIds(Arrays.asList(ids));
-//	}
-	
-	
-	
-	@CrossOrigin("*")
-	@GetMapping("/productgroup")
-	public List<ProductGroup> getAllProductGroup(){
-		return pgRepo.findAll();
-	}
-	 
-	@CrossOrigin("*")	
-	@PostMapping("/productgroup")	
-	public ProductGroup createpg(@RequestBody ProductGroup productgroup)
-	{
-		return pgRepo.save(productgroup);
-	}
-	
-	@CrossOrigin("*")	
-	@PutMapping("/productgroup")	
-	public ProductGroup updatepg(@RequestBody ProductGroup productgroup)
-	{
-		return pgRepo.save(productgroup);
-	}
-	
-	@CrossOrigin("*")
-	@DeleteMapping("/productgroup/{id}")
-	public void deleteProductgroup(@PathVariable Integer id)
-	{
-		pgRepo.deleteById(id);
-	}
-	
-	@CrossOrigin("*")	
-	@PostMapping("/manufacturer")
-	public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
-		return manufRepo.save(manufacturer);
-	}
-	
-	
-	@CrossOrigin("*")
-	@GetMapping("/manufacturer")
-	public List<Manufacturer> getManufacturer(){
-		return  manufRepo.findAll();
-	}
-	
-	@CrossOrigin("*")
-	@DeleteMapping("/manufacturer/{id}")
-	public void deleteManufacturer(@PathVariable Integer id)
-	{
-		manufRepo.deleteById(id);
-	}
-	
-	@CrossOrigin("*")
-	@PostMapping("/brand")
-	public Brand createBand(@RequestBody Brand brand ) {
-		
-		return brandRepo.save(brand);
-		
-	}
-	
-	@CrossOrigin("*")
-	@GetMapping("/brand")
-	public List<Brand> getBrand(){
-		return brandRepo.findAll();
-		}
-	
-	@CrossOrigin("*")
-	@DeleteMapping("/brand/{id}")
-	public void deleteBrand(@PathVariable Integer id) {
-		brandRepo.deleteById(id);
-	}
-	
-	@CrossOrigin("*")
-	@PostMapping("/puh")
-	public ProductUpdateHistory createProductUpdateHistory(@RequestBody ProductUpdateHistory productupdtHst) {
-		return PrdtUpdtHstRepo.save(productupdtHst);
-	}
-	
-	@CrossOrigin("*")
-	@GetMapping("/puh")
-	public Page<List<ProductUpdateHistory>> getPuh(
-		 @RequestParam(required = false) String title,
-		 @RequestParam() int id,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "2") int size
-	      ) {
-		 // List<ProductUpdateHistory[]> tutorials = new ArrayList<ProductUpdateHistory>();
-	      Pageable paging = PageRequest.of(page, size);
-	      Page<List<ProductUpdateHistory>> pageTuts;
-	      
-	      if(title==null)
-	     
-	      { pageTuts = PrdtUpdtHstRepo.findAllById(id,paging);
-	      System.out.println(title);
-	      return pageTuts;}
-	     
-	      else
-	      {pageTuts=PrdtUpdtHstRepo.findByUpdateDateContaining(title,id, paging);
-	      return pageTuts;}
-	     
-		}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/products/{productlike}")
-	public List<Product> getproductlike(@PathVariable String productlike){
-		return prepo.getProductLike(productlike);
+	public List<Product> getproductlike(@PathVariable String productlike) {
+		return productservice.getproductlike(productlike);
 	}
-	
-	@CrossOrigin("*")
-	@GetMapping("/productKey/{productKeylike}")
-	public List<Product> getproductKeylike(@PathVariable String productKeylike){
-		return prepo.getProductKeyLike(productKeylike);
-	}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/products/lowstock")
-	public List<Product> getLowStock(){
-		return prepo.getLowStock();
+	public List<Product> getLowStock() {
+		return productservice.getLowStock();
 	}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/products/stockInHand")
 	public int getStockInHand() {
-		return prepo.getStockinHand();
+		return productservice.getStockInHand();
 	}
-	
-	@CrossOrigin("*")
-	@GetMapping("/products/stockSold")
-	public int getStockSold() {
-		return PrdtUpdtHstRepo.getSTockSold();
-	}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/products/totalProductCount")
 	public int getTotalproductcount() {
-		return prepo.getTotalproduct();
+		return productservice.getTotalproductcount();
 	}
-	
+
 	@CrossOrigin("*")
-	  @GetMapping("/prd")
-	  public Page<Product> getAllTutorials(
-	        @RequestParam(required = false) String title,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "2") int size
-	      ) {
-		  List<Product> tutorials = new ArrayList<Product>();
-	      Pageable paging = PageRequest.of(page, size);
-	      Page<Product> pageTuts;
-	      
-	      
-	      if(title==null)
-	      {pageTuts = prepo.findAll(paging);
-	      System.out.println(title);
-	      }
-	      else
-	      {pageTuts=prepo.findByProductNameContaining(title, paging);}
-	      return pageTuts;
-	     
-	  }
-	
-	@CrossOrigin("*")
-	@GetMapping("/soldquantity")
-	public Map<String,Number> getTotalSoldQuantity(@RequestParam() int id) {
-		System.out.println(id);
-		return  billproductRepo.getTotalSoldQuantity(id);
+	@GetMapping("/prd")
+	public Page<Product> getAllProducts(@RequestParam(required = false) String title,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
+		List<Product> tutorials = new ArrayList<Product>();
+		Pageable paging = PageRequest.of(page, size);
+		Page<Product> pageTuts;
+
+		if (title == null) {
+			pageTuts = productservice.getAllproduct(paging);
+			System.out.println(title);
+		} else {
+			pageTuts = productservice.findByProductNameContaining(title, paging);
+		}
+		return pageTuts;
+
 	}
+
 	@CrossOrigin("*")
 	@RequestMapping("/updatequantity/{id}")
-	public void updateQuantity(@PathVariable int id,@RequestParam() String qty) {
-		prepo.updateProductQuantity(id,qty);
+	public void updateQuantity(@PathVariable int id, @RequestParam() String qty) {
+		productservice.updateProductQuantity(id, qty);
 	}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/inventoryReports")
 	public Page<List<Map<String, Object>>> getInventoryReport(
-		
+
 			@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 
-		 Page<List<Map<String, Object>>> data;
-		
-			 Pageable paging = PageRequest.of(page, size);
-			
-			
-			if (title == null) {
-				System.out.println("inventorynull");
-				
-				data= prepo.getInventoryReport(paging);
-				
+		Page<List<Map<String, Object>>> data;
 
-			} else {
-				System.out.println("inventory have title");
-				data = prepo.getInventoryReportTitle(title, paging);
-				
-			
+		Pageable paging = PageRequest.of(page, size);
 
-		} 
+		if (title == null) {
+			System.out.println("inventorynull");
+
+			data = productservice.getInventoryReport(paging);
+
+		} else {
+			System.out.println("inventory have title");
+			data = productservice.getInventoryReportTitle(title, paging);
+
+		}
 		return data;
 
 	}
-	
+
 	@CrossOrigin("*")
 	@PostMapping("/productValidators")
 	public ProductValidators createProductValidators(@RequestBody ProductValidators pv) {
 		return pvRepo.save(pv);
 	}
-	
+
 	@CrossOrigin("*")
 	@GetMapping("/productValidators")
 	public Optional<ProductValidators> getPv() {
 		return pvRepo.findById(1);
 	}
-	
-}
 
+}

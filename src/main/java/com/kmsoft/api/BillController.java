@@ -30,36 +30,18 @@ import com.kmsoft.model.Product;
 import com.kmsoft.repository.BalanceUpdateHistoryRepository;
 import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.repository.HeaderBillRepository;
+import com.kmsoft.service.HeaderBillService;
 
 @RestController
 public class BillController {
 
 	@Autowired
-	BillproductRepository billproductRepo;
-
-	@Autowired
-	HeaderBillRepository headerbillRepo;
-
-	@Autowired
-	BalanceUpdateHistoryRepository balanceupdateRepo;
+	HeaderBillService headerbillService;
 	
-	@CrossOrigin("*")
-	@PostMapping("/billproduct")
-	public Billproduct createBillBody(@RequestBody Billproduct billProduct) {
-		return billproductRepo.save(billProduct);
-
-	}
-
-	@CrossOrigin("*")
-	@GetMapping("/billproduct")
-	public List<Billproduct> getBillProduct() {
-		return billproductRepo.findAll();
-	}
-
 	@CrossOrigin("*")
 	@PostMapping("/headerbill")
 	public HeaderBill createheaderBill(@RequestBody HeaderBill headerbill) {
-		return headerbillRepo.save(headerbill);
+		return headerbillService.createHeaderBill(headerbill);
 
 	}
 
@@ -73,11 +55,11 @@ public class BillController {
 
 		if (title == null) {
 			System.out.println("null");
-			pageTuts = headerbillRepo.findAllByOrderByHeaderBillIdDesc(paging);
+			pageTuts = headerbillService.findAllByOrderByHeaderBillIdDesc(paging);
 
 		} else {
 			System.out.println("have ttl");
-			pageTuts = headerbillRepo.findByInvoiceContaining(title, paging);
+			pageTuts = headerbillService.findByInvoiceContaining(title, paging);
 		}
 		return pageTuts;
 
@@ -95,11 +77,11 @@ public class BillController {
 		// System.out.println(title);
 		if (title == null) {
 			System.out.println("null");
-			pageTuts = headerbillRepo.getAllBetweenDates(startDate, endDate, paging);
+			pageTuts = headerbillService.getAllBetweenDates(startDate, endDate, paging);
 
 		} else {
 			System.out.println("havr title");
-			pageTuts = headerbillRepo.getAllBetweenDatesContaining(startDate, endDate, title, paging);
+			pageTuts = headerbillService.getAllBetweenDatesContaining(startDate, endDate, title, paging);
 		}
 		return pageTuts;
 	}
@@ -108,99 +90,48 @@ public class BillController {
 	@GetMapping("/headerbill/draft")
 	public List<HeaderBill> getdraftbill() {
 
-		return headerbillRepo.getDraftBill();
+		return headerbillService.getDraftBill();
 	}
 
 	@CrossOrigin("*")
 	@DeleteMapping("/headerbill/draft/{id}")
-	public void deleteCustomer(@PathVariable Integer id) {
-		headerbillRepo.deleteById(id);
+	public void deletedraftbill(@PathVariable Integer id) {
+		headerbillService.deleteDraftbillByid(id);
 	}
 
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/bydate/{startDate}/{endDate}")
 	public List<HeaderBill> getbillbydate(@PathVariable  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate ) {
-		return headerbillRepo.getbillbydate(startDate,endDate);
+		return headerbillService.getbillbydates(startDate,endDate);
 	}
 
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/invoiceNo")
 	public int getInvoiceNumber() {
 
-		return headerbillRepo.getHeaderbillInvNo();
+		return headerbillService.getHeaderbillInvNo();
 	}
 
-	@CrossOrigin("*")
-	@GetMapping("/salesByDate/{startDate}/{endDate}")
-	public Page<List<Map<String, Object>>> getProductSaleByDate(
-			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
-			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate,
-			@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-
-		 Page<List<Map<String, Object>>> data;
-		
-			 Pageable paging = PageRequest.of(page, size);
-			
-			
-			if (title == null) {
-				
-				
-				data= billproductRepo.getSaleByDateProduct(startDate, endDate,paging);
-				
-
-			} else {
-				
-				data = billproductRepo.getSaleByDateProductTitle(startDate, endDate, title,paging);
-				
-			
-
-		} 
-		return data;
-
-	}
 	
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/details")
 	public Map<String,Object> getHeaderBillDetails(@RequestParam(required = false)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startdate, @RequestParam(required = false
 	)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date enddate){
 		if(startdate==null && enddate==null) {
-			return headerbillRepo.getHeaderbillDetails();
+			return headerbillService.getHeaderbillDetails();
 		}
 		else {
-		return headerbillRepo.getHeaderbillDetailsDate(startdate, enddate);
+		return headerbillService.getHeaderbillDetailsDate(startdate, enddate);
 		}
 	}
 	
 	@CrossOrigin("*")
 	@PutMapping("/headerbill/{id}")
 	public HeaderBill updateHeaderBill(@PathVariable int id,@RequestBody HeaderBill headerbill) {
-		return headerbillRepo.saveAndFlush(headerbill);
+		return headerbillService.updateHeaderBill(headerbill);
 	}
 	
-	@CrossOrigin("*")
-	@PostMapping("/balanceupdate")
-	public  BalanceUpdateHistory saveBalanceUpdate(@RequestBody BalanceUpdateHistory balanceupdatehistory)
-	{ 
-		return balanceupdateRepo.save(balanceupdatehistory);
-	}
-	@CrossOrigin("*")
-	@GetMapping("/balanceupdate")
-	public Page<List<Map<String,Object>>> getBalanceUpdateHistory(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size)
-	{
-		
-		Page<List<Map<String,Object>>> data;
-		 Pageable paging = PageRequest.of(page, size);
-		if(title==null) {
-			data=balanceupdateRepo.findAllbuh(paging);
-		}
-		else {
-			data=balanceupdateRepo.getbySearch(title, paging);
-			
-		}
-		return data;
-	}
+	
 	
 }

@@ -1,8 +1,11 @@
 package com.kmsoft.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.kmsoft.model.Billproduct;
@@ -65,6 +68,73 @@ public class ProductServiceImp implements ProductService{
 	public List<Product> getoneById(int id) {
 		// TODO Auto-generated method stub
 		return productRepo.findById(id);
+	}
+
+
+	@Override
+	public List<Product> getproductlike(String productlike) {
+		// TODO Auto-generated method stub
+		return productRepo.getProductLike(productlike);
+	}
+
+
+	@Override
+	public List<Product> getLowStock() {
+		// TODO Auto-generated method stub
+		return productRepo.getLowStock();
+	}
+
+
+	@Override
+	public int getStockInHand() {
+		// TODO Auto-generated method stub
+		return productRepo.getStockinHand();
+	}
+
+
+	@Override
+	public int getTotalproductcount() {
+		// TODO Auto-generated method stub
+		return productRepo.getTotalproduct();
+	}
+
+
+
+
+
+	@Override
+	public Page<Product> findByProductNameContaining(String title, Pageable paging) {
+		// TODO Auto-generated method stub
+		return productRepo.findByProductNameContaining(title, paging);
+	}
+
+
+	@Override
+	public Page<List<Map<String, Object>>> getInventoryReport(Pageable paging) {
+		// TODO Auto-generated method stub
+		return productRepo.getInventoryReport(paging);
+	}
+
+
+	@Override
+	public Page<List<Map<String, Object>>> getInventoryReportTitle(String title, Pageable paging) {
+		// TODO Auto-generated method stub
+		return productRepo.getInventoryReportTitle(title, paging);
+	}
+
+
+	@Override
+	public Page<Product> getAllproduct(Pageable paging) {
+		// TODO Auto-generated method stub
+		return productRepo.findAll(paging);
+	}
+
+
+	@Override
+	public void updateProductQuantity(int id, String qty) {
+		// TODO Auto-generated method stub
+		productRepo.updateProductQuantity(id, qty);
+		
 	}
  
 	

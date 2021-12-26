@@ -41,11 +41,7 @@ public class CustomerController {
 		
 	}
 
-//	@CrossOrigin("*")
-//	@GetMapping("/customers")
-//	public List<Customer> getCustomer() {
-//		return customerRepo.findAll();
-//	}
+
 	@CrossOrigin("*")
 	  @GetMapping("/customers")
 	  public Page<Customer> getAllcustomers(
