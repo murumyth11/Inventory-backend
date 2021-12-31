@@ -2,12 +2,8 @@ package com.kmsoft.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.kmsoft.model.Product;
 
 
@@ -22,7 +18,7 @@ public Product createProduct(Product product);
 	
 	public void deleteProduct(int id);
 
-	public List<Product> getoneById(int id);
+	public Product getoneById(int id);
 	
 	public List<Product> getproductlike(String productlike);
 	

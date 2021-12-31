@@ -2,7 +2,6 @@ package com.kmsoft.api;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.kmsoft.model.Billproduct;
 import com.kmsoft.model.Customer;
-import com.kmsoft.model.Product;
 import com.kmsoft.repository.BillRepository;
 import com.kmsoft.repository.CustomerRepository;
 

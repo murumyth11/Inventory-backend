@@ -1,15 +1,13 @@
 package com.kmsoft.model;
 
 
-import java.sql.Date;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 
 @Entity
@@ -41,15 +40,17 @@ public class HeaderBill {
 	@Column(name="invoice")
 	String invoice;
 	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@Column(name="date" ,columnDefinition="DATETIME")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime date;
 	
 	@Column(name="subtotal")
-	int subtotal;
+	BigDecimal subtotal;
 	
 	@Column(name="adjustment")
-	int adjustment;
+	BigDecimal adjustment;
 	
 	@Column(name="billnotes")
 	String billnotes;
@@ -65,10 +66,10 @@ public class HeaderBill {
     int isdraft;
 	
 	@Column(name="creditAmount")
-	int creditAmount;
+	BigDecimal creditAmount;
 	
 	@Column(name="balance")
-	int balance;
+	BigDecimal balance;
 	
 	@Column(name="status")
 	String status;
@@ -92,21 +93,7 @@ public class HeaderBill {
 		this.status = status;
 	}
 
-	public int getCreditAmount() {
-		return creditAmount;
-	}
-
-	public void setCreditAmount(int creditAmount) {
-		this.creditAmount = creditAmount;
-	}
-
-	public int getBalance() {
-		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
+	
 
 	public int getIsdraft() {
 		return isdraft;
@@ -140,24 +127,10 @@ public class HeaderBill {
 		this.billnotes = billnotes;
 	}
 
-	public int getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(int subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public int getAdjustment() {
-		return adjustment;
-	}
-
-	public void setAdjustment(int adjustment) {
-		this.adjustment = adjustment;
-	}
+	
 
 	@Column(name="total")
-	int total;
+	BigDecimal total;
 	
 	public int getHeaderBillId() {
 		return headerBillId;
@@ -201,14 +174,7 @@ public class HeaderBill {
 		this.date = date;
 	}
 
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
+	
 	public List<Billproduct> getBilldetails() {
 		return billdetails;
 	}
@@ -233,4 +199,80 @@ public class HeaderBill {
 		this.customer = customer;
 	}
 
+	
+
+	
+
+	public BigDecimal getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(BigDecimal subtotal) {
+		this.subtotal = subtotal;
+	}
+
+	public BigDecimal getAdjustment() {
+		return adjustment;
+	}
+
+	public void setAdjustment(BigDecimal adjustment) {
+		this.adjustment = adjustment;
+	}
+
+	public BigDecimal getCreditAmount() {
+		return creditAmount;
+	}
+
+	public void setCreditAmount(BigDecimal creditAmount) {
+		this.creditAmount = creditAmount;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+ 
+	
+	public HeaderBill(int headerBillId, String customerName, String customerPhone, String invoice, LocalDateTime date,
+			BigDecimal subtotal, BigDecimal adjustment, String billnotes, int totalitems, int totalquantity,
+			int isdraft, BigDecimal creditAmount, BigDecimal balance, String status, String billedBy, BigDecimal total,
+			List<Billproduct> billdetails, Customer customer) {
+		super();
+		this.headerBillId = headerBillId;
+		this.customerName = customerName;
+		this.customerPhone = customerPhone;
+		this.invoice = invoice;
+		this.date = date;
+		this.subtotal = subtotal;
+		this.adjustment = adjustment;
+		this.billnotes = billnotes;
+		this.totalitems = totalitems;
+		this.totalquantity = totalquantity;
+		this.isdraft = isdraft;
+		this.creditAmount = creditAmount;
+		this.balance = balance;
+		this.status = status;
+		this.billedBy = billedBy;
+		this.total = total;
+		this.billdetails = billdetails;
+		this.customer = customer;
+	}
+
+	public HeaderBill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 }

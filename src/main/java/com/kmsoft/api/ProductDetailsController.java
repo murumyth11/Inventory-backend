@@ -18,14 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.kmsoft.model.Product;
-import com.kmsoft.model.ProductGroup;
-import com.kmsoft.model.ProductUpdateHistory;
 import com.kmsoft.model.ProductValidators;
-import com.kmsoft.repository.BillproductRepository;
-import com.kmsoft.repository.ProductGroupRepository;
-import com.kmsoft.repository.ProductUpdateHistoryRepository;
 import com.kmsoft.repository.ProductValidatorsRepository;
 import com.kmsoft.service.ProductService;
 
@@ -47,8 +41,8 @@ public class ProductDetailsController {
 	}
 
 	@CrossOrigin("*")
-	@RequestMapping("/products/{id}")
-	public List<Product> getProductsById(@PathVariable Integer id) {
+	@GetMapping("/products/{id}")
+	public Product getProductsById(@PathVariable Integer id) {
 		return productservice.getoneById(id);
 	}
 
@@ -87,7 +81,7 @@ public class ProductDetailsController {
 	
 
 	@CrossOrigin("*")
-	@GetMapping("/products/{productlike}")
+	@GetMapping("/productsLike/{productlike}")
 	public List<Product> getproductlike(@PathVariable String productlike) {
 		return productservice.getproductlike(productlike);
 	}

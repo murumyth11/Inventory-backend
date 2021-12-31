@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import com.kmsoft.model.Billproduct;
 import com.kmsoft.model.Product;
 import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.service.ProductService;
@@ -34,13 +32,10 @@ public class ProductServiceImp implements ProductService{
 
 
 	public Product updateProduct(int id,Product product) {
-		Product prod= productRepo.findById(id).get(0);
+		Product prod= productRepo.findById(id);
 		prod.setProductId(product.getProductId());
 		prod.setProductKey(product.getProductKey());
 		prod.setProductName(product.getProductName());
-		System.out.println(prod.getProductQuantity());
-		System.out.println(product.getProductQuantity());
-	
 		prod.setProductQuantity(product.getProductQuantity()+prod.getProductQuantity());
 		prod.setBrand(product.getBrand());
 		prod.setManufacturer(product.getManufacturer());
@@ -49,7 +44,9 @@ public class ProductServiceImp implements ProductService{
 		prod.setDimension(product.getDimension());
 		prod.setManufacturePartNumber(product.getManufacturePartNumber());
 		prod.setProductgroup(product.getProductgroup());
-	   // prod.setprimaryUnit(product.getPrimaryUnit());
+	 prod.setUnitConversion(product.getUnitConversion());
+		prod.setPrimaryUnit(product.getPrimaryUnit());
+		prod.setSecondaryUnit(product.getSecondaryUnit());
 	    prod.setUniversalProductCode(product.getUniversalProductCode());
 	    prod.setWeight(product.getWeight());
 		
@@ -65,7 +62,7 @@ public class ProductServiceImp implements ProductService{
 
 
 	@Override
-	public List<Product> getoneById(int id) {
+	public Product getoneById(int id) {
 		// TODO Auto-generated method stub
 		return productRepo.findById(id);
 	}

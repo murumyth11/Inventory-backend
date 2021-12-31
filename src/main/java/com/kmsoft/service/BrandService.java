@@ -1,9 +1,5 @@
 package com.kmsoft.service;
-
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.kmsoft.model.Brand;
 
 public interface BrandService {
