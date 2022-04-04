@@ -34,7 +34,7 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 				 ,nativeQuery = true)
 	 Page<HeaderBill> findByInvoiceContaining(String title,Pageable pageable);
 	
-	 @Query(value="SELECT MAX(invoice) FROM header_bill WHERE isdraft=0",nativeQuery=true)
+	 @Query(value="SELECT ifnull(MAX(invoice),0) FROM header_bill WHERE isdraft=0",nativeQuery=true)
 	 int getHeaderbillInvNo();
 	 
 	 @Query(value="select count(*) as totalbill,sum(totalquantity) as totalqty,sum(total) as total,count(distinct customer_fk) as cust from header_bill "

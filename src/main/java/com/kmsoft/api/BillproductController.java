@@ -76,6 +76,9 @@ public class BillproductController {
 		return  billproductService.getTotalSoldQuantity(id);
 	}
 	
+	
+	
+	
 
 
 }

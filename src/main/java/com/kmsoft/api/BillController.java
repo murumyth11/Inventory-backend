@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -144,13 +145,13 @@ public class BillController {
 	@PatchMapping("/submitBill")
 	@Transactional(rollbackOn = { Exception.class })
 	public void submitBill(@RequestBody String sb){
-	
+	System.out.println(sb);
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
 	
 	JSONArray updateQtyArray=jsonObject.getJSONArray("updateQtyArray");
 	JSONArray  updateHistroryArray=jsonObject.getJSONArray("updateHistroryArray");
-	
+
 	try {
 		HeaderBill h=objectMapper.readValue(jsonObject.get("headerData").toString(), HeaderBill.class);
 		headerbillService.createHeaderBill(h);
@@ -161,12 +162,14 @@ public class BillController {
 			i++;
 			int id;
 			String qty;
-			
+			String updatefrom;
 			JSONObject o=(JSONObject) qtyData;
 			id=o.getInt("id");
 		    qty=o.get("q").toString();
-		    productService.updateProductQuantity(id, qty);
+		    updatefrom=o.get("updatefrom").toString();
 		    
+		    productService.updateProductQuantity(id, qty,updatefrom);
+		    System.out.println(updatefrom);
 			}
 		for(Object updatehistory:updateHistroryArray) {
 			

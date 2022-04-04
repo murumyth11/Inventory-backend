@@ -19,7 +19,7 @@ public class Customer {
 	@Column(name="customerName")
 	String customerName;
 	
-	@Column(name="customerPhone")
+	@Column(name="customerPhone",unique = true)
 	String customerPhone;
 	
 	@Column(name="customerEmail")

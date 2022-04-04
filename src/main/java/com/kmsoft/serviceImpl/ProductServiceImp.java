@@ -44,7 +44,7 @@ public class ProductServiceImp implements ProductService{
 		prod.setDimension(product.getDimension());
 		prod.setManufacturePartNumber(product.getManufacturePartNumber());
 		prod.setProductgroup(product.getProductgroup());
-	 prod.setUnitConversion(product.getUnitConversion());
+	    prod.setUnitConversion(product.getUnitConversion());
 		prod.setPrimaryUnit(product.getPrimaryUnit());
 		prod.setSecondaryUnit(product.getSecondaryUnit());
 	    prod.setUniversalProductCode(product.getUniversalProductCode());
@@ -128,11 +128,15 @@ public class ProductServiceImp implements ProductService{
 
 
 	@Override
-	public void updateProductQuantity(int id, String qty) {
-		// TODO Auto-generated method stub
-		productRepo.updateProductQuantity(id, qty);
+	public void updateProductQuantity(int id, String qty,String updatefrom) {
 		
-	}
+			productRepo.updateProductQuantityLess(id, qty,updatefrom);
+			
+			  
+		}
+		
+		
+		
  
 	
 

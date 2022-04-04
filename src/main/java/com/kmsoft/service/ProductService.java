@@ -36,6 +36,6 @@ public Product createProduct(Product product);
 	  
 	  public Page<List<Map<String, Object>>> getInventoryReportTitle(String title,Pageable paging);
 	  
-	  public void updateProductQuantity(int id,String qty);
+	  public void updateProductQuantity(int id,String qty,String updatefrom);
 
 }

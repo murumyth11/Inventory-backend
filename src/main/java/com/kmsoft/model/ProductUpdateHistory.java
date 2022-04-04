@@ -28,6 +28,28 @@ public class  ProductUpdateHistory {
 	@Column(name="updateQuantity")
 	int updateQuantity;
 	
+	
+	
+	@Column(name="updateBy")
+	String updateBy;
+	
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	@Column(name="updatefrom")
+	String updatefrom;
+	
+	@ManyToOne
+	@JoinColumn(name="productFk",referencedColumnName = "productId")
+	Product product;
+
+	
+	
 	public int getUpdateQuantity() {
 		return updateQuantity;
 	}
@@ -36,21 +58,10 @@ public class  ProductUpdateHistory {
 		this.updateQuantity = updateQuantity;
 	}
     
-	@Column(name="updateFrom")
-	String updateFrom;
 	
-	public String getUpdateFrom() {
-		return updateFrom;
-	}
+	
 
-	public void setUpdateFrom(String updateFrom) {
-		this.updateFrom = updateFrom;
-	}
-
-	@ManyToOne
-	@JoinColumn(name="productFk",referencedColumnName = "productId")
-	Product product;
-
+	
 	public Product getProduct() {
 		return product;
 	}
@@ -81,6 +92,31 @@ public class  ProductUpdateHistory {
 
 	public void setUpdateData(String updateData) {
 		this.updateData = updateData;
+	}
+
+	public ProductUpdateHistory(int updateHistoryId, String updateDate, String updateData, int updateQuantity,
+			String updateBy, String updatefrom, Product product) {
+		super();
+		this.updateHistoryId = updateHistoryId;
+		this.updateDate = updateDate;
+		this.updateData = updateData;
+		this.updateQuantity = updateQuantity;
+		this.updateBy = updateBy;
+		this.updatefrom = updatefrom;
+		this.product = product;
+	}
+
+	public String getUpdatefrom() {
+		return updatefrom;
+	}
+
+	public void setUpdatefrom(String updatefrom) {
+		this.updatefrom = updatefrom;
+	}
+
+	public ProductUpdateHistory() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

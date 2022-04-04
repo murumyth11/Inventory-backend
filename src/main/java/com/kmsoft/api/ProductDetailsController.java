@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,7 @@ import com.kmsoft.repository.ProductValidatorsRepository;
 import com.kmsoft.service.ProductService;
 
 @RestController
+
 public class ProductDetailsController {
 
 	@Autowired
@@ -49,7 +54,7 @@ public class ProductDetailsController {
 	// save product
 	@CrossOrigin("*")
 	@PostMapping("/products")
-	public Product createProduct(@RequestBody Product product) {
+	public Product createProduct(@Valid @RequestBody Product product) {
 		if (product.getPrimaryUnit() == null) {
 			product.setPrimaryUnit("qty");
 		}
@@ -66,7 +71,7 @@ public class ProductDetailsController {
 
 	@CrossOrigin("*")
 	@PutMapping("/products/{id}")
-	public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
+	public Product updateProduct( @PathVariable int id,@Valid @RequestBody Product product) {
 		return productservice.updateProduct(id, product);
 
 	}
@@ -125,7 +130,7 @@ public class ProductDetailsController {
 	@CrossOrigin("*")
 	@RequestMapping("/updatequantity/{id}")
 	public void updateQuantity(@PathVariable int id, @RequestParam() String qty) {
-		productservice.updateProductQuantity(id, qty);
+		productservice.updateProductQuantity(id, qty,"purchase");
 	}
 
 	@CrossOrigin("*")

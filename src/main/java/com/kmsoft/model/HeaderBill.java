@@ -187,7 +187,7 @@ public class HeaderBill {
 	@JoinColumn(name="headerbillFk")
 	public List<Billproduct> billdetails=new ArrayList<Billproduct>();
 	
-	@ManyToOne( )
+	@ManyToOne()
 	@JoinColumn(name="customerFk",referencedColumnName = "customerId")
 	Customer customer;
 

@@ -59,8 +59,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	@Modifying
     @Transactional 
-	@Query(value="update product set product_quantity=product_quantity-:qty where product_id=:id",nativeQuery=true)
-	void updateProductQuantity(int id,String qty);
+	@Query(value="update product set product_quantity= if(:updatefrom='sales',product_quantity-:qty,product_quantity+:qty) where product_id=:id",nativeQuery=true)
+	void updateProductQuantityLess(int id,String qty,String updatefrom);
+	
+	@Modifying
+    @Transactional 
+	@Query(value="update product set product_quantity=product_quantity+:qty where product_id=:id",nativeQuery=true)
+	void updateProductQuantityMore(int id,String qty);
 	
 	
 	@Query(value="select p.product_name as PNAME,concat(ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity),' ',p.primaryunit) as tpq,p.primaryunit as unit,concat(ifnull(round(sum(b.converted_quantity*p.unitconversion)),0),' ',p.secondaryunit) as"

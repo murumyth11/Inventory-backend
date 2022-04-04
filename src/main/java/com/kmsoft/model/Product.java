@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -31,15 +33,18 @@ public class Product {
 	@Column(name = "productName")
 	String productName;
 
+	
+	
 	@Column(name = "productQuantity",columnDefinition="DECIMAL(10,2)")
-	float productQuantity=0;
+	
+	float productQuantity;
 	
 	@Column(name="weight")
 	int weight;
 	
 	@Column(name="entryDate")
 //	@Temporal(TemporalType.TIMESTAMP)
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
+//  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
     private String createDate;
 	
 	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL }, orphanRemoval = true)
@@ -248,15 +253,7 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public float getProductQuantity() {
-		return productQuantity;
-	}
-
-	public void setProductQuantity(float productQuantity) {
-		
-		this.productQuantity=productQuantity;
-		
-	}
+	
 
 
 
@@ -270,7 +267,15 @@ public class Product {
 
 	
 
-	public Product(int productId, String productKey, String productName, int productQuantity, int weight,
+	public float getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(float productQuantity) {
+		this.productQuantity = productQuantity;
+	}
+
+	public Product(int productId, String productKey, String productName, float productQuantity, int weight,
 			String createDate, List<Billproduct> billproduct, String dimension, String primaryUnit,
 			String secondaryUnit, int unitConversion, BigDecimal costPrice, BigDecimal sellingPrice,
 			String manufacturer, String brand, String manufacturePartNumber, String universalProductCode,
