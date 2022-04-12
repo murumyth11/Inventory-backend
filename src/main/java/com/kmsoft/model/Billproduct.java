@@ -32,6 +32,17 @@ public class Billproduct {
 	@Column(name="unit")
 	String unit;
 	
+	@Column(name="batch")
+	String batch;
+	
+	public String getBatch() {
+		return batch;
+	}
+
+	public void setBatch(String batch) {
+		this.batch = batch;
+	}
+
 	public float getConvertedQuantity() {
 		return convertedQuantity;
 	}
@@ -134,14 +145,17 @@ public class Billproduct {
 		this.amount = amount;
 	}
 
+	
+
 	public Billproduct(int billproductId, Product name, float quantity, float convertedQuantity, String unit,
-			int discount, String discountType, int rate, int amount, String code) {
+			String batch, int discount, String discountType, float rate, float amount, String code) {
 		super();
 		this.billproductId = billproductId;
 		this.name = name;
 		this.quantity = quantity;
 		this.convertedQuantity = convertedQuantity;
 		this.unit = unit;
+		this.batch = batch;
 		this.discount = discount;
 		this.discountType = discountType;
 		this.rate = rate;

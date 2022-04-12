@@ -68,6 +68,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	void updateProductQuantityMore(int id,String qty);
 	
 	
+	
+	
 	@Query(value="select p.product_name as PNAME,concat(ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity),' ',p.primaryunit) as tpq,p.primaryunit as unit,concat(ifnull(round(sum(b.converted_quantity*p.unitconversion)),0),' ',p.secondaryunit) as"
 			+ " tqs,concat(round(p.product_quantity*p.unitconversion),' ',p.secondaryunit) as instock from product p left join billproduct b on p.product_id=b.product_fk group by product_id",countQuery =  "SELECT count(*) FROM product",nativeQuery=true)
 	Page<List<Map<String,Object>>> getInventoryReport(Pageable pageable);

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.kmsoft.model.Product;
 import com.kmsoft.repository.ProductRepository;
+import com.kmsoft.repository.PurchaseBillProductRepository;
 import com.kmsoft.service.ProductService;
 
  
@@ -17,6 +18,8 @@ public class ProductServiceImp implements ProductService{
 	
 	@Autowired 
 	ProductRepository productRepo;
+	@Autowired
+	PurchaseBillProductRepository pbpRepo;
 
    @Override
 	public List<Product> getAllProducts() {
@@ -134,6 +137,15 @@ public class ProductServiceImp implements ProductService{
 			
 			  
 		}
+
+
+	@Override
+	public void updatebatchQuantity(int id, String qty, String batch) {
+		// TODO Auto-generated method stub
+		pbpRepo.updateBatchQuantity(id, qty, batch);
+		System.out.println(id+"||"+qty+"||"+batch);
+		
+	}
 		
 		
 		

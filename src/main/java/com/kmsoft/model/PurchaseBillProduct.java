@@ -24,6 +24,9 @@ public class PurchaseBillProduct {
 	@Column(name="quantity",columnDefinition="DECIMAL(10,2)")
 	float quantity;
 	
+	@Column(name="availablequantity")
+	float availablequantity;
+	
 	@Column(name="rate",columnDefinition="DECIMAL(10,2)")
 	float rate;
 	
@@ -38,6 +41,16 @@ public class PurchaseBillProduct {
 	
 	@Column(name="unit")
 	String unit;
+	
+	
+
+	public float getAvailablequantity() {
+		return availablequantity;
+	}
+
+	public void setAvailablequantity(float availablequantity) {
+		this.availablequantity = availablequantity;
+	}
 
 	public String getUnit() {
 		return unit;
@@ -107,7 +120,7 @@ public class PurchaseBillProduct {
 	
 
 	public PurchaseBillProduct(int pbpId, Product name, float quantity, float rate, float amount, String code,
-			String batch, String unit) {
+			String batch, String unit,float availablequantity) {
 		super();
 		this.pbpId = pbpId;
 		this.name = name;
@@ -117,6 +130,7 @@ public class PurchaseBillProduct {
 		this.code = code;
 		this.batch = batch;
 		this.unit = unit;
+		this.availablequantity=availablequantity;
 	}
 
 	public PurchaseBillProduct() {
