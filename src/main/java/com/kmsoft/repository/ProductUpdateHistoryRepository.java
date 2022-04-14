@@ -19,7 +19,7 @@ public interface ProductUpdateHistoryRepository extends JpaRepository<ProductUpd
 			countQuery =  "SELECT count(*) from product_update_history where product_fk=:id ",nativeQuery=true)
 	Page<List<ProductUpdateHistory>> findAllById(int id,Pageable pageable);
 	
-	@Query(value="select * from product_update_history where product_fk=:id and (update_date like %:title% or update_data like %:title% )order by  update_history_id desc",
+	@Query(value="select * from product_update_history where product_fk=:id and (update_date like %:title% or update_data like %:title%  or updatefrom like %:title% or update_by like %:title%)order by  update_history_id desc",
 			countQuery =  "SELECT count(*) from product_update_history where product_fk=:id",nativeQuery=true)
 	Page<List<ProductUpdateHistory>> findByUpdateDateContaining(@Param("title") String title,int id,Pageable pageable);
 }

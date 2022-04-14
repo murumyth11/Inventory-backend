@@ -3,8 +3,11 @@ package com.kmsoft.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.kmsoft.model.ProductUpdateHistory;
 import com.kmsoft.model.PurchaseBillProduct;
 import com.kmsoft.repository.PurchaseBillProductRepository;
 import com.kmsoft.service.PurchaseBillProductService;
@@ -32,6 +35,18 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 	public List<PurchaseBillProduct> getbatchcode(int id) {
 		// TODO Auto-generated method stub
 		return pbpRepo.getbatchcode(id);
+	}
+
+	@Override
+	public Page<PurchaseBillProduct> findAllBatchById(int id, Pageable paging) {
+		// TODO Auto-generated method stub
+		return pbpRepo.findAllBatchById(id,paging);
+	}
+
+	@Override
+	public Page<PurchaseBillProduct> findByBatchContaining(String title, int id, Pageable paging) {
+		// TODO Auto-generated method stub
+		return pbpRepo.findByIdContaining(title,id,paging);
 	}
 
 }
