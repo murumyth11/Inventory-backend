@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kmsoft.model.ProductGroup;
@@ -30,6 +31,7 @@ public class ProductGroupController {
 	@CrossOrigin("*")
 	@PostMapping("/productgroup")
 	public ProductGroup createpg(@RequestBody ProductGroup productgroup) {
+		productgroup.setIsalivegroup(1);
 		return pgService.createpg(productgroup);
 	}
 
@@ -40,8 +42,8 @@ public class ProductGroupController {
 	}
 
 	@CrossOrigin("*")
-	@DeleteMapping("/productgroup/{id}")
-	public void deleteProductgroup(@PathVariable Integer id) {
+	@PutMapping("/deleteproductgroup")
+	public void deleteProductgroup(@RequestParam int id) {
 		pgService.deleteProductgroup(id);
 	}
 }

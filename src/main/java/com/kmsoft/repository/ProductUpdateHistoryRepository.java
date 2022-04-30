@@ -12,7 +12,7 @@ import com.kmsoft.model.ProductUpdateHistory;
 
 public interface ProductUpdateHistoryRepository extends JpaRepository<ProductUpdateHistory, Integer>{
 
-	@Query(value="SELECT sum(update_quantity) FROM product_update_history where update_from='bill'",nativeQuery=true)
+	@Query(value="SELECT sum(update_quantity) FROM product_update_history where updatefrom='sales'",nativeQuery=true)
 	int getSTockSold();
 	
 	@Query(value="select * from product_update_history where product_fk=:id order by update_history_id desc ",

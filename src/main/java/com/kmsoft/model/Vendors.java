@@ -28,6 +28,19 @@ public class Vendors {
 	@Column(name="vendorAddress")
 	String vendorAddress;
 	
+	@Column(name="isalivevendor",columnDefinition = "integer default '1'")
+	int isalivevendor;
+	
+	
+	
+	public int getIsalivevendor() {
+		return isalivevendor;
+	}
+
+	public void setIsalivevendor(int isalivevendor) {
+		this.isalivevendor = isalivevendor;
+	}
+
 	public int getVendorId() {
 		return vendorId;
 	}
@@ -68,13 +81,16 @@ public class Vendors {
 		this.vendorAddress = vendorAddress;
 	}
 
-	public Vendors(int vendorId, String vendorName, String vendorGSTIN, String vendorMobile, String vendorAddress) {
+	
+	public Vendors(int vendorId, String vendorName, String vendorGSTIN, String vendorMobile, String vendorAddress,
+			int isalivevendor) {
 		super();
 		this.vendorId = vendorId;
 		this.vendorName = vendorName;
 		this.vendorGSTIN = vendorGSTIN;
 		this.vendorMobile = vendorMobile;
 		this.vendorAddress = vendorAddress;
+		this.isalivevendor = isalivevendor;
 	}
 
 	public Vendors() {

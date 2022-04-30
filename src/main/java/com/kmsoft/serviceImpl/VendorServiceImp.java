@@ -54,6 +54,12 @@ public class VendorServiceImp implements Vendorservice{
 		return vendorRepo.getvendorsLike(namelike);
 	}
 
+	@Override
+	public void deleteVendorsById(int id) {
+		vendorRepo.deleteVendorsById(id);
+		
+	}
+
 	
 
 }

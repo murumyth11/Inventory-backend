@@ -1,7 +1,9 @@
 package com.kmsoft.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,13 +15,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Entity
 @Table(name = "Product")
-@JsonIgnoreProperties({ "productUpdateHistory","billproduct" })
+@JsonIgnoreProperties({ "productUpdateHistory","billproduct","purchasebillproduct" })
 
 public class Product {
 
@@ -47,10 +58,14 @@ public class Product {
 //  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
     private String createDate;
 	
-	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL })
 		public List<Billproduct> billproduct=new ArrayList<Billproduct>();
+	
+	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL })
+	public List<PurchaseBillProduct> purchasebillproduct=new ArrayList<PurchaseBillProduct>();
 		
-
+    
+	
 	public String getCreateDate() {
 		return createDate;
 	}
@@ -90,6 +105,73 @@ public class Product {
 	
 	int unitConversion;
 	
+	@Column(name="batch")
+	String batch;
+	
+	
+	@Column(name="isaliveproduct",columnDefinition = "integer default '1'")
+	int isAliveProduct;
+	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="manufacturedate" ,columnDefinition="DATETIME")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	Date manufacturedate;
+	
+	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="expirydate" ,columnDefinition="DATETIME")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	Date expirydate;
+	
+	
+
+	
+	
+	public Date getManufacturedate() {
+		return manufacturedate;
+	}
+
+	public void setManufacturedate(Date manufacturedate) {
+		this.manufacturedate = manufacturedate;
+	}
+
+	public Date getExpirydate() {
+		return expirydate;
+	}
+
+	public void setExpirydate(Date expirydate) {
+		this.expirydate = expirydate;
+	}
+
+	public List<PurchaseBillProduct> getPurchasebillproduct() {
+		return purchasebillproduct;
+	}
+
+	public void setPurchasebillproduct(List<PurchaseBillProduct> purchasebillproduct) {
+		this.purchasebillproduct = purchasebillproduct;
+	}
+
+	
+
+	public int getIsAliveProduct() {
+		return isAliveProduct;
+	}
+
+	public void setIsAliveProduct(int isAliveProduct) {
+		this.isAliveProduct = isAliveProduct;
+	}
+
+	public String getBatch() {
+		return batch;
+	}
+
+	public void setBatch(String batch) {
+		this.batch = batch;
+	}
 
 	public List<Billproduct> getBillproduct() {
 		return billproduct;
@@ -276,10 +358,12 @@ public class Product {
 	}
 
 	public Product(int productId, String productKey, String productName, float productQuantity, int weight,
-			String createDate, List<Billproduct> billproduct, String dimension, String primaryUnit,
-			String secondaryUnit, int unitConversion, BigDecimal costPrice, BigDecimal sellingPrice,
-			String manufacturer, String brand, String manufacturePartNumber, String universalProductCode,
-			String productType, ProductGroup productgroup, List<ProductUpdateHistory> productUpdateHistory) {
+			String createDate, List<Billproduct> billproduct, List<PurchaseBillProduct> purchasebillproduct,
+			String dimension, String primaryUnit, String secondaryUnit, int unitConversion, String batch,
+			int isAliveProduct, Date manufacturedate, Date expirydate, BigDecimal costPrice,
+			BigDecimal sellingPrice, String manufacturer, String brand, String manufacturePartNumber,
+			String universalProductCode, String productType, ProductGroup productgroup,
+			List<ProductUpdateHistory> productUpdateHistory) {
 		super();
 		this.productId = productId;
 		this.productKey = productKey;
@@ -288,10 +372,15 @@ public class Product {
 		this.weight = weight;
 		this.createDate = createDate;
 		this.billproduct = billproduct;
+		this.purchasebillproduct = purchasebillproduct;
 		this.dimension = dimension;
 		this.primaryUnit = primaryUnit;
 		this.secondaryUnit = secondaryUnit;
 		this.unitConversion = unitConversion;
+		this.batch = batch;
+		this.isAliveProduct = isAliveProduct;
+		this.manufacturedate = manufacturedate;
+		this.expirydate = expirydate;
 		this.costPrice = costPrice;
 		this.sellingPrice = sellingPrice;
 		this.manufacturer = manufacturer;
@@ -303,6 +392,7 @@ public class Product {
 		this.productUpdateHistory = productUpdateHistory;
 	}
 
-
-
+	
+	
+	
 }

@@ -27,6 +27,18 @@ public class Customer {
 	
 	@Column(name="customerAddress")
 	String customerAddress;
+	
+	@Column(name="isAlive" ,columnDefinition = "integer default '1'")
+	int isalive;
+
+	
+	public int getIsalive() {
+		return isalive;
+	}
+
+	public void setIsalive(int isalive) {
+		this.isalive = isalive;
+	}
 
 	public int getCustomerId() {
 		return customerId;
@@ -66,6 +78,22 @@ public class Customer {
 
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
+	}
+
+	public Customer(int customerId, String customerName, String customerPhone, String customerEmail,
+			String customerAddress, int isalive) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPhone = customerPhone;
+		this.customerEmail = customerEmail;
+		this.customerAddress = customerAddress;
+		this.isalive = isalive;
+	}
+
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

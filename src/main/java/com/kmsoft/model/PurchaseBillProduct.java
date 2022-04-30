@@ -1,5 +1,8 @@
 package com.kmsoft.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 
 @Entity
 @Table(name="purchasebillproduct")
@@ -18,6 +32,7 @@ public class PurchaseBillProduct {
 	int pbpId;
 	
 	@ManyToOne
+	
 	@JoinColumn(name="productFk",referencedColumnName = "productId")
 	Product name;
 	
@@ -29,6 +44,9 @@ public class PurchaseBillProduct {
 	
 	@Column(name="rate",columnDefinition="DECIMAL(10,2)")
 	float rate;
+	
+	@Column(name="costprice",columnDefinition = "DECIMAL(10,2)")
+	float costprice;
 	
 	@Column(name="amount",columnDefinition="DECIMAL(10,2)")
 	float amount;
@@ -43,6 +61,21 @@ public class PurchaseBillProduct {
 	String unit;
 	
 	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+//	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="manufacturedate" ,columnDefinition="DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	//@DateTimeFormat (pattern = "dd-MM-yyyy")
+	public Date manufacturedate;
+	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+//	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="expirydate" ,columnDefinition="DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	//@DateTimeFormat(pattern = "dd-MM-yyyy")
+	public Date expirydate;
 
 	public float getAvailablequantity() {
 		return availablequantity;
@@ -117,20 +150,46 @@ public class PurchaseBillProduct {
 	}
 
 	
-	
+	public float getCostprice() {
+		return costprice;
+	}
 
-	public PurchaseBillProduct(int pbpId, Product name, float quantity, float rate, float amount, String code,
-			String batch, String unit,float availablequantity) {
+	public void setCostprice(float costprice) {
+		this.costprice = costprice;
+	}
+
+	public Date getManufacturedate() {
+		return manufacturedate;
+	}
+
+	public void setManufacturedate(Date manufacturedate) {
+		this.manufacturedate = manufacturedate;
+	}
+
+	public Date getExpirydate() {
+		return expirydate;
+	}
+
+	public void setExpirydate(Date expirydate) {
+		this.expirydate = expirydate;
+	}
+
+	public PurchaseBillProduct(int pbpId, Product name, float quantity, float availablequantity, float rate,
+			float costprice, float amount, String code, String batch, String unit, Date manufacturedate,
+			Date expirydate) {
 		super();
 		this.pbpId = pbpId;
 		this.name = name;
 		this.quantity = quantity;
+		this.availablequantity = availablequantity;
 		this.rate = rate;
+		this.costprice = costprice;
 		this.amount = amount;
 		this.code = code;
 		this.batch = batch;
 		this.unit = unit;
-		this.availablequantity=availablequantity;
+		this.manufacturedate = manufacturedate;
+		this.expirydate = expirydate;
 	}
 
 	public PurchaseBillProduct() {

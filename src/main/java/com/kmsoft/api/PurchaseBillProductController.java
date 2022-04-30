@@ -1,6 +1,7 @@
 package com.kmsoft.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,9 @@ public class PurchaseBillProductController {
 	@CrossOrigin("*")
 	@PostMapping("/purchasebillproduct")
 	public PurchaseBillProduct createPurchaseBillBody(@RequestBody PurchaseBillProduct billProduct) {
+		if(billProduct.getBatch()==null) {
+			billProduct.setBatch("");
+		}
 		return pbservice.createpbp(billProduct);
 		}
 
@@ -71,5 +75,21 @@ public class PurchaseBillProductController {
 	      return pageTuts;}
 		
 	}
+
+	@CrossOrigin("*")
+	@GetMapping("/availableqty")
+	public PurchaseBillProduct getAvailableqty(
+			@RequestParam int id) {
+				return pbservice.getavailableqty(id);
+		
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/totalstockinfo")
+	public Map<String, Number> getTotalStockValue(){
+		return pbservice.gettotalstockinfo();
+		
+	}
+	
 
 }

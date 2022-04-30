@@ -5,17 +5,23 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Fetch;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -66,6 +72,10 @@ public class PurchaseBill {
 	@JoinColumn(name="vendorFk",referencedColumnName = "vendorId")
 	Vendors vendors;
 	
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name="purchaseimagedata",referencedColumnName = "pbfiledataId")
+//	PurchaseBillFileData pbfiledata;
+	
 	@Column(name="billedby")
 	String billedBy;
 	
@@ -80,13 +90,20 @@ public class PurchaseBill {
 	
 	@Column(name="balance")
 	BigDecimal balance;
+	
+	@Column(name="status")
+	String status;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name="purchaseimage")
+	byte[] purchaseimage;
 
 	
-
 	public PurchaseBill(int purchaseBillId, String pbNo, String pbInvoice, LocalDateTime pbInvoiceDate,
 			LocalDateTime pbEntryDate, BigDecimal taxAmount, BigDecimal subtotal, BigDecimal total,
 			List<PurchaseBillProduct> purchaseBillProduct, Vendors vendors, String billedBy, BigDecimal charges,
-			String billnotes, BigDecimal amountdebit, BigDecimal balance) {
+			String billnotes, BigDecimal amountdebit, BigDecimal balance, String status, byte[] purchaseimage) {
 		super();
 		this.purchaseBillId = purchaseBillId;
 		this.pbNo = pbNo;
@@ -103,8 +120,11 @@ public class PurchaseBill {
 		this.billnotes = billnotes;
 		this.amountdebit = amountdebit;
 		this.balance = balance;
+		this.status = status;
+		this.purchaseimage = purchaseimage;
 	}
 
+	
 
 
 	public PurchaseBill() {
@@ -113,7 +133,28 @@ public class PurchaseBill {
 	}
 
 
+	
+	
+	public String getStatus() {
+		return status;
+	}
 
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+
+	public byte[] getPurchaseimage() {
+		return purchaseimage;
+	}
+	public void setPurchaseimage(byte[] purchaseimage) {
+		this.purchaseimage = purchaseimage;
+	}
 	public int getPurchaseBillId() {
 		return purchaseBillId;
 	}

@@ -65,6 +65,8 @@ public class ProductDetailsController {
 		if (product.getUnitConversion() == 0) {
 			product.setUnitConversion(1);
 		}
+		
+		product.setIsAliveProduct(1);
 		return productservice.createProduct(product);
 
 	}
@@ -77,9 +79,9 @@ public class ProductDetailsController {
 	}
 
 	@CrossOrigin("*")
-	@DeleteMapping("/products/{id}")
+	@PutMapping("/deleteproducts")
 
-	public void deleteProduct(@PathVariable Integer id) {
+	public void deleteProduct(@RequestParam int id) {
 		productservice.deleteProduct(id);
 	}
 

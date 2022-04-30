@@ -63,7 +63,7 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	}
 
 	
-	public List<HeaderBill> getbillbydates(Date startDate, Date endDate) {
+	public List<Map<String, Object>> getbillbydates(Date startDate, Date endDate) {
 		
 		return headerbillRepo.getbillbydate(startDate, endDate);
 	}
@@ -91,5 +91,8 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	
 		return headerbillRepo.getHeaderbillDetails();
 	}
+
+
+	
 
 }

@@ -77,6 +77,19 @@ public class HeaderBill {
 	@Column(name="billedBy")
 	String billedBy;
 	
+	@Column(name="paymentmethod")
+	String paymentmethod;
+	
+	
+	
+	public String getPaymentmethod() {
+		return paymentmethod;
+	}
+
+	public void setPaymentmethod(String paymentmethod) {
+		this.paymentmethod = paymentmethod;
+	}
+
 	public String getBilledBy() {
 		return billedBy;
 	}
@@ -244,10 +257,12 @@ public class HeaderBill {
 	}
  
 	
+	
+
 	public HeaderBill(int headerBillId, String customerName, String customerPhone, String invoice, LocalDateTime date,
 			BigDecimal subtotal, BigDecimal adjustment, String billnotes, int totalitems, int totalquantity,
-			int isdraft, BigDecimal creditAmount, BigDecimal balance, String status, String billedBy, BigDecimal total,
-			List<Billproduct> billdetails, Customer customer) {
+			int isdraft, BigDecimal creditAmount, BigDecimal balance, String status, String billedBy,
+			String paymentmethod, BigDecimal total, List<Billproduct> billdetails, Customer customer) {
 		super();
 		this.headerBillId = headerBillId;
 		this.customerName = customerName;
@@ -264,6 +279,7 @@ public class HeaderBill {
 		this.balance = balance;
 		this.status = status;
 		this.billedBy = billedBy;
+		this.paymentmethod = paymentmethod;
 		this.total = total;
 		this.billdetails = billdetails;
 		this.customer = customer;

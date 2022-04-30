@@ -35,6 +35,17 @@ public class ProductGroup {
 
 	@Column(name = "brand")
 	String brand;
+	
+	@Column(name="isalivegroup",columnDefinition = "integer default '1'")
+	int isalivegroup;
+
+	public int getIsalivegroup() {
+		return isalivegroup;
+	}
+
+	public void setIsalivegroup(int isalivegroup) {
+		this.isalivegroup = isalivegroup;
+	}
 
 	@OneToMany(mappedBy = "productgroup", cascade = { CascadeType.ALL })
 	List<Product> product = new ArrayList<Product>();

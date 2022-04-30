@@ -83,8 +83,19 @@ public class Billproduct {
 	String code;
     
 	
+	@Column(name="batchid")
+	int batchid;
+	
 
 	
+
+	public int getBatchid() {
+		return batchid;
+	}
+
+	public void setBatchid(int batchid) {
+		this.batchid = batchid;
+	}
 
 	public String getCode() {
 		return code;
@@ -147,8 +158,10 @@ public class Billproduct {
 
 	
 
+	
+
 	public Billproduct(int billproductId, Product name, float quantity, float convertedQuantity, String unit,
-			String batch, int discount, String discountType, float rate, float amount, String code) {
+			String batch, int discount, String discountType, float rate, float amount, String code, int batchid) {
 		super();
 		this.billproductId = billproductId;
 		this.name = name;
@@ -161,6 +174,7 @@ public class Billproduct {
 		this.rate = rate;
 		this.amount = amount;
 		this.code = code;
+		this.batchid = batchid;
 	}
 
 	public Billproduct() {

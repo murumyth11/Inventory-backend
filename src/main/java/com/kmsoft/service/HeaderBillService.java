@@ -24,7 +24,7 @@ public interface HeaderBillService {
 	
 	public void deleteDraftbillByid(int id);
 	
-	public List<HeaderBill> getbillbydates(Date startDate,Date endDate);
+	public List<Map<String, Object>> getbillbydates(Date startDate,Date endDate);
 	
 	public int getHeaderbillInvNo();
 	
@@ -33,5 +33,7 @@ public interface HeaderBillService {
 	public Map<String,Object> getHeaderbillDetailsDate(Date startdate,Date enddate);
 	
 	public HeaderBill updateHeaderBill(HeaderBill headerBill);
+
+	
 
 }

@@ -28,16 +28,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	//Product findByProductName(String name);
 	
-	@Query(value="SELECT * FROM product WHERE product_name LIKE :productlike% or product_key like :productlike%",nativeQuery = true)
+	@Query(value="SELECT * FROM product WHERE (product_name LIKE :productlike% or product_key like :productlike%) and isaliveproduct=1",nativeQuery = true)
 	List<Product> getProductLike(@Param("productlike") String productlike);
 	
-	@Query(value="SELECT * FROM product WHERE product_key LIKE :productKeylike%",nativeQuery = true)
+	@Query(value="SELECT * FROM product WHERE (product_key LIKE :productKeylike%) and isaliveproduct=1",nativeQuery = true)
 	List<Product> getProductKeyLike(@Param("productKeylike") String productKeylike);
 	
-	@Query(value="SELECT * FROM product WHERE product_quantity <=10",nativeQuery=true)
+	@Query(value="SELECT * FROM product WHERE product_quantity <=10 and isaliveproduct=1",nativeQuery=true)
 	List<Product> getLowStock();
 	
-	@Query(value="SELECT SUM(product_quantity) FROM product",nativeQuery=true)
+	@Query(value="SELECT SUM(availablequantity) FROM purchasebillproduct",nativeQuery=true)
 	int getStockinHand();
 	
 	@Query(value="SELECT COUNT(*) FROM product",nativeQuery=true)
@@ -45,12 +45,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	 Page<Product> findAll(Pageable pageable);
 	
-	 @Query(value="SELECT * FROM product WHERE product_name LIKE %:title%"+" OR product_quantity LIKE %:title% "
+	 @Query(value="SELECT * FROM product WHERE (product_name LIKE %:title%"+" OR product_quantity LIKE %:title% "
 	 +" OR product_group_fk LIKE %:title% "
 			 +" OR primaryunit LIKE %:title% "
 	 +" OR entry_date LIKE %:title% "
 			 +" OR selling_price LIKE %:title% "+" OR cost_price LIKE %:title% "+" OR manufacturer LIKE %:title% "+
-			 " OR brand LIKE %:title% "
+			 " OR brand LIKE %:title% ) and isaliveproduct=1"
 	 
 			 ,nativeQuery = true)
 	 Page<Product> findByProductNameContaining(String title,Pageable pageable);
@@ -78,6 +78,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 			+ " tqs,concat(round(p.product_quantity*p.unitconversion),' ',p.secondaryunit) as instock from product p left join billproduct b on p.product_id=b.product_fk where p.product_name like %:title% group by product_id"
 			,countQuery =  "SELECT count(*) FROM product",nativeQuery=true)
 	Page<List<Map<String,Object>>> getInventoryReportTitle(String title,Pageable pageable);
+
+
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update product set isaliveproduct=0 where product_id=:id",nativeQuery = true)
+	void deleteProductsById(int id);
 	
 	
 	

@@ -26,12 +26,53 @@ public class BalanceUpdateHistory {
 	@Column(name="cashOut")
 	int cashOut;
 	
+	@Column(name="balance")
+	int balance;
+	
 	@Column(name="updatedBy")
 	String updatedBy;
 	
 	@ManyToOne
 	@JoinColumn(name="headerbillFk",referencedColumnName = "headerBillId")
 	HeaderBill headerbill;
+	
+	@ManyToOne
+	@JoinColumn(name="purchasebillFk",referencedColumnName = "purchaseBillId")
+	PurchaseBill purchaseBill;
+	
+	@Column(name="paymentmethod")
+	String paymentmethod;
+	
+
+	
+	
+	
+
+	public PurchaseBill getPurchaseBill() {
+		return purchaseBill;
+	}
+
+	public void setPurchaseBill(PurchaseBill purchaseBill) {
+		this.purchaseBill = purchaseBill;
+	}
+
+	public String getPaymentmethod() {
+		return paymentmethod;
+	}
+
+	public void setPaymentmethod(String paymentmethod) {
+		this.paymentmethod = paymentmethod;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	
 
 	public int getBalanceUpdateHistoryId() {
 		return balanceUpdateHistoryId;
@@ -85,15 +126,23 @@ public class BalanceUpdateHistory {
 		this.updatedBy = updatedBy;
 	}
 
+	
+	
+
+	
+
 	public BalanceUpdateHistory(int balanceUpdateHistoryId, String balanceUpdateDate, int cashIn, int cashOut,
-			String updatedBy, HeaderBill headerbill) {
+			int balance, String updatedBy, HeaderBill headerbill, PurchaseBill purchaseBill, String paymentmethod) {
 		super();
 		this.balanceUpdateHistoryId = balanceUpdateHistoryId;
 		this.balanceUpdateDate = balanceUpdateDate;
 		this.cashIn = cashIn;
 		this.cashOut = cashOut;
+		this.balance = balance;
 		this.updatedBy = updatedBy;
 		this.headerbill = headerbill;
+		this.purchaseBill = purchaseBill;
+		this.paymentmethod = paymentmethod;
 	}
 
 	public BalanceUpdateHistory() {

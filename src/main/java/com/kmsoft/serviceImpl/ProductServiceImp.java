@@ -52,6 +52,7 @@ public class ProductServiceImp implements ProductService{
 		prod.setSecondaryUnit(product.getSecondaryUnit());
 	    prod.setUniversalProductCode(product.getUniversalProductCode());
 	    prod.setWeight(product.getWeight());
+	    prod.setBatch(product.getBatch());
 		
 		return productRepo.saveAndFlush(prod);
 	}
@@ -60,7 +61,7 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public void deleteProduct(int id) {
 	
-		 productRepo.deleteById(id);
+		 productRepo.deleteProductsById(id);
 	}
 
 

@@ -16,5 +16,6 @@ public interface Vendorservice {
 	public Page<Vendors> findByVendorNameContaining(String title, Pageable paging);
 	public void deleteById(int id);
 	public List<Vendors> getVendorLike(String namelike);
+	public void deleteVendorsById(int id);
 	
 }

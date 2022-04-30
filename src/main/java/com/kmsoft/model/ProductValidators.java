@@ -57,6 +57,17 @@ public class ProductValidators {
 
 	@Column(name = "productgroup")
 	boolean productgroup;
+	
+	@Column(name="batch")
+	boolean batch;
+
+	public boolean isBatch() {
+		return batch;
+	}
+
+	public void setBatch(boolean batch) {
+		this.batch = batch;
+	}
 
 	public boolean isProductName() {
 		return productName;
@@ -162,10 +173,12 @@ public class ProductValidators {
 		this.productgroup = productgroup;
 	}
 
+	
+
 	public ProductValidators(int pvId, boolean productName, boolean brand, boolean costPrice, boolean dimension,
 			boolean manufacturePartNumber, boolean manufacturer, boolean primaryUnit, boolean productKey,
 			boolean productQuantity, boolean secondaryUnit, boolean sellingPrice, boolean universalProductCode,
-			boolean productgroup) {
+			boolean productgroup, boolean batch) {
 		super();
 		this.pvId = pvId;
 		this.productName = productName;
@@ -181,6 +194,7 @@ public class ProductValidators {
 		this.sellingPrice = sellingPrice;
 		this.universalProductCode = universalProductCode;
 		this.productgroup = productgroup;
+		this.batch = batch;
 	}
 
 	public ProductValidators() {

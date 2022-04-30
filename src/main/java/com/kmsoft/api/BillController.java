@@ -110,11 +110,13 @@ public class BillController {
 
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/bydate/{startDate}/{endDate}")
-	public List<HeaderBill> getbillbydate(@PathVariable  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
+	public List<Map<String,Object>> getbillbydate(@PathVariable  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate ) {
 		return headerbillService.getbillbydates(startDate,endDate);
 	}
 
+	
+	
 	@CrossOrigin("*")
 	@GetMapping("/headerbill/invoiceNo")
 	public int getInvoiceNumber() {
@@ -142,19 +144,19 @@ public class BillController {
 	}
 	
 	@CrossOrigin("*")
-	@PatchMapping("/submitBill")
+	@PostMapping("/submitBill")
 	@Transactional(rollbackOn = { Exception.class })
-	public void submitBill(@RequestBody String sb){
+	public HeaderBill submitBill(@RequestBody String sb){
 	System.out.println(sb);
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
 	
 	JSONArray updateQtyArray=jsonObject.getJSONArray("updateQtyArray");
 	JSONArray  updateHistroryArray=jsonObject.getJSONArray("updateHistroryArray");
-
+     HeaderBill h=new HeaderBill();
 	try {
-		HeaderBill h=objectMapper.readValue(jsonObject.get("headerData").toString(), HeaderBill.class);
-		headerbillService.createHeaderBill(h);
+		 h=objectMapper.readValue(jsonObject.get("headerData").toString(), HeaderBill.class);
+		
 		
 		int i=0,j=0;
 		for(Object qtyData:updateQtyArray)
@@ -186,8 +188,10 @@ public class BillController {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	return   headerbillService.createHeaderBill(h);
 	
 	} 
+	
 	
 	
 	

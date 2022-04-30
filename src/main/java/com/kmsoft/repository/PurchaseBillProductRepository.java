@@ -1,6 +1,7 @@
 package com.kmsoft.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -38,4 +39,11 @@ public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBil
 
 	@Query(value = "select * from purchasebillproduct where product_fk=:id and batch like %:title% order by pbp_id desc",nativeQuery = true)
 	Page<PurchaseBillProduct> findByIdContaining(String title, int id, Pageable paging);
+
+  @Query(value = "select * from purchasebillproduct where pbp_id=:id ",nativeQuery = true)
+	PurchaseBillProduct getavailableqty(int id);
+
+
+  @Query(value = "select ifnull(sum(p.availablequantity),0) as currentstockquantity,ifnull((sum(p.amount)-b.amount),sum(p.amount)) as currentstockvalue from purchasebillproduct p join product pt on p.product_fk=pt.product_id cross join (select sum(amount) as amount from billproduct) b where pt.isaliveproduct=1",nativeQuery = true)
+Map<String, Number> gettotalstockinfo();
 }

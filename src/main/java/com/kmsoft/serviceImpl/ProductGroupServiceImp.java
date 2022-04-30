@@ -19,7 +19,7 @@ public class ProductGroupServiceImp implements ProductGroupService {
 	@Override
 	public List<ProductGroup> getAllProductGroup() {
 		// TODO Auto-generated method stub
-		return pgRepo.findAll() ;
+		return pgRepo.findAllgroup() ;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class ProductGroupServiceImp implements ProductGroupService {
 
 	@Override
 	public void deleteProductgroup(int id) {
-		pgRepo.deleteById(id);
+		pgRepo.deletegroupbyId(id);
 		
 	}
 

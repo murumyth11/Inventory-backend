@@ -1,8 +1,13 @@
 package com.kmsoft.repository;
 
+import java.math.BigDecimal;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -24,11 +29,17 @@ public interface PurchasebillRepository extends JpaRepository<PurchaseBill, Inte
 //			 +" OR taxamount LIKE %:title%  or charges like  %:title%  or billedby like %:title% or balance like %:title% or amountdebit"
 //			 + " like %:title% or  like %:title%  or vendor_fk in (select vendor_id from vendors where vendor_name like %:title% )  ORDER BY header_bill_id DESC"
 //						 ,nativeQuery = true)
-	 @Query(value="select * from Purchasebill where pbNo like %:title% or pbInvoice like %:title% or billedBy like %:title% or "
+	 @Query(value="select * from Purchasebill where pbNo like %:title% or pbinvoice like %:title% or billedBy like %:title% or "
 	 		+ "pbEntryDate like %:title% or pbInvoiceDate like %:title% or  total like %:title% or balance like %:title% or "
 	 		+ "vendor_fk in (select vendor_id from vendors where vendor_name like %:title% ) order by purchase_bill_id desc",nativeQuery =true)
 			 Page<PurchaseBill> findByPurchaseBillContaining(String title,Pageable pageable);
 
 	 @Query(value = "select * from purchasebill where purchase_bill_id=:id",nativeQuery = true)
 	PurchaseBill getpurchasebillbyid(int id);
+
+	 
+	 @Transactional
+	 @Modifying
+	 @Query(value = "update purchasebill set balance=:balance,amountdebit=:amountdebit,status=:status where purchase_bill_id=:id",nativeQuery = true)
+	void updatePurchaseBill(int id, BigDecimal balance, BigDecimal amountdebit, String status);
 }

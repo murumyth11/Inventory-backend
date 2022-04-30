@@ -46,5 +46,23 @@ public class BalanceUpdateController {
 		}
 		return data;
 	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/balanceupdatepurchase")
+	public Page<List<Map<String,Object>>> getBalanceUpdateHistoryPurchase(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size)
+	{
+		
+		Page<List<Map<String,Object>>> data;
+		 Pageable paging = PageRequest.of(page, size);
+		if(title==null) {
+			data=balanceUpdateHistoryService.getBysearchPurchase(title, paging);
+		}
+		else {
+			data=balanceUpdateHistoryService.getBysearchPurchase(title, paging);
+			
+		}
+		return data;
+	}
 
 }

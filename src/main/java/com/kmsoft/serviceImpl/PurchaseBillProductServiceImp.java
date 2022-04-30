@@ -1,6 +1,7 @@
 package com.kmsoft.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,18 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 	public Page<PurchaseBillProduct> findByBatchContaining(String title, int id, Pageable paging) {
 		// TODO Auto-generated method stub
 		return pbpRepo.findByIdContaining(title,id,paging);
+	}
+
+	@Override
+	public PurchaseBillProduct getavailableqty(int id) {
+		// TODO Auto-generated method stub
+		return pbpRepo.getavailableqty(id);
+	}
+
+	@Override
+	public Map<String, Number> gettotalstockinfo() {
+		// TODO Auto-generated method stub
+		return pbpRepo.gettotalstockinfo();
 	}
 
 }

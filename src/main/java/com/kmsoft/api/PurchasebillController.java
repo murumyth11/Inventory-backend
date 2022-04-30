@@ -1,5 +1,8 @@
 package com.kmsoft.api;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+
 import javax.transaction.Transactional;
 
 import org.json.JSONArray;
@@ -8,13 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kmsoft.model.HeaderBill;
@@ -45,18 +53,37 @@ public class PurchasebillController {
 	}
 	
 	@CrossOrigin("*")
+	@PutMapping("/savepurchasebill")
+	public void updatepurchasebill(@RequestBody String data) {
+	System.out.println(data);
+	JSONObject jsonObject=new JSONObject(data);
+	 int id=jsonObject.getInt("id");
+	 BigDecimal balance=jsonObject.getBigDecimal("balance");
+	 BigDecimal amountdebit=jsonObject.getBigDecimal("amountdebit");
+	 String status=jsonObject.getString("status");
+	 pbservice.updatePurchaseBill(id,balance,amountdebit,status);
+	 
+	}
+	
+	@CrossOrigin("*")
 	@PatchMapping("/submit")
 	@Transactional(rollbackOn = { Exception.class })
-	public void submitBill(@RequestBody String sb){
+	public PurchaseBill submitBill(@RequestPart String data1 ,@RequestPart(required = false) MultipartFile img) throws IOException{
 	
+		System.out.println(data1);
+		String sb=data1;
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
 	
 	JSONArray updateQtyArray=jsonObject.getJSONArray("updateQtyArray");
 	JSONArray  updateHistroryArray=jsonObject.getJSONArray("updateHistroryArray");
 	
+	PurchaseBill h=new PurchaseBill();
+	
 	try {
-		PurchaseBill h=objectMapper.readValue(jsonObject.get("headerData").toString(), PurchaseBill.class);
+		 h=objectMapper.readValue(jsonObject.get("headerData").toString(), PurchaseBill.class);
+		 if(img!=null)
+		 { h.setPurchaseimage(img.getBytes());}
 		pbservice.createPurchaseBill(h);
 		
 		int i=0,j=0;
@@ -85,6 +112,7 @@ public class PurchasebillController {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	return pbservice.createPurchaseBill(h);
 	
 	
 	
@@ -114,6 +142,13 @@ public class PurchasebillController {
 	@GetMapping("/pbid")
 	public PurchaseBill getpurchasebillId(@RequestParam int id) {
 		return pbservice.getpurchasebillbyid(id);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/purchasehardcopy")
+	public byte[] getimage(@RequestParam int id) {
+		return pbservice.getimage(id);
+		
 	}
 	
 
