@@ -2,6 +2,8 @@ package com.kmsoft.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -79,6 +81,12 @@ public class CustomerController {
 	@GetMapping("/customersPhone/{custPhone}")
 	public Customer getCustomerPhone(@PathVariable String custPhone){
 		return customerRepo.getCustomerPhone(custPhone);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/getcustomerbyid/{id}")
+	public Optional<Customer> getCustomerById(@PathVariable int id) {
+		return customerRepo.findById(id);
 	}
 		
 }

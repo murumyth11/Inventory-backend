@@ -23,7 +23,7 @@ public interface BalanceUpdateHistoryRepository extends JpaRepository<BalanceUpd
 				+ "bh.cash_in like %:title% or h.customer like %:title% or h.phone like %:title% or h.invoice like %:title%  or bh.updated_by like "
 				+ " %:title% "
 				+ " group by balance_update_history_id order by bh.balance_update_history_id desc",
-				countQuery="select count(*) from balance_update_history",nativeQuery=true)
+				countQuery="select count(*) from balance_update_history bh join header_bill h on bh.headerbill_fk=h.header_bill_id",nativeQuery=true)
 		Page<List<Map<String,Object>>> getbySearch(String title,Pageable pageable);
 		
 		@Query(value="SELECT bh.paymentmethod, bh.balance_update_date,bh.cash_out,bh.updated_by,v.vendor_name,v.vendor_mobile,p.pbno ,bh.balance,p.total"
@@ -31,7 +31,7 @@ public interface BalanceUpdateHistoryRepository extends JpaRepository<BalanceUpd
 				+ "bh.cash_out like %:title% or v.vendor_name like %:title% or v.vendor_mobile like %:title% or p.pbno like %:title%  or bh.updated_by like "
 				+ " %:title% "
 				+ " group by balance_update_history_id order by bh.balance_update_history_id desc",
-				countQuery="select count(*) from balance_update_history",nativeQuery=true)
+				countQuery="SELECT count(*) FROM  balance_update_history bh  join (purchasebill p join vendors v on p.vendor_fk=v.vendor_id)  on bh.purchasebill_fk=p.purchase_bill_id;",nativeQuery=true)
 		Page<List<Map<String,Object>>> getbySearchPurchase(String title,Pageable pageable);
 		
 		

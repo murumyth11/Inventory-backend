@@ -20,6 +20,8 @@ public class ProductUpdateHistoryServiceImp implements ProductUpdateHistoryServi
 	@Override
 	public ProductUpdateHistory createProductUpdateHistory(ProductUpdateHistory productupdtHst) {
 		// TODO Auto-generated method stub
+		System.out.println(productupdtHst);
+		
 		return puhRepo.save(productupdtHst) ;
 	}
 
@@ -31,8 +33,8 @@ public class ProductUpdateHistoryServiceImp implements ProductUpdateHistoryServi
 
 	@Override
 	public Page<List<ProductUpdateHistory>> findByUpdateDateContaining(String title, int id, Pageable paging) {
-		// TODO Auto-generated method stub
-		return puhRepo.findByUpdateDateContaining(title, id, paging);
+		
+		return puhRepo.findByUpdateDateContaining(title,id, paging);
 	}
 
 	@Override

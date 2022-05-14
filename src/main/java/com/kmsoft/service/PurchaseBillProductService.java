@@ -24,6 +24,8 @@ public interface PurchaseBillProductService {
 	public PurchaseBillProduct getavailableqty(int id);
 
 	public Map<String, Number> gettotalstockinfo();
+	
+	public void updatAvailableQty(int id,String qty);
 
 
 

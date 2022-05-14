@@ -25,13 +25,13 @@ public interface BillproductRepository  extends JpaRepository<Billproduct, Integ
 		 		+ "sum(b.amount-b.converted_quantity*p.cost_price) as totalgain ,g.product_group_name as pg , g.brand as brand from billproduct b join product p on p.product_id=b.product_fk "
 		 		+ " left join product_group g on g.product_group_id=p.product_group_fk where headerbill_fk in(select header_bill_id from header_bill where date"
 		 		+ ">= :startDate AND date <= :endDate) and (p.product_name like %:title% or g.brand like %:title% or g.product_group_name like %:title% ) group by b.product_fk ",
-		 		countQuery =  "SELECT count(*) FROM billproduct group by product_fk",nativeQuery=true)
+		 		countQuery =  "select  count(*) from  (select count(*) from billproduct group by product_fk ) as c",nativeQuery=true)
 		 Page<List<Map<String,Object>>> getSaleByDateProductTitle(@Param("startDate") Date startDate, @Param("endDate") Date endDate,String title,Pageable pageable);
 
 	@Query(value="select sum(b.amount) as tsa,sum(b.converted_quantity) as tsq,sum(b.quantity*b.rate-b.amount) as dis,p.product_name,\r\n"
 	 		+ "sum(b.amount-b.converted_quantity*p.cost_price) as totalgain,g.product_group_name as pg , g.brand as brand  from billproduct b left join product p on p.product_id=b.product_fk "
 	 		+ " left join product_group g on g.product_group_id=p.product_group_fk where headerbill_fk in(select header_bill_id from header_bill where date"
 	 		+ ">= :startDate AND date <= :endDate)  group by b.product_fk ",
-	 		countQuery =  "SELECT count(*) FROM billproduct group by product_fk",nativeQuery=true)
+	 		countQuery =  "select  count(*) from  (select count(*) from billproduct group by product_fk ) as c",nativeQuery=true)
 	Page<List<Map<String,Object>>> getSaleByDateProduct(@Param("startDate") Date startDate, @Param("endDate") Date endDate,Pageable pageable);
  }

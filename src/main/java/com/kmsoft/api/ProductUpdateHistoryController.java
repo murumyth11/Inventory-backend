@@ -35,7 +35,8 @@ public class ProductUpdateHistoryController {
 	@GetMapping("/puh/{id}")
 	public Page<List<ProductUpdateHistory>> getPuh(
 			 @PathVariable int id,
-		 @RequestParam(defaultValue="") String title,
+		
+			 @RequestParam(required=false) String title,
 		
 	        @RequestParam(defaultValue = "0") int page,
 	        @RequestParam(defaultValue = "5") int size
@@ -46,16 +47,17 @@ public class ProductUpdateHistoryController {
 	      
 	      if(title=="")
 	     
-	      { System.out.println(title+"no ttl");
+	      { 
 	    	  pageTuts = puhService.findAllById(id,paging);
 	      
 	      return pageTuts;}
 	     
 	      else
 	      {
-	    	  System.out.println("have ttl"+title);
+	    	  
 	    	  pageTuts=puhService.findByUpdateDateContaining(title,id, paging);
-	      return pageTuts;}
+	    
+	    	  return pageTuts;}
 	     
 		}
 	@CrossOrigin("*")

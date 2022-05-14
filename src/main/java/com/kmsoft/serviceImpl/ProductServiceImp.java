@@ -144,7 +144,16 @@ public class ProductServiceImp implements ProductService{
 	public void updatebatchQuantity(int id, String qty, String batch) {
 		// TODO Auto-generated method stub
 		pbpRepo.updateBatchQuantity(id, qty, batch);
-		System.out.println(id+"||"+qty+"||"+batch);
+		
+		
+	}
+
+
+	@Override
+	public void updateProductQuantityBatchAdjust(int id, String qty) {
+		// TODO Auto-generated method stub
+		System.out.println(qty);
+		productRepo.updateProductQuantityMore(id, qty);
 		
 	}
 		

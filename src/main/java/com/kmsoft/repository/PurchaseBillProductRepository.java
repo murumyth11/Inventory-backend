@@ -46,4 +46,9 @@ public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBil
 
   @Query(value = "select ifnull(sum(p.availablequantity),0) as currentstockquantity,ifnull((sum(p.amount)-b.amount),sum(p.amount)) as currentstockvalue from purchasebillproduct p join product pt on p.product_fk=pt.product_id cross join (select sum(amount) as amount from billproduct) b where pt.isaliveproduct=1",nativeQuery = true)
 Map<String, Number> gettotalstockinfo();
+
+  @Modifying
+  @Transactional 
+  @Query(value="update purchasebillproduct set availablequantity=availablequantity + :qty where pbp_id=:id",nativeQuery = true)
+void updateAvailableqty(int id, String qty);
 }

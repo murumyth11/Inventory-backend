@@ -98,12 +98,15 @@ public class PurchaseBill {
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name="purchaseimage")
 	byte[] purchaseimage;
+	
+	@Column(name="paymentmethod")
+	String paymentmethod;
 
 	
 	public PurchaseBill(int purchaseBillId, String pbNo, String pbInvoice, LocalDateTime pbInvoiceDate,
 			LocalDateTime pbEntryDate, BigDecimal taxAmount, BigDecimal subtotal, BigDecimal total,
 			List<PurchaseBillProduct> purchaseBillProduct, Vendors vendors, String billedBy, BigDecimal charges,
-			String billnotes, BigDecimal amountdebit, BigDecimal balance, String status, byte[] purchaseimage) {
+			String billnotes, BigDecimal amountdebit, BigDecimal balance, String status, byte[] purchaseimage,String paymentmethod) {
 		super();
 		this.purchaseBillId = purchaseBillId;
 		this.pbNo = pbNo;
@@ -122,6 +125,7 @@ public class PurchaseBill {
 		this.balance = balance;
 		this.status = status;
 		this.purchaseimage = purchaseimage;
+		this.paymentmethod=paymentmethod;
 	}
 
 	
@@ -135,6 +139,20 @@ public class PurchaseBill {
 
 	
 	
+	public String getPaymentmethod() {
+		return paymentmethod;
+	}
+
+
+
+
+	public void setPaymentmethod(String paymentmethod) {
+		this.paymentmethod = paymentmethod;
+	}
+
+
+
+
 	public String getStatus() {
 		return status;
 	}

@@ -62,4 +62,11 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 		return pbpRepo.gettotalstockinfo();
 	}
 
+	@Override
+	public void updatAvailableQty(int id, String qty) {
+		// TODO Auto-generated method stub
+		 pbpRepo.updateAvailableqty(id,qty);
+		
+	}
+
 }

@@ -145,9 +145,9 @@ public class BillController {
 	
 	@CrossOrigin("*")
 	@PostMapping("/submitBill")
-	@Transactional(rollbackOn = { Exception.class })
+	@Transactional(rollbackOn = { Exception.class})
 	public HeaderBill submitBill(@RequestBody String sb){
-	System.out.println(sb);
+	
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
 	
@@ -168,7 +168,8 @@ public class BillController {
 			String batch;
 			String batchqty;
 			JSONObject o=(JSONObject) qtyData;
-			id=o.getInt("id");
+			id=o.getInt("id1");
+			
 		    qty=o.get("q").toString();
 		    updatefrom=o.get("updatefrom").toString();
 		    batch=o.get("batch").toString();
@@ -185,7 +186,7 @@ public class BillController {
 		}
 		
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
 	return   headerbillService.createHeaderBill(h);

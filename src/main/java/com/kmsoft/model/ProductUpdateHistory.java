@@ -28,7 +28,8 @@ public class  ProductUpdateHistory {
 	@Column(name="updateQuantity")
 	int updateQuantity;
 	
-	
+	@Column(name="batch")
+	String batch;
 	
 	@Column(name="updateBy")
 	String updateBy;
@@ -95,7 +96,7 @@ public class  ProductUpdateHistory {
 	}
 
 	public ProductUpdateHistory(int updateHistoryId, String updateDate, String updateData, int updateQuantity,
-			String updateBy, String updatefrom, Product product) {
+			String updateBy, String updatefrom, Product product,String batch) {
 		super();
 		this.updateHistoryId = updateHistoryId;
 		this.updateDate = updateDate;
@@ -104,6 +105,7 @@ public class  ProductUpdateHistory {
 		this.updateBy = updateBy;
 		this.updatefrom = updatefrom;
 		this.product = product;
+		this.batch=batch;
 	}
 
 	public String getUpdatefrom() {
@@ -112,6 +114,16 @@ public class  ProductUpdateHistory {
 
 	public void setUpdatefrom(String updatefrom) {
 		this.updatefrom = updatefrom;
+	}
+	
+	
+
+	public String getBatch() {
+		return batch;
+	}
+
+	public void setBatch(String batch) {
+		this.batch = batch;
 	}
 
 	public ProductUpdateHistory() {
