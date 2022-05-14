@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Manufacturer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int manufacturerId;
 	
 	@Column(name="manufacturerName")
