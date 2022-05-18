@@ -220,5 +220,11 @@ public class ProductDetailsController {
 		}
 		
 	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/test")
+	public String getsample() {
+		return "test executed";
+	}
 
 }

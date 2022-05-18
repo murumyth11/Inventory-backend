@@ -7,27 +7,36 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 
 @SpringBootApplication
 public class InventoryApplication extends SpringBootServletInitializer {
-
-	
-
-	 
-	  @PostConstruct
-	  public void init(){
-	    // Setting Spring Boot SetTimeZone
-	    TimeZone.setDefault(TimeZone.getTimeZone("IST"));
-	  }
+//  @PostConstruct
+//	  public void init(){
+//	    
+//	    TimeZone.setDefault(TimeZone.getTimeZone("IST"));
+//	  }
+  
+//  @Override  
+//  protected SpringApplicationBuilder configure(SpringApplicationBuilder application)   
+//  {  
+//  return application.sources(InventoryApplication.class);  
+//  }  
 	  
-	static Date date;
+	
+	  @Override
+	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	        return application.sources(InventoryApplication.class);
+	    }
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApplication.class, args);
-	System.out.println(System.currentTimeMillis());
-		//hai this is main
+	
+		
 		
 	} 
 	
 
 }
+

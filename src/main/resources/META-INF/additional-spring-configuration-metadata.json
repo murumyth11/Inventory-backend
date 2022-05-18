@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "spring.datasource.auto-commit",
-  "type": "java.lang.String",
-  "description": "A description for 'spring.datasource.auto-commit'"
-}]}
+{"properties": [
+  {
+    "name": "spring.datasource.auto-commit",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.auto-commit'"
+  },
+  {
+    "name": "server.contextPath",
+    "type": "java.lang.String",
+    "description": "A description for 'server.contextPath'"
+  }
+]}
