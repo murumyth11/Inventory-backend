@@ -24,7 +24,7 @@ public class InventoryApplication extends SpringBootServletInitializer {
 //  {  
 //  return application.sources(InventoryApplication.class);  
 //  }  
-	  
+  static Date date;
 	
 	  @Override
 	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
