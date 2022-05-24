@@ -1,13 +1,17 @@
 package com.kmsoft.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="balanceUpdateHistory")
@@ -32,8 +36,9 @@ public class BalanceUpdateHistory {
 	@Column(name="updatedBy")
 	String updatedBy;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
 	@JoinColumn(name="headerbillFk",referencedColumnName = "headerBillId")
+	
 	HeaderBill headerbill;
 	
 	@ManyToOne

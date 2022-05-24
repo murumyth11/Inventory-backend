@@ -93,6 +93,20 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	}
 
 
+	@Override
+	public Page<List<Map<String, Object>>> getHeaderbillCustomers(String title,int cId, Pageable paging) {
+		// TODO Auto-generated method stub
+		return headerbillRepo.getHeaderbillCustomer(title,cId,paging);
+	}
+
+
+	@Override
+	public Map<String, Object> customerbilldetails(int id) {
+		// TODO Auto-generated method stub
+		return headerbillRepo.customerbilldetails(id);
+	}
+
+
 	
 
 }

@@ -7,9 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.kmsoft.model.ProductUpdateHistory;
 
+@Repository
 public interface ProductUpdateHistoryRepository extends JpaRepository<ProductUpdateHistory, Integer>{
 
 	@Query(value="SELECT sum(update_quantity) FROM product_update_history where updatefrom='sales'",nativeQuery=true)

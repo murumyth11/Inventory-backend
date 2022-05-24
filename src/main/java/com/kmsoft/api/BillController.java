@@ -193,8 +193,34 @@ public class BillController {
 	
 	} 
 	
+	@CrossOrigin("*")
+	@GetMapping("/customerproducts")
 	
+	public Page<List<Map<String, Object>>> getHeaderbillsCustomer(@RequestParam(required = false,defaultValue = " ") String title,
+			@RequestParam int page, @RequestParam int size,
+			@RequestParam int id){
+		
+		Pageable paging = PageRequest.of(page, size);
+		Page<List<Map<String, Object>>> pageTuts;
+
+		
+           if (title == null) {
+			
+			pageTuts = headerbillService.getHeaderbillCustomers(title,id, paging);
+
+		} else {
+			
+			pageTuts =headerbillService.getHeaderbillCustomers(title,id, paging);
+		}
+		
+		return pageTuts;
+	}
 	
+	@CrossOrigin("*")
+	@GetMapping("/customerbilldetails")
+	public Map<String,Object> getCustomerbilldetails(@RequestParam int id){
+		return headerbillService.customerbilldetails(id);
+	}
 	
 	
 	

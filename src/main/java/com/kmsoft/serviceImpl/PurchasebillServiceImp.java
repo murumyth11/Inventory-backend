@@ -72,7 +72,7 @@ public class PurchasebillServiceImp implements PurchasebillService {
 		PurchaseBill pb = pbRepo.findById(id).get();
 		byte[] image = pb.getPurchaseimage();
 		
-	    System.out.println(image);
+	    
 	    return image;
 	}
 	@Override

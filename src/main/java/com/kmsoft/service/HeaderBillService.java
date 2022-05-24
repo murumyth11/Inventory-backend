@@ -34,6 +34,10 @@ public interface HeaderBillService {
 	
 	public HeaderBill updateHeaderBill(HeaderBill headerBill);
 
+	public Page<List<Map<String, Object>>> getHeaderbillCustomers(String title,int cId, Pageable paging);
+
+	public Map<String, Object> customerbilldetails(int id);
+
 	
 
 }
