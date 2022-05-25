@@ -20,7 +20,7 @@ public class ProductUpdateHistoryServiceImp implements ProductUpdateHistoryServi
 	@Override
 	public ProductUpdateHistory createProductUpdateHistory(ProductUpdateHistory productupdtHst) {
 		// TODO Auto-generated method stub
-		System.out.println(productupdtHst);
+		
 		
 		return puhRepo.save(productupdtHst) ;
 	}

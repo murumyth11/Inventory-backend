@@ -152,7 +152,7 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public void updateProductQuantityBatchAdjust(int id, String qty) {
 		// TODO Auto-generated method stub
-		System.out.println(qty);
+	
 		productRepo.updateProductQuantityMore(id, qty);
 		
 	}

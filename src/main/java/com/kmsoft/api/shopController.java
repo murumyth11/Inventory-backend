@@ -1,6 +1,9 @@
 package com.kmsoft.api;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 import org.json.JSONArray;
@@ -50,6 +53,30 @@ public class shopController {
 	@GetMapping("/shop")
 	public Optional<Shop> getShop() {
 		return shopRepo.findById(1);
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/expiry")
+	public boolean checkExpiry() {
+	   
+	 LocalDate d=LocalDate.now();
+	  Shop s=shopRepo.getOne(1);
+	  LocalDate exdate=s.getExpirydate();
+	  
+	 boolean isbefore;
+	  
+	 if( d.isBefore(exdate)) {
+		 return true;
+	 }
+	 else  {
+		return false;
+	}
+		 
+	 
+	 
+	
+	
+		
 	}
 
 }

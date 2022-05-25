@@ -95,7 +95,7 @@ public class PurchasebillServiceImp implements PurchasebillService {
 //		pb.setAmountdebit(amountdebit);
 //		pb.setBalance(balance);
 //		pb.setStatus(status);
-		System.out.println(id+" "+balance+" "+amountdebit+" "+status);
+		
 		pbRepo.updatePurchaseBill(id,balance,amountdebit,status);
 		
 		

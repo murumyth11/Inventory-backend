@@ -1,5 +1,8 @@
 package com.kmsoft.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Entity
 @Table(name="shop")
@@ -40,9 +49,42 @@ public class Shop {
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name="shoplogo")
 	byte[] shoplogo;
+	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+//	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="createdate" ,columnDefinition="DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	//@DateTimeFormat (pattern = "dd-MM-yyyy")
+	public Date createdate;
+	
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
+//	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="expirydate" ,columnDefinition="DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	//@DateTimeFormat(pattern = "dd-MM-yyyy")
+	public LocalDate expirydate;
 
 	
 	
+	
+	public Date getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(Date createdate) {
+		this.createdate = createdate;
+	}
+
+	public LocalDate getExpirydate() {
+		return expirydate;
+	}
+
+	public void setExpirydate(LocalDate expirydate) {
+		this.expirydate = expirydate;
+	}
+
 	public byte[] getShoplogo() {
 		return shoplogo;
 	}
@@ -115,8 +157,10 @@ public class Shop {
 		this.gstin = gstin;
 	}
 
+	
+
 	public Shop(int shopid, String shopName, String phone1, String phone2, String email, String address, String shopno,
-			String gstin, byte[] shoplogo) {
+			String gstin, byte[] shoplogo, Date createdate, LocalDate expirydate) {
 		super();
 		this.shopid = shopid;
 		this.shopName = shopName;
@@ -127,6 +171,8 @@ public class Shop {
 		this.shopno = shopno;
 		this.gstin = gstin;
 		this.shoplogo = shoplogo;
+		this.createdate = createdate;
+		this.expirydate = expirydate;
 	}
 
 	public Shop() {

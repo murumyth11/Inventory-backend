@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kmsoft.model.Shop;
 import com.kmsoft.model.UserRegistration;
 import com.kmsoft.repository.RegistrationRepository;
+import com.kmsoft.repository.ShopRepository;
 import com.kmsoft.service.RegistrationService;
 
 @RestController
@@ -20,6 +22,7 @@ public class RegisterController {
 	
 	@Autowired
 	RegistrationService registerationService;
+	 
 	
 	
 	
@@ -74,6 +77,10 @@ return userobj;
 	@PostMapping("/login")
 	public UserRegistration login(@RequestBody UserRegistration user) throws Exception {
 	
+	
+		
+		
+		
 		String tempemail=user.getUserEmail();
 		String tempusername=user.getUserName();
 		String temppassword=user.getPassword();
