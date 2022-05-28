@@ -36,7 +36,7 @@ public class BalanceUpdateHistory {
 	@Column(name="updatedBy")
 	String updatedBy;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
+	@ManyToOne()
 	@JoinColumn(name="headerbillFk",referencedColumnName = "headerBillId")
 	
 	HeaderBill headerbill;

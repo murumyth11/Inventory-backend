@@ -51,4 +51,10 @@ Map<String, Number> gettotalstockinfo();
   @Transactional 
   @Query(value="update purchasebillproduct set availablequantity=availablequantity + :qty where pbp_id=:id",nativeQuery = true)
 void updateAvailableqty(int id, String qty);
+
+
+  @Modifying
+  @Transactional 
+	@Query(value = "update purchasebillproduct set rate=:rate where pbp_id=:pbpid1",nativeQuery = true)
+	void updateRate(int pbpid1, String rate);
 }

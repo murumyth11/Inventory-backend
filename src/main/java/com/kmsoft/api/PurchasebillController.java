@@ -68,9 +68,9 @@ public class PurchasebillController {
 	@CrossOrigin("*")
 	@PatchMapping("/submit")
 	@Transactional(rollbackOn = { Exception.class })
-	public PurchaseBill submitBill(@RequestPart String data1 ,@RequestPart(required = false) MultipartFile img) throws IOException{
+	public PurchaseBill submitBill(@RequestPart String data1 ,@RequestPart(required = false) MultipartFile img) throws Exception{
 	
-		System.out.println(data1);
+		
 		String sb=data1;
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
@@ -107,12 +107,12 @@ public class PurchasebillController {
 			ProductUpdateHistory productUpdateHistory=objectMapper.readValue(updatehistory.toString(), ProductUpdateHistory.class);
 			productUpdateHistoryService.createProductUpdateHistory(productUpdateHistory);
 		}
-		
+		return pbservice.createPurchaseBill(h);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		throw new Exception(e);
 	}
-	return pbservice.createPurchaseBill(h);
+	
 	
 	
 	

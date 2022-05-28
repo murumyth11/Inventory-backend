@@ -200,17 +200,31 @@ public class ProductDetailsController {
 		try {
 			productUpdateHistory = objectMapper.readValue(jsonobj.get("updatehst").toString(), ProductUpdateHistory.class);
 			productUpdateHistoryService.createProductUpdateHistory(productUpdateHistory);
-			System.out.println(productUpdateHistory);
+			
 			
 			JSONObject o= (JSONObject) jsonobj.get("batchQty");
 			int pbpid= o.getInt("pbpid");
 			String qty= o.get("qty").toString();
 			purchaseBillProductService.updatAvailableQty(pbpid, qty);
 			
+
+			JSONObject o1= (JSONObject) jsonobj.get("batchRate");
+			int pbpid1= o1.getInt("id");
+			String rate= o1.get("rate").toString();
+			System.out.println(rate+" "+"rate");
+			
+			purchaseBillProductService.updatRate(pbpid1,rate);
+			
+			
 			JSONObject pqu=(JSONObject) jsonobj.get("productQuantityUpdate");
 			int productid= pqu.getInt("id");
 			String productqty= pqu.get("quantity").toString();
 			 productservice.updateProductQuantityBatchAdjust(productid, productqty);
+			 
+
+				
+			 
+			 
 			
 			
 			

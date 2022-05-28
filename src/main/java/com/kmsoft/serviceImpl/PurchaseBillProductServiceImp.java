@@ -69,4 +69,11 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 		
 	}
 
+	@Override
+	public void updatRate(int pbpid1, String rate) {
+		// TODO Auto-generated method stub
+		pbpRepo.updateRate(pbpid1,rate);
+		
+	}
+
 }

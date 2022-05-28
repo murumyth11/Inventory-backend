@@ -146,7 +146,7 @@ public class BillController {
 	@CrossOrigin("*")
 	@PostMapping("/submitBill")
 	@Transactional(rollbackOn = { Exception.class})
-	public HeaderBill submitBill(@RequestBody String sb){
+	public HeaderBill submitBill(@RequestBody String sb) throws Exception{
 	
 	ObjectMapper objectMapper=new ObjectMapper();
 	JSONObject jsonObject=new JSONObject(sb);
@@ -184,12 +184,13 @@ public class BillController {
 			ProductUpdateHistory productUpdateHistory=objectMapper.readValue(updatehistory.toString(), ProductUpdateHistory.class);
 			productUpdateHistoryService.createProductUpdateHistory(productUpdateHistory);
 		}
+		 return  headerbillService.createHeaderBill(h);
 		
 	} catch (Exception e) {
 		
-		e.printStackTrace();
+		throw new Exception("Not Submitted");
 	}
-	return   headerbillService.createHeaderBill(h);
+	 
 	
 	} 
 	

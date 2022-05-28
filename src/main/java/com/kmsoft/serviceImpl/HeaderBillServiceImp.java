@@ -22,7 +22,7 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	
 	public HeaderBill createHeaderBill(HeaderBill headerbill) {
 		
-		return headerbillRepo.save(headerbill);
+		return headerbillRepo.saveAndFlush(headerbill);
 	}
 
 

@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @Entity
 @Table(name="shop")
@@ -58,8 +60,8 @@ public class Shop {
 	//@DateTimeFormat (pattern = "dd-MM-yyyy")
 	public Date createdate;
 	
-	@JsonDeserialize(using = DateDeserializer.class)
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 //	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="expirydate" ,columnDefinition="DATE")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")

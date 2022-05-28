@@ -22,7 +22,7 @@ import com.kmsoft.model.ProductUpdateHistory;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	@Query(value="select * from product where product_id=:id",nativeQuery=true)
+	@Query(value="select * from product where product_id=:id ",nativeQuery=true)
 	Product findById(int id);
 	
 	
@@ -34,7 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query(value="SELECT * FROM product WHERE (product_key LIKE :productKeylike%) and isaliveproduct=1",nativeQuery = true)
 	List<Product> getProductKeyLike(@Param("productKeylike") String productKeylike);
 	
-	@Query(value="SELECT * FROM product WHERE product_quantity <=10 and isaliveproduct=1",nativeQuery=true)
+	@Query(value="SELECT * FROM product WHERE product_quantity*unitconversion <=10 and isaliveproduct=1",nativeQuery=true)
 	List<Product> getLowStock();
 	
 	@Query(value="SELECT SUM(availablequantity) FROM purchasebillproduct",nativeQuery=true)

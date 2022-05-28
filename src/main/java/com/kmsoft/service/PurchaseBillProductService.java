@@ -27,6 +27,8 @@ public interface PurchaseBillProductService {
 	
 	public void updatAvailableQty(int id,String qty);
 
+	public void updatRate(int pbpid1, String rate);
+
 
 
 }

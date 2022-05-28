@@ -77,10 +77,6 @@ return userobj;
 	@PostMapping("/login")
 	public UserRegistration login(@RequestBody UserRegistration user) throws Exception {
 	
-	
-		
-		
-		
 		String tempemail=user.getUserEmail();
 		String tempusername=user.getUserName();
 		String temppassword=user.getPassword();

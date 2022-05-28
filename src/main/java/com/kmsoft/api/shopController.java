@@ -51,8 +51,8 @@ public class shopController {
 	
 	@CrossOrigin("*")
 	@GetMapping("/shop")
-	public Optional<Shop> getShop() {
-		return shopRepo.findById(1);
+	public Shop getShop() {
+		return shopRepo.findById(1).get();
 	}
 	
 	@CrossOrigin("*")
