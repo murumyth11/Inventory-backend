@@ -64,6 +64,10 @@ public class shopController {
 	  LocalDate exdate=s.getExpirydate();
 	  
 	 boolean isbefore;
+	 
+	 
+	
+	 
 	  
 	 if( d.isBefore(exdate)) {
 		 return true;

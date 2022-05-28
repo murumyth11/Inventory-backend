@@ -188,7 +188,7 @@ public class BillController {
 		
 	} catch (Exception e) {
 		
-		throw new Exception("Not Submitted");
+		throw new Exception(e);
 	}
 	 
 	

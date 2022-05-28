@@ -18,12 +18,12 @@ public interface BillproductRepository  extends JpaRepository<Billproduct, Integ
 
 	
 	@Query(value="select sum(b.amount) as totalsaleamount,\r\n"
-			+ "sum(b.converted_quantity) as totalsoldquantity ,\r\n"
-			+ "sum(b.converted_quantity)+p.product_quantity as tpq,\r\n"
+			+ "sum(b.converted_quantity*p.unitconversion) as totalsoldquantity ,\r\n"
+			+ "sum(b.converted_quantity*p.unitconversion)+(p.product_quantity*p.unitconversion) as tpq,\r\n"
 			+ "(sum(b.converted_quantity)+p.product_quantity)*p.cost_price as tpp from billproduct b, product p where product_fk=:id and product_id=:id",nativeQuery=true)
 	Map<String,Number> getTotalSoldQuantity(int id);
 	
-	 @Query(value="select sum(b.amount) as tsa,sum(b.converted_quantity) as tsq,sum(b.quantity*b.rate-b.amount) as dis,p.product_name,\r\n"
+	 @Query(value="select sum(b.amount) as tsa,sum(b.converted_quantity*p.unitconversion) as tsq,sum(b.quantity*b.rate-b.amount) as dis,p.product_name,\r\n"
 		 		+ "sum(b.amount-b.converted_quantity*p.cost_price) as totalgain ,g.product_group_name as pg , p.brand as brand from billproduct b join product p on p.product_id=b.product_fk "
 		 		+ " left join product_group g on g.product_group_id=p.product_group_fk where headerbill_fk in(select header_bill_id from header_bill where date"
 		 		+ ">= :startDate AND date <= :endDate) and (p.product_name like %:title% or p.brand like %:title% or g.product_group_name like %:title% ) group by b.product_fk ",

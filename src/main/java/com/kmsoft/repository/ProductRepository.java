@@ -74,8 +74,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 			+ " tqs,concat(round(p.product_quantity*p.unitconversion),' ',p.secondaryunit) as instock from product p left join billproduct b on p.product_id=b.product_fk group by p.product_id",countQuery =  "select count(*) from (SELECT count(*) FROM product p left join billproduct b on p.product_id=b.product_fk group by p.product_id) as c",nativeQuery=true)
 	Page<List<Map<String,Object>>> getInventoryReport(Pageable pageable);
 	
-	@Query(value="select p.product_name as PNAME,concat(ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity),' ',p.primaryunit) as tpq,p.primaryunit as unit,concat(ifnull(round(sum(b.converted_quantity*p.unitconversion)),0),' ',p.secondaryunit) as"
-			+ " tqs,concat(round(p.product_quantity*p.unitconversion),' ',p.secondaryunit) as instock from product p left join billproduct b on p.product_id=b.product_fk where p.product_name like %:title% group by p.product_id"
+	@Query(value="select p.product_name as PNAME,g.product_group_name as group1,p.brand as brand,concat(ifnull((sum(b.converted_quantity)+p.product_quantity),p.product_quantity),' ',p.primaryunit) as tpq,p.primaryunit as unit,concat(ifnull(round(sum(b.converted_quantity*p.unitconversion)),0),' ',p.secondaryunit) as"
+			+ " tqs,concat(round(p.product_quantity*p.unitconversion),' ',p.secondaryunit) as instock from product p join billproduct b on p.product_id=b.product_fk left join product_group g on g.product_group_id=p.product_group_fk where p.product_name like %:title%  or p.brand like %:title% or g.product_group_name like %:title% group by p.product_id"
 			,countQuery =  " select count(*) from (SELECT count(*) FROM product  p left join billproduct b on p.product_id=b.product_fk group by p.product_id) as c",nativeQuery=true)
 	Page<List<Map<String,Object>>> getInventoryReportTitle(String title,Pageable pageable);
 
