@@ -30,7 +30,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Entity
-@Table(name="Purchasebill",uniqueConstraints={@UniqueConstraint(columnNames={"pbNo"})})
+@Table(name="PurchaseBill",uniqueConstraints={@UniqueConstraint(columnNames={"pbNo"})})
 public class PurchaseBill {
 	
 	@Id

@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kmsoft.model.Shop;
-import com.kmsoft.model.UserRegistration;
-import com.kmsoft.repository.RegistrationRepository;
+import com.kmsoft.model.User;
 import com.kmsoft.repository.ShopRepository;
-import com.kmsoft.service.RegistrationService;
+import com.kmsoft.repository.UserRepository;
+import com.kmsoft.service.UserService;
 
 @RestController
-public class RegisterController {
+public class UserController {
 	
 	@Autowired
-	RegistrationService registerationService;
+	UserService registerationService;
 	 
 	
 	
 	
 	@Autowired
-	RegistrationRepository registrationrepo;
+	UserRepository registrationrepo;
 	
 	@CrossOrigin("*")
 	@PostMapping("/register")
-	public UserRegistration registerUser(@RequestBody UserRegistration user) throws Exception {
+	public User registerUser(@RequestBody User user) throws Exception {
 		
 		String tempemail=user.getUserEmail();
 		if(tempemail!=null && !"".equals(tempemail)) {
 			
-			UserRegistration userObj=registerationService.fetchByemail(tempemail);
+			User userObj=registerationService.fetchByemail(tempemail);
 			if(userObj!=null) {
 				throw new Exception("User with "+tempemail+"already exist");
 			}
 		}
 		
-		UserRegistration userreg=registrationrepo.findById(1);
+		User userreg=registrationrepo.findById(1);
 		
-		UserRegistration userobj=null;
+		User userobj=null;
 		if(userreg==null)
 		{userobj=registrationrepo.save(user);}
 		else {
@@ -57,16 +57,16 @@ public class RegisterController {
 	
 	@CrossOrigin("*")
 	@PostMapping("/registerRole")
-	public UserRegistration registerRole(@RequestBody UserRegistration user) throws Exception{
+	public User registerRole(@RequestBody User user) throws Exception{
 		String tempUserName=user.getUserName();
 if(tempUserName!=null && !"".equals(tempUserName)) {
 			
-			UserRegistration userObj=registerationService.fetchByusername(tempUserName);
+			User userObj=registerationService.fetchByusername(tempUserName);
 			if(userObj!=null) {
 				throw new Exception("User with "+tempUserName+"already exist");
 			}
 		}
-UserRegistration userobj=null;
+User userobj=null;
 userobj=registrationrepo.save(user);
 return userobj;
 
@@ -75,13 +75,13 @@ return userobj;
 	
 	@CrossOrigin("*")
 	@PostMapping("/login")
-	public UserRegistration login(@RequestBody UserRegistration user) throws Exception {
+	public User login(@RequestBody User user) throws Exception {
 	
 		String tempemail=user.getUserEmail();
 		String tempusername=user.getUserName();
 		String temppassword=user.getPassword();
 		
-		UserRegistration userObj=null;
+		User userObj=null;
 		if( temppassword!=null && tempusername!=null) {
 		 userObj=registerationService.findByUserNameAndPassword(tempusername, temppassword);}
 		if(userObj==null) {
@@ -91,7 +91,7 @@ return userobj;
 	}
 	@CrossOrigin("*")
 	@GetMapping("/userRoles")
-	public List<UserRegistration> getAllUser(){
+	public List<User> getAllUser(){
 		return registrationrepo.findAll();
 	}
 	

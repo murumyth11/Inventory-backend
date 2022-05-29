@@ -24,7 +24,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 
 @Entity
-@Table(name="purchasebillproduct")
+@Table(name="PurchaseBillProduct")
 public class PurchaseBillProduct {
 
 	@Id

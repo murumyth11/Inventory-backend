@@ -3,30 +3,30 @@ package com.kmsoft.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.UserRegistration;
-import com.kmsoft.repository.RegistrationRepository;
-import com.kmsoft.service.RegistrationService;
+import com.kmsoft.model.User;
+import com.kmsoft.repository.UserRepository;
+import com.kmsoft.service.UserService;
 @Service
-public class RegistrationSerImp implements RegistrationService {
+public class UserServiceImp implements UserService {
 
 	
 	@Autowired
-	RegistrationRepository registrationRepo;
+	UserRepository registrationRepo;
 	
 	@Override
-	public UserRegistration fetchByemail(String email) {
+	public User fetchByemail(String email) {
 		// TODO Auto-generated method stub
 		return  registrationRepo.findByUserEmail(email);
 	}
 
 	@Override
-	public UserRegistration findByUserNameAndPassword(String tempemail, String temppassword) {
+	public User findByUserNameAndPassword(String tempemail, String temppassword) {
 		// TODO Auto-generated method stub
 		return registrationRepo.findByUserNameAndPassword(tempemail, temppassword);
 	}
 
 	@Override
-	public UserRegistration fetchByusername(String userName) {
+	public User fetchByusername(String userName) {
 		// TODO Auto-generated method stub
 		return registrationRepo.findByUserName(userName);
 	}

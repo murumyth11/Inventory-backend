@@ -20,7 +20,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @Entity
-@Table(name="shop")
+@Table(name="Shop")
 public class Shop {
 	
 	@Id

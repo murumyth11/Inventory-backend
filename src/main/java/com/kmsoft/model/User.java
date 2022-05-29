@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="registration")
-public class UserRegistration {
+@Table(name="User")
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -67,12 +67,12 @@ public class UserRegistration {
 		this.roles = roles;
 	}
 
-	public UserRegistration() {
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserRegistration(int userId, String userName, String userEmail, String password, String roles) {
+	public User(int userId, String userName, String userEmail, String password, String roles) {
 		super();
 		this.userId = userId;
 		this.userName = userName;

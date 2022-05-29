@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table(name="balanceUpdateHistory")
+@Table(name="BalanceUpdateHistory")
 public class BalanceUpdateHistory {
 
 	@Id

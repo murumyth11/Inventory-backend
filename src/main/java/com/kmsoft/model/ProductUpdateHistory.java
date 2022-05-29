@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="productUpdateHistory")
+@Table(name="ProductUpdateHistory")
 public class  ProductUpdateHistory {
 	
 	@Id

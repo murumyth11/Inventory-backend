@@ -11,27 +11,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.kmsoft.model.UserRegistration;
-import com.kmsoft.repository.RegistrationRepository;
+import com.kmsoft.model.User;
+
+
 
 
 
 @SpringBootApplication
 public class InventoryApplication extends SpringBootServletInitializer {
 	
-	@Autowired
-	RegistrationRepository regRepo;
+
 	
-  @PostConstruct
-	  public void init(){
-	    
-	  UserRegistration user=new UserRegistration();
-		user.setUserName("kmsoftv1");
-		user.setUserId(1);
-		user.setRoles("system");
-		user.setPassword("tn52q0297");
-		regRepo.save(user);
-	  }
+//  @PostConstruct
+//	  public void init(){
+//	    
+//	  UserRegistration user=new UserRegistration();
+//		user.setUserName("kmsoftv1");
+//		user.setUserId(1);
+//		user.setRoles("system");
+//		
+//		user.setPassword("tn52q0297");
+//		regRepo.save(user);
+//	  }
   
 //  @Override  
 //  protected SpringApplicationBuilder configure(SpringApplicationBuilder application)   

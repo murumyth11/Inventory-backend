@@ -114,7 +114,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>vMInventoryService</finalName>
+		<finalName>kmsoft</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

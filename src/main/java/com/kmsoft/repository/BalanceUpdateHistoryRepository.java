@@ -29,11 +29,11 @@ public interface BalanceUpdateHistoryRepository extends JpaRepository<BalanceUpd
 		Page<List<Map<String,Object>>> getbySearch(String title,Pageable pageable);
 		
 		@Query(value="SELECT bh.paymentmethod, bh.balance_update_date,bh.cash_out,bh.updated_by,v.vendor_name,v.vendor_mobile,p.pbno ,bh.balance,p.total"
-				+ " from balance_update_history bh join (purchasebill p join vendors v on p.vendor_fk=v.vendor_id)  on bh.purchasebill_fk=p.purchase_bill_id where bh.balance_update_date like %:title% or "
+				+ " from balance_update_history bh join (purchase_bill p join vendors v on p.vendor_fk=v.vendor_id)  on bh.purchasebill_fk=p.purchase_bill_id where bh.balance_update_date like %:title% or "
 				+ "bh.cash_out like %:title% or v.vendor_name like %:title% or v.vendor_mobile like %:title% or p.pbno like %:title%  or bh.updated_by like "
 				+ " %:title% "
 				+ " group by balance_update_history_id order by bh.balance_update_history_id desc",
-				countQuery="SELECT count(*) FROM  balance_update_history bh  join (purchasebill p join vendors v on p.vendor_fk=v.vendor_id)  on bh.purchasebill_fk=p.purchase_bill_id;",nativeQuery=true)
+				countQuery="SELECT count(*) FROM  balance_update_history bh  join (purchase_bill p join vendors v on p.vendor_fk=v.vendor_id)  on bh.purchasebill_fk=p.purchase_bill_id;",nativeQuery=true)
 		Page<List<Map<String,Object>>> getbySearchPurchase(String title,Pageable pageable);
 		
 		
