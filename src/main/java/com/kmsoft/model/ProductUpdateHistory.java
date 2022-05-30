@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class  ProductUpdateHistory {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int updateHistoryId;
 	
 	

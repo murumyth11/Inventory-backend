@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Billproduct {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int billproductId;
 	
 	@ManyToOne

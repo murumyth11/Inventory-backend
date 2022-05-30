@@ -37,7 +37,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query(value="SELECT * FROM product WHERE product_quantity*unitconversion <=10 and isaliveproduct=1",nativeQuery=true)
 	List<Product> getLowStock();
 	
-	@Query(value="SELECT SUM(availablequantity) FROM purchase_bill_product",nativeQuery=true)
+	@Query(value="SELECT ifnull(SUM(availablequantity),0) FROM purchase_bill_product",nativeQuery=true)
 	int getStockinHand();
 	
 	@Query(value="SELECT COUNT(*) FROM product",nativeQuery=true)
