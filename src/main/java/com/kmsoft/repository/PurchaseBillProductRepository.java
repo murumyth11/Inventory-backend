@@ -29,8 +29,8 @@ public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBil
 	
 	@Modifying
     @Transactional 
-	@Query(value = "update purchase_bill_product set availablequantity=availablequantity - :qty where batch=:batch and product_fk=:id",nativeQuery = true)
-	void updateBatchQuantity(int id,String qty,String batch);
+	@Query(value = "update purchase_bill_product set availablequantity=availablequantity - :qty where pbp_id=:batch and product_fk=:id",nativeQuery = true)
+	void updateBatchQuantity(int id,String qty,int batch);
 
 
 	@Query(value = "select * from purchase_bill_product where product_fk=:id order by pbp_id desc",nativeQuery = true)
@@ -44,7 +44,7 @@ public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBil
 	PurchaseBillProduct getavailableqty(int id);
 
 
-  @Query(value = "select ifnull(sum(p.availablequantity),0) as currentstockquantity,ifnull((sum(p.amount)-b.amount),sum(p.amount)) as currentstockvalue from purchase_bill_product p join product pt on p.product_fk=pt.product_id cross join (select sum(amount) as amount from billproduct) b where pt.isaliveproduct=1",nativeQuery = true)
+  @Query(value = "select ifnull(sum(p.availablequantity),0) as currentstockquantity,sum(p.availablequantity*p.costprice) as currentstockvalue from purchase_bill_product p join product pt on p.product_fk=pt.product_id cross join (select sum(amount) as amount from billproduct) b where pt.isaliveproduct=1",nativeQuery = true)
 Map<String, Number> gettotalstockinfo();
 
   @Modifying

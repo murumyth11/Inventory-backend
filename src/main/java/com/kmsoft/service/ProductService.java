@@ -38,7 +38,7 @@ public Product createProduct(Product product);
 	  
 	  public void updateProductQuantity(int id,String qty,String updatefrom);
 
-	public void updatebatchQuantity(int id, String qty, String batch);
+	public void updatebatchQuantity(int id, String qty, int batch);
 	
 	public void updateProductQuantityBatchAdjust(int id,String qty);
 

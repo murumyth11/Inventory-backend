@@ -165,14 +165,14 @@ public class BillController {
 			int id;
 			String qty;
 			String updatefrom;
-			String batch;
+			int batch;
 			String batchqty;
 			JSONObject o=(JSONObject) qtyData;
 			id=o.getInt("id");
 			
 		    qty=o.get("q").toString();
 		    updatefrom=o.get("updatefrom").toString();
-		    batch=o.get("batch").toString();
+		    batch=(int) o.get("batchid");
 		    batchqty=o.get("batchqty").toString();
 		    productService.updateProductQuantity(id, qty,updatefrom);
 		    productService.updatebatchQuantity(id,batchqty,batch);

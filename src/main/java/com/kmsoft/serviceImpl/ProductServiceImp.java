@@ -141,7 +141,7 @@ public class ProductServiceImp implements ProductService{
 
 
 	@Override
-	public void updatebatchQuantity(int id, String qty, String batch) {
+	public void updatebatchQuantity(int id, String qty, int batch) {
 		// TODO Auto-generated method stub
 		pbpRepo.updateBatchQuantity(id, qty, batch);
 		
