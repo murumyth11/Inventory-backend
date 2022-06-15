@@ -38,6 +38,8 @@ public interface HeaderBillService {
 
 	public Map<String, Object> customerbilldetails(int id);
 
+	public List<Map<String, Object>> getcustomerbatchproduct(int cid, int pid);
+
 	
 
 }

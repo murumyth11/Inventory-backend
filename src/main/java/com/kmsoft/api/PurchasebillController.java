@@ -55,7 +55,7 @@ public class PurchasebillController {
 	@CrossOrigin("*")
 	@PutMapping("/savepurchasebill")
 	public void updatepurchasebill(@RequestBody String data) {
-	System.out.println(data);
+
 	JSONObject jsonObject=new JSONObject(data);
 	 int id=jsonObject.getInt("id");
 	 BigDecimal balance=jsonObject.getBigDecimal("balance");

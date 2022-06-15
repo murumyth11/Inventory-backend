@@ -107,6 +107,13 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	}
 
 
+	@Override
+	public List<Map<String, Object>> getcustomerbatchproduct(int cid, int pid) {
+		// TODO Auto-generated method stub
+		return headerbillRepo.getCustomerProductBatch(cid, pid);
+	}
+
+
 	
 
 }

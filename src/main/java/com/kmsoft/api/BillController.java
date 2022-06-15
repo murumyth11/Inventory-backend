@@ -223,6 +223,12 @@ public class BillController {
 		return headerbillService.customerbilldetails(id);
 	}
 	
+	@CrossOrigin("*")
+	@GetMapping("/customerbatchproduct")
+	public List<Map<String,Object>> getCustomerBatchProduct(@RequestParam int cid,@RequestParam int pid){
+		return headerbillService.getcustomerbatchproduct(cid,pid);
+	}
+	
 	
 	
 }

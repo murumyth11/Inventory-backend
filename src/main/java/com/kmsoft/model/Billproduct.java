@@ -1,4 +1,6 @@
 package com.kmsoft.model;
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -74,7 +76,7 @@ public class Billproduct {
 	}
 
 	@Column(name="rate",columnDefinition="DECIMAL(10,2)")
-	float rate;
+	BigDecimal rate;
 	
 	@Column(name="amount",columnDefinition="DECIMAL(10,2)")
 	float amount;
@@ -140,11 +142,11 @@ public class Billproduct {
 
 	
 
-	public float getRate() {
+	public BigDecimal getRate() {
 		return rate;
 	}
 
-	public void setRate(float rate) {
+	public void setRate(BigDecimal rate) {
 		this.rate = rate;
 	}
 
@@ -161,7 +163,7 @@ public class Billproduct {
 	
 
 	public Billproduct(int billproductId, Product name, float quantity, float convertedQuantity, String unit,
-			String batch, int discount, String discountType, float rate, float amount, String code, int batchid) {
+			String batch, int discount, String discountType, BigDecimal rate, float amount, String code, int batchid) {
 		super();
 		this.billproductId = billproductId;
 		this.name = name;

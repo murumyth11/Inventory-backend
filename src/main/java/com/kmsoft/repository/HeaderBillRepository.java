@@ -58,6 +58,8 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	Map<String, Object> customerbilldetails(int id);
 
 	 
+	 @Query(value="select b.batch,b.quantity,b.unit,b.rate,b.batchid  from header_bill h join (billproduct b join product p on p.product_id=b.product_fk) on h.header_bill_id=b.headerbill_fk where h.customer_fk=:cId and h.isdraft=0 and p.product_id=:pid",nativeQuery = true)
+	 List<Map<String, Object>> getCustomerProductBatch(int cId,int pid);
 	
 	
 }

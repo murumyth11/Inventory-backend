@@ -45,6 +45,10 @@ public class BalanceUpdateHistory {
 	@JoinColumn(name="purchasebillFk",referencedColumnName = "purchaseBillId")
 	PurchaseBill purchaseBill;
 	
+	@ManyToOne
+	@JoinColumn(name="salesreturnFk",referencedColumnName="salesReturnId")
+	SalesReturn salesReturn;
+	
 	@Column(name="paymentmethod")
 	String paymentmethod;
 	
@@ -52,6 +56,14 @@ public class BalanceUpdateHistory {
 	
 	
 	
+
+	public SalesReturn getSalesReturn() {
+		return salesReturn;
+	}
+
+	public void setSalesReturn(SalesReturn salesReturn) {
+		this.salesReturn = salesReturn;
+	}
 
 	public PurchaseBill getPurchaseBill() {
 		return purchaseBill;
@@ -136,8 +148,11 @@ public class BalanceUpdateHistory {
 
 	
 
+	
+
 	public BalanceUpdateHistory(int balanceUpdateHistoryId, String balanceUpdateDate, int cashIn, int cashOut,
-			int balance, String updatedBy, HeaderBill headerbill, PurchaseBill purchaseBill, String paymentmethod) {
+			int balance, String updatedBy, HeaderBill headerbill, PurchaseBill purchaseBill, SalesReturn salesReturn,
+			String paymentmethod) {
 		super();
 		this.balanceUpdateHistoryId = balanceUpdateHistoryId;
 		this.balanceUpdateDate = balanceUpdateDate;
@@ -147,6 +162,7 @@ public class BalanceUpdateHistory {
 		this.updatedBy = updatedBy;
 		this.headerbill = headerbill;
 		this.purchaseBill = purchaseBill;
+		this.salesReturn = salesReturn;
 		this.paymentmethod = paymentmethod;
 	}
 
