@@ -77,7 +77,8 @@ public class ProductDetailsController {
 		}
 		if (product.getSecondaryUnit() == null) {
 			String su = product.getPrimaryUnit();
-			product.setSecondaryUnit("qty");
+			
+			product.setSecondaryUnit(su);
 		}
 		if (product.getUnitConversion() == 0) {
 			product.setUnitConversion(1);
@@ -138,7 +139,7 @@ public class ProductDetailsController {
 
 		if (title == null) {
 			pageTuts = productservice.getAllproduct(paging);
-			System.out.println(title);
+			
 		} else {
 			pageTuts = productservice.findByProductNameContaining(title, paging);
 		}
@@ -164,12 +165,12 @@ public class ProductDetailsController {
 		Pageable paging = PageRequest.of(page, size);
 
 		if (title == null) {
-			System.out.println("inventorynull");
+			
 
 			data = productservice.getInventoryReport(paging);
 
 		} else {
-			System.out.println("inventory have title");
+			
 			data = productservice.getInventoryReportTitle(title, paging);
 
 		}
@@ -232,6 +233,13 @@ public class ProductDetailsController {
 			
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("/topmovingproducts")
+	public List<Product> getTopMovingProducts(){
+		return productservice.getTopMovingproducts();
 		
 	}
 	

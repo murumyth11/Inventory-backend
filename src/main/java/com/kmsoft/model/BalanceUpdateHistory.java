@@ -1,5 +1,7 @@
 package com.kmsoft.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+
 
 @Entity
 @Table(name="BalanceUpdateHistory")
@@ -21,8 +29,12 @@ public class BalanceUpdateHistory {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int balanceUpdateHistoryId;
 	
-	@Column(name="balanceUpdateDate")
-	String balanceUpdateDate;
+	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@Column(name="balanceUpdateDate" ,columnDefinition="DATETIME")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
+	LocalDateTime balanceUpdateDate;
 	
 	@Column(name="cashIn")
 	int cashIn;
@@ -99,13 +111,7 @@ public class BalanceUpdateHistory {
 		this.balanceUpdateHistoryId = balanceUpdateHistoryId;
 	}
 
-	public String getBalanceUpdateDate() {
-		return balanceUpdateDate;
-	}
-
-	public void setBalanceUpdateDate(String balanceUpdateDate) {
-		this.balanceUpdateDate = balanceUpdateDate;
-	}
+	
 
 	public int getCashIn() {
 		return cashIn;
@@ -143,14 +149,16 @@ public class BalanceUpdateHistory {
 		this.updatedBy = updatedBy;
 	}
 
-	
-	
 
-	
+	public LocalDateTime getBalanceUpdateDate() {
+		return balanceUpdateDate;
+	}
 
-	
+	public void setBalanceUpdateDate(LocalDateTime balanceUpdateDate) {
+		this.balanceUpdateDate = balanceUpdateDate;
+	}
 
-	public BalanceUpdateHistory(int balanceUpdateHistoryId, String balanceUpdateDate, int cashIn, int cashOut,
+	public BalanceUpdateHistory(int balanceUpdateHistoryId, LocalDateTime balanceUpdateDate, int cashIn, int cashOut,
 			int balance, String updatedBy, HeaderBill headerbill, PurchaseBill purchaseBill, SalesReturn salesReturn,
 			String paymentmethod) {
 		super();

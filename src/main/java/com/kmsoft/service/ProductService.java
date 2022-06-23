@@ -42,4 +42,6 @@ public Product createProduct(Product product);
 	
 	public void updateProductQuantityBatchAdjust(int id,String qty);
 
+	public List<Product> getTopMovingproducts();
+
 }

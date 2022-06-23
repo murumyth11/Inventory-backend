@@ -18,4 +18,6 @@ public interface BalanceUpdateHistoryService {
 	public Page<List<Map<String,Object>>> getBysearch(String title,Pageable pageable);
 
 	public Page<List<Map<String, Object>>> getBysearchPurchase(String title, Pageable paging);
+
+	public Page<List<Map<String, Object>>> getBysearchSalesReturn(String title, Pageable paging);
 }

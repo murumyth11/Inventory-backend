@@ -63,11 +63,11 @@ public class BillController {
 		Page<HeaderBill> pageTuts;
 
 		if (title == null) {
-			System.out.println("null");
+			
 			pageTuts = headerbillService.findAllByOrderByHeaderBillIdDesc(paging);
 
 		} else {
-			System.out.println("have ttl");
+			
 			pageTuts = headerbillService.findByInvoiceContaining(title, paging);
 		}
 		return pageTuts;

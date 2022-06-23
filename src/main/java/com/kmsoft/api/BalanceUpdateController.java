@@ -50,7 +50,7 @@ public class BalanceUpdateController {
 	@CrossOrigin("*")
 	@GetMapping("/balanceupdatepurchase")
 	public Page<List<Map<String,Object>>> getBalanceUpdateHistoryPurchase(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size)
+			@RequestParam(defaultValue = "5") int size)
 	{
 		
 		Page<List<Map<String,Object>>> data;
@@ -64,5 +64,24 @@ public class BalanceUpdateController {
 		}
 		return data;
 	}
+	@CrossOrigin("*")
+	@GetMapping("/balanceupdatesalesreturn")
+	public Page<List<Map<String,Object>>> getBalanceUpdateHistorySalesReturn(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size)
+	{
+		
+		Page<List<Map<String,Object>>> data;
+		 Pageable paging = PageRequest.of(page, size);
+		if(title==null) {
+			data=balanceUpdateHistoryService.getBysearchSalesReturn(title, paging);
+		}
+		else {
+			data=balanceUpdateHistoryService.getBysearchSalesReturn(title, paging);
+			
+		}
+		return data;
+	}
+	
+	
 
 }

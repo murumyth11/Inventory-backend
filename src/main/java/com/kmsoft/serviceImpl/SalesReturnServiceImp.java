@@ -1,6 +1,8 @@
 package com.kmsoft.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.kmsoft.model.SalesReturn;
@@ -22,6 +24,18 @@ SalesReturnRepository salesReturnRepo;
 	public SalesReturn createSalesReturn(SalesReturn h) {
 		return salesReturnRepo.saveAndFlush(h);
 		
+	}
+
+	@Override
+	public Page<SalesReturn> findBySalesReturnContaining(String title, Pageable paging) {
+		// TODO Auto-generated method stub
+		return salesReturnRepo.findBySalesReturnContaining(title,paging);
+	}
+
+	@Override
+	public SalesReturn getSalesReturnByid(int id) {
+		// TODO Auto-generated method stub
+		return salesReturnRepo.getSalesReturnById(id);
 	}
 
 }

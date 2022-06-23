@@ -156,6 +156,13 @@ public class ProductServiceImp implements ProductService{
 		productRepo.updateProductQuantityMore(id, qty);
 		
 	}
+
+
+	@Override
+	public List<Product> getTopMovingproducts() {
+		// TODO Auto-generated method stub
+		return productRepo.getTopMovingproducts();
+	}
 		
 		
 		

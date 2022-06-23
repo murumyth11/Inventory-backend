@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.kmsoft.model.Billproduct;
+import com.kmsoft.model.Product;
+import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.service.BillProductService;
 
 @RestController
@@ -24,6 +26,7 @@ public class BillproductController {
 	
 	@Autowired
 	BillProductService billproductService;
+	
 	
 	@CrossOrigin("*")
 	@PostMapping("/billproduct")
@@ -72,9 +75,41 @@ public class BillproductController {
 	@CrossOrigin("*")
 	@GetMapping("/soldquantity")
 	public Map<String,Number> getTotalSoldQuantity(@RequestParam() int id) {
-		System.out.println(id);
+		
 		return  billproductService.getTotalSoldQuantity(id);
 	}
+	
+	
+	@CrossOrigin("*")
+	@GetMapping("/topMovingProductsByDate")
+	public Page<List<Map<String, Object>>> getTopMovingByDate(
+			@RequestParam(required =false) @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate,
+			@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+
+		 Page<List<Map<String, Object>>> data;
+		
+			 Pageable paging = PageRequest.of(page, size);
+			
+			
+			
+				if(startDate==null && endDate==null) {
+					data=billproductService.getTopMovingProducts(title, paging);
+				}
+				else {
+				data = billproductService.getTopMovingProductsBydate(startDate, endDate, title,paging);
+				}
+				
+			
+
+		
+		return data;
+
+	}
+
+	
+	
 	
 	
 	

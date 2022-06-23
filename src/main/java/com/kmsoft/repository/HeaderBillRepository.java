@@ -18,7 +18,7 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate ORDER BY date DESC", nativeQuery = true)
 	Page<HeaderBill> getAllBetweenDates(@Param("startDate") Date startDate, @Param("endDate") Date endDate,Pageable pageable);
 	
-	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate  and (total like %:title% or status like  %:title%  ) "
+	@Query(value = "SELECT * FROM Header_bill WHERE date >= :startDate AND date <= :endDate  and (total like %:title% or status like  %:title% or customer like %:title% or invoice like %:title% or phone like %:title% or date like %:title% ) "
 			, nativeQuery = true)
 	Page<HeaderBill> getAllBetweenDatesContaining(@Param("startDate") Date startDate, @Param("endDate") Date endDate,String title,Pageable pageable);
 	
@@ -33,7 +33,7 @@ public interface HeaderBillRepository extends JpaRepository<HeaderBill, Integer>
 	 @Query(value="SELECT * FROM header_bill WHERE isdraft=0 and ( customer LIKE %:title%"+" OR invoice LIKE %:title% "
 	 +" OR subtotal LIKE %:title% "
 			 +" OR total LIKE %:title% "
-	 +" OR phone LIKE %:title%  or status like  %:title%  or balance like %:title% or billed_by like %:title% )ORDER BY header_bill_id DESC"
+	 +" OR phone LIKE %:title%  or status like  %:title%  or balance like %:title% or billed_by like %:title% or date like %:title% )ORDER BY header_bill_id DESC"
 				 ,nativeQuery = true)
 	 Page<HeaderBill> findByInvoiceContaining(String title,Pageable pageable);
 	

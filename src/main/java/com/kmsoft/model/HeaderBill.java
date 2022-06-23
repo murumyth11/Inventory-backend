@@ -49,7 +49,6 @@ public class HeaderBill {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@Column(name="date" ,columnDefinition="DATETIME")
-	//DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime date;
 	

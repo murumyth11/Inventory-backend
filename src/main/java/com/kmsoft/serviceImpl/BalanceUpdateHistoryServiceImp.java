@@ -44,4 +44,10 @@ public class BalanceUpdateHistoryServiceImp implements BalanceUpdateHistoryServi
 		return balanceupdateRepo.getbySearchPurchase(title, paging);
 	}
 
+	@Override
+	public Page<List<Map<String, Object>>> getBysearchSalesReturn(String title, Pageable paging) {
+		// TODO Auto-generated method stub
+		return balanceupdateRepo.getbySearchSalesReturn(title, paging);
+	}
+
 }

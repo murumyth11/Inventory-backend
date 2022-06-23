@@ -33,7 +33,7 @@ public class shopController {
 	@PostMapping("/shop")
 	public Shop createShop(@RequestPart String data,@RequestPart MultipartFile Image) throws IOException {
 		
-		System.out.println(data);
+		
 		
 		String sb=data;
 	ObjectMapper objectMapper=new ObjectMapper();

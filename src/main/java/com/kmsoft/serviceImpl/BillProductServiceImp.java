@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.kmsoft.model.Billproduct;
+import com.kmsoft.model.Product;
 import com.kmsoft.repository.BillproductRepository;
 import com.kmsoft.service.BillProductService;
 
@@ -49,5 +50,20 @@ public class BillProductServiceImp implements BillProductService{
 		// TODO Auto-generated method stub
 		return billproductRepo.getTotalSoldQuantity(id);
 	}
+
+	@Override
+	public Page<List<Map<String, Object>>> getTopMovingProductsBydate(Date startDate, Date endDate, String title,
+			Pageable paging) {
+		// TODO Auto-generated method stub
+		return billproductRepo.getTopMovingProductBydate(startDate,endDate,title,paging);
+	}
+
+	@Override
+	public Page<List<Map<String, Object>>> getTopMovingProducts(String title, Pageable paging) {
+		// TODO Auto-generated method stub
+		return billproductRepo.getTopMovingProduct(title, paging);
+	}
+
+
 
 }

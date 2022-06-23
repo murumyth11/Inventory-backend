@@ -86,6 +86,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query(value = "update product set isaliveproduct=0 where product_id=:id",nativeQuery = true)
 	void deleteProductsById(int id);
 	
+	@Query(value = "select p.* from product p left outer join billproduct b on p.product_id=b.product_fk where p.product_quantity > 0 group by b.product_fk order by count(b.product_fk)desc limit 10;",nativeQuery = true)
+	List<Product> getTopMovingproducts();
+	
 	
 	
 	

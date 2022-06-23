@@ -37,5 +37,12 @@ public interface BalanceUpdateHistoryRepository extends JpaRepository<BalanceUpd
 		Page<List<Map<String,Object>>> getbySearchPurchase(String title,Pageable pageable);
 		
 		
+		@Query(value = "select  bh.paymentmethod, bh.balance_update_date,bh.cash_out,bh.updated_by,c.customer_name,c.customer_phone,s.salesreturnno,s.total from balance_update_history bh join (sales_return s join customer c on s.customer_fk=c.customer_id)  on bh.salesreturn_fk=s.sales_return_id "
+				+ "where bh.paymentmethod like %:title% or bh.balance_update_date like %:title% or bh.cash_out like %:title% or bh.updated_by like %:title% or c.customer_name like %:title% or c.customer_phone like %:title% or s.salesreturnno like %:title%  or s.total like %:title% "
+				+ " group by balance_update_history_id order by bh.balance_update_history_id desc",
+				countQuery = "select count(*) from balance_update_history bh join (sales_return s join customer c on s.customer_fk=c.customer_id)  on bh.salesreturn_fk=s.sales_return_id",nativeQuery = true)
+		Page<List<Map<String, Object>>> getbySearchSalesReturn(String title, Pageable paging);
+		
+		
 	
 }

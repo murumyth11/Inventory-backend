@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.kmsoft.model.Billproduct;
+import com.kmsoft.model.Product;
 
 
 public interface BillProductService {
@@ -19,4 +20,11 @@ public interface BillProductService {
 	public Page<List<Map<String, Object>>> getSaleByDateProductTitle(Date startDate, Date endDate,String title,Pageable paging);
 	
 	public Map<String,Number> getTotalSoldQuantity(int id);
+
+	public Page<List<Map<String, Object>>> getTopMovingProductsBydate(Date startDate, Date endDate, String title,
+			Pageable paging);
+
+	public Page<List<Map<String, Object>>> getTopMovingProducts(String title, Pageable paging);
+
+	
 }

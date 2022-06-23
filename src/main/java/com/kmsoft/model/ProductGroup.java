@@ -105,7 +105,7 @@ public class ProductGroup {
 	}
 
 	public void setProductGroupName(String productGroupName) {
-		this.productGroupName = productGroupName;
+		this.productGroupName = "G-"+productGroupName;
 	}
 
 	public ProductGroup() {

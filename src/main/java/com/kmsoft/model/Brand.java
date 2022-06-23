@@ -30,7 +30,7 @@ public class Brand {
 	}
 
 	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+		this.brandName = "#"+brandName;
 	}
 
 	public Brand() {
