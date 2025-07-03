@@ -1,17 +1,16 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import com.kmsoft.model.HeaderBill;
+import com.kmsoft.repository.HeaderBillRepository;
+import com.kmsoft.service.HeaderBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.HeaderBill;
-import com.kmsoft.repository.HeaderBillRepository;
-import com.kmsoft.service.HeaderBillService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class HeaderBillServiceImp implements HeaderBillService {
@@ -34,7 +33,8 @@ public class HeaderBillServiceImp implements HeaderBillService {
 
 	public Page<HeaderBill> findByInvoiceContaining(String title, Pageable paging) {
 		
-		return headerbillRepo.findByInvoiceContaining(title, paging);
+		String stitle = "%" + title + "%";
+		return headerbillRepo.findByInvoiceContaining(stitle, paging);
 	}
 
 	
@@ -45,8 +45,8 @@ public class HeaderBillServiceImp implements HeaderBillService {
 
 	
 	public Page<HeaderBill> getAllBetweenDatesContaining(Date startDate, Date endDate, String title, Pageable paging) {
-		
-		return headerbillRepo.getAllBetweenDatesContaining(startDate, endDate, title, paging);
+		String stitle = "%" + title + "%";
+		return headerbillRepo.getAllBetweenDatesContaining(startDate, endDate, stitle, paging);
 	}
 
 	
@@ -96,7 +96,8 @@ public class HeaderBillServiceImp implements HeaderBillService {
 	@Override
 	public Page<List<Map<String, Object>>> getHeaderbillCustomers(String title,int cId, Pageable paging) {
 		// TODO Auto-generated method stub
-		return headerbillRepo.getHeaderbillCustomer(title,cId,paging);
+		String stitle = "%" + title + "%";
+		return headerbillRepo.getHeaderbillCustomer(stitle,cId,paging);
 	}
 
 

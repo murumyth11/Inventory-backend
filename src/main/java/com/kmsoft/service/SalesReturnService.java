@@ -1,11 +1,8 @@
 package com.kmsoft.service;
 
+import com.kmsoft.model.SalesReturn;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import com.kmsoft.model.PurchaseBill;
-import com.kmsoft.model.SalesReturn;
 
 
 public interface SalesReturnService {

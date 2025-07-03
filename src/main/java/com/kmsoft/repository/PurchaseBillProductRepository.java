@@ -1,10 +1,7 @@
 package com.kmsoft.repository;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.transaction.Transactional;
-
+import com.kmsoft.model.PurchaseBillProduct;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.kmsoft.model.ProductUpdateHistory;
-import com.kmsoft.model.PurchaseBillProduct;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBillProduct, Integer> {
@@ -37,7 +34,7 @@ public interface PurchaseBillProductRepository extends JpaRepository<PurchaseBil
 	Page<PurchaseBillProduct> findAllBatchById(int id, Pageable paging);
 
 
-	@Query(value = "select * from purchase_bill_product where product_fk=:id and batch like %:title% order by pbp_id desc",nativeQuery = true)
+	@Query(value = "select * from purchase_bill_product where product_fk=:id and batch like :title order by pbp_id desc",nativeQuery = true)
 	Page<PurchaseBillProduct> findByIdContaining(String title, int id, Pageable paging);
 
   @Query(value = "select * from purchase_bill_product where pbp_id=:id ",nativeQuery = true)
@@ -57,4 +54,9 @@ void updateAvailableqty(int id, String qty);
   @Transactional 
 	@Query(value = "update purchase_bill_product set rate=:rate where pbp_id=:pbpid1",nativeQuery = true)
 	void updateRate(int pbpid1, String rate);
+
+
+  @Query(value = "select concat(sum(pbp.availablequantity),' ',p.secondaryunit) as instock,p.product_name from purchase_bill_product pbp join product p on p.product_id=pbp.product_fk where pbp.warehouse_fk=:warehouseid and p.product_name like :title group by pbp.product_fk,pbp.warehouse_fk",countQuery = 
+		  "select count(*) from (select p.product_name from purchase_bill_product pbp join product p on p.product_id=pbp.product_fk  group by pbp.product_fk,pbp.warehouse_fk) as cnt",nativeQuery = true)
+Page<List<Map<String, Object>>> getWarehouseProducts(String title,Pageable paging,int warehouseid);
 }

@@ -1,14 +1,10 @@
 package com.kmsoft.repository;
 
-import com.kmsoft.model.Shop;
+import com.kmsoft.model.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ShopRepository extends JpaRepository<Shop, Integer> {
+public interface WarehouseRepository extends JpaRepository<Warehouse, Integer> {
 
-	
-	
-
-	
 }

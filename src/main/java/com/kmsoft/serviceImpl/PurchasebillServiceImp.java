@@ -1,20 +1,14 @@
 package com.kmsoft.serviceImpl;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.Base64;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import com.kmsoft.model.PurchaseBill;
 import com.kmsoft.repository.PurchasebillRepository;
 import com.kmsoft.service.PurchasebillService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 
 
@@ -53,7 +47,8 @@ public class PurchasebillServiceImp implements PurchasebillService {
 	@Override
 	public Page<PurchaseBill> findBypurchasebillContaining(String title, Pageable paging) {
 		// TODO Auto-generated method stub
-		return pbRepo.findByPurchaseBillContaining(title, paging);
+		 String stitle = "%"+title+"%";
+		return pbRepo.findByPurchaseBillContaining(stitle, paging);
 	}
 
 

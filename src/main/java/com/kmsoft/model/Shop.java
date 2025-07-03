@@ -1,18 +1,5 @@
 package com.kmsoft.model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.ColumnTransformer;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,6 +7,10 @@ import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializ
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name="Shop")

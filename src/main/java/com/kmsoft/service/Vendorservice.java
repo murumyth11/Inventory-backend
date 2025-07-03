@@ -1,12 +1,10 @@
 package com.kmsoft.service;
 
-import java.util.List;
-
+import com.kmsoft.model.Vendors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.kmsoft.model.Customer;
-import com.kmsoft.model.Vendors;
+import java.util.List;
 
 public interface Vendorservice {
 

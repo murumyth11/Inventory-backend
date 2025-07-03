@@ -1,33 +1,16 @@
 package com.kmsoft.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Fetch;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="PurchaseBill",uniqueConstraints={@UniqueConstraint(columnNames={"pbNo"})})
@@ -72,6 +55,10 @@ public class PurchaseBill {
 	@JoinColumn(name="vendorFk",referencedColumnName = "vendorId")
 	Vendors vendors;
 	
+	@ManyToOne()
+	@JoinColumn(name="warehouseFk",referencedColumnName = "warehouseId")
+	Warehouse warehouse;
+	
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name="purchaseimagedata",referencedColumnName = "pbfiledataId")
 //	PurchaseBillFileData pbfiledata;
@@ -102,11 +89,11 @@ public class PurchaseBill {
 	@Column(name="paymentmethod")
 	String paymentmethod;
 
-	
-	public PurchaseBill(int purchaseBillId, String pbNo, String pbInvoice, LocalDateTime pbInvoiceDate,
+		public PurchaseBill(int purchaseBillId, String pbNo, String pbInvoice, LocalDateTime pbInvoiceDate,
 			LocalDateTime pbEntryDate, BigDecimal taxAmount, BigDecimal subtotal, BigDecimal total,
-			List<PurchaseBillProduct> purchaseBillProduct, Vendors vendors, String billedBy, BigDecimal charges,
-			String billnotes, BigDecimal amountdebit, BigDecimal balance, String status, byte[] purchaseimage,String paymentmethod) {
+			List<PurchaseBillProduct> purchaseBillProduct, Vendors vendors, Warehouse warehouse, String billedBy,
+			BigDecimal charges, String billnotes, BigDecimal amountdebit, BigDecimal balance, String status,
+			byte[] purchaseimage, String paymentmethod) {
 		super();
 		this.purchaseBillId = purchaseBillId;
 		this.pbNo = pbNo;
@@ -118,6 +105,7 @@ public class PurchaseBill {
 		this.total = total;
 		this.purchaseBillProduct = purchaseBillProduct;
 		this.vendors = vendors;
+		this.warehouse = warehouse;
 		this.billedBy = billedBy;
 		this.charges = charges;
 		this.billnotes = billnotes;
@@ -125,10 +113,10 @@ public class PurchaseBill {
 		this.balance = balance;
 		this.status = status;
 		this.purchaseimage = purchaseimage;
-		this.paymentmethod=paymentmethod;
+		this.paymentmethod = paymentmethod;
 	}
 
-	
+
 
 
 	public PurchaseBill() {
@@ -349,6 +337,20 @@ public class PurchaseBill {
 
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+
+
+
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+
+
+
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 	
 	

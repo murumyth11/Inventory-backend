@@ -1,14 +1,12 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.kmsoft.model.ProductGroup;
 import com.kmsoft.repository.ProductGroupRepository;
 import com.kmsoft.service.ProductGroupService;
-import com.kmsoft.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductGroupServiceImp implements ProductGroupService {

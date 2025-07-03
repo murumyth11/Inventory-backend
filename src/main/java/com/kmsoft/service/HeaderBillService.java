@@ -1,11 +1,12 @@
 package com.kmsoft.service;
 
+import com.kmsoft.model.HeaderBill;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import com.kmsoft.model.HeaderBill;
 
 
 public interface HeaderBillService {

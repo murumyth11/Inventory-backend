@@ -1,26 +1,17 @@
 package com.kmsoft.api;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.kmsoft.model.Customer;
+import com.kmsoft.repository.BillRepository;
+import com.kmsoft.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.kmsoft.model.Customer;
-import com.kmsoft.repository.BillRepository;
-import com.kmsoft.repository.CustomerRepository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CustomerController {
@@ -60,7 +51,8 @@ public class CustomerController {
 	      System.out.println(title);
 	      }
 	      else
-	      {pageTuts=customerRepo.findByCustomerNameContaining(title, paging);}
+	      {   String stitle = "%" + title + "%";
+	    	  pageTuts=customerRepo.findByCustomerNameContaining(stitle, paging);}
 	      return pageTuts;
 	     
 	  }
@@ -75,7 +67,8 @@ public class CustomerController {
 	@CrossOrigin("*")
 	@GetMapping("/customers/{namelike}")
 	public List<Customer> getCustomerLike(@PathVariable String namelike){
-		return customerRepo.getCustomerLike(namelike);
+		String snamelike = "%" + namelike + "%";
+		return customerRepo.getCustomerLike(snamelike);
 	}
 	@CrossOrigin("*")
 	@GetMapping("/customersPhone/{custPhone}")

@@ -1,25 +1,15 @@
 package com.kmsoft.api;
 
-import java.util.List;
-import java.util.Map;
-
+import com.kmsoft.model.PurchaseBillProduct;
+import com.kmsoft.service.PurchaseBillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.kmsoft.model.Billproduct;
-import com.kmsoft.model.ProductUpdateHistory;
-import com.kmsoft.model.PurchaseBillProduct;
-import com.kmsoft.service.PurchaseBillProductService;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PurchaseBillProductController {
@@ -74,7 +64,7 @@ public class PurchaseBillProductController {
 	     
 	      else
 	      {
-	    	  System.out.println("have ttl"+title);
+	    	  
 	    	  pageTuts=pbservice.findByBatchContaining(title,id, paging);
 	      return pageTuts;}
 		
@@ -93,6 +83,16 @@ public class PurchaseBillProductController {
 	public Map<String, Number> getTotalStockValue(){
 		return pbservice.gettotalstockinfo();
 		
+	}
+	
+	@CrossOrigin("*")
+	@GetMapping("productsbywarehouse")
+	public  Page<List<Map<String,Object>>> getWarehouseProducts(@RequestParam int warehouseid,@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "1") int size){
+		 
+			 Pageable paging = PageRequest.of(page, size);
+		 
+		return pbservice.getWarehouseProducts(title,paging,warehouseid);
 	}
 	
 	

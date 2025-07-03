@@ -1,18 +1,16 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import com.kmsoft.model.Billproduct;
+import com.kmsoft.repository.BillproductRepository;
+import com.kmsoft.service.BillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.Billproduct;
-import com.kmsoft.model.Product;
-import com.kmsoft.repository.BillproductRepository;
-import com.kmsoft.service.BillProductService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BillProductServiceImp implements BillProductService{
@@ -42,7 +40,8 @@ public class BillProductServiceImp implements BillProductService{
 	public Page<List<Map<String, Object>>> getSaleByDateProductTitle(Date startDate, Date endDate, String title,
 			Pageable paging) {
 		// TODO Auto-generated method stub
-		return billproductRepo.getSaleByDateProductTitle(startDate, endDate, title, paging);
+		String stitle = "%" + title + "%";
+		return billproductRepo.getSaleByDateProductTitle(startDate, endDate, stitle, paging);
 	}
 
 	@Override
@@ -55,13 +54,15 @@ public class BillProductServiceImp implements BillProductService{
 	public Page<List<Map<String, Object>>> getTopMovingProductsBydate(Date startDate, Date endDate, String title,
 			Pageable paging) {
 		// TODO Auto-generated method stub
-		return billproductRepo.getTopMovingProductBydate(startDate,endDate,title,paging);
+		String stitle = "%" + title + "%";
+		return billproductRepo.getTopMovingProductBydate(startDate,endDate,stitle,paging);
 	}
 
 	@Override
 	public Page<List<Map<String, Object>>> getTopMovingProducts(String title, Pageable paging) {
 		// TODO Auto-generated method stub
-		return billproductRepo.getTopMovingProduct(title, paging);
+		String stitle = "%" + title + "%";
+		return billproductRepo.getTopMovingProduct(stitle, paging);
 	}
 
 

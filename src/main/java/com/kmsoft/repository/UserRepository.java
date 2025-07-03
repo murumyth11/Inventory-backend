@@ -1,9 +1,8 @@
 package com.kmsoft.repository;
 
+import com.kmsoft.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.kmsoft.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -12,6 +11,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public User findByUserName(String userName);
 	public User findByUserEmail(String email);
 	public User findByUserNameAndPassword(String email,String pass);
+	public User findByRoles(String role);
 }
 
 

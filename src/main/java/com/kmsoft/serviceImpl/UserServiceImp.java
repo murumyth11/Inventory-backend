@@ -1,11 +1,10 @@
 package com.kmsoft.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.kmsoft.model.User;
 import com.kmsoft.repository.UserRepository;
 import com.kmsoft.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImp implements UserService {
 

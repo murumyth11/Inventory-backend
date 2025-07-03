@@ -1,16 +1,16 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import com.kmsoft.model.Product;
 import com.kmsoft.repository.ProductRepository;
 import com.kmsoft.repository.PurchaseBillProductRepository;
 import com.kmsoft.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
  
 @Service
@@ -75,7 +75,8 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public List<Product> getproductlike(String productlike) {
 		// TODO Auto-generated method stub
-		return productRepo.getProductLike(productlike);
+		String sproductlike = "%" + productlike ;
+		return productRepo.getProductLike(sproductlike);
 	}
 
 
@@ -106,7 +107,8 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public Page<Product> findByProductNameContaining(String title, Pageable paging) {
 		// TODO Auto-generated method stub
-		return productRepo.findByProductNameContaining(title, paging);
+        String stitle = "%"+title+"%";
+		return productRepo.findByProductNameContaining(stitle, paging);
 	}
 
 
@@ -120,7 +122,8 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public Page<List<Map<String, Object>>> getInventoryReportTitle(String title, Pageable paging) {
 		// TODO Auto-generated method stub
-		return productRepo.getInventoryReportTitle(title, paging);
+		 String stitle = "%"+title+"%";
+		return productRepo.getInventoryReportTitle(stitle, paging);
 	}
 
 

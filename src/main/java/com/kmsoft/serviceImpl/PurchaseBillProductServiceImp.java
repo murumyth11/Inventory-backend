@@ -1,17 +1,15 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-import java.util.Map;
-
+import com.kmsoft.model.PurchaseBillProduct;
+import com.kmsoft.repository.PurchaseBillProductRepository;
+import com.kmsoft.service.PurchaseBillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.ProductUpdateHistory;
-import com.kmsoft.model.PurchaseBillProduct;
-import com.kmsoft.repository.PurchaseBillProductRepository;
-import com.kmsoft.service.PurchaseBillProductService;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PurchaseBillProductServiceImp implements PurchaseBillProductService {
@@ -47,7 +45,8 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 	@Override
 	public Page<PurchaseBillProduct> findByBatchContaining(String title, int id, Pageable paging) {
 		// TODO Auto-generated method stub
-		return pbpRepo.findByIdContaining(title,id,paging);
+		 String stitle = "%"+title+"%";
+		return pbpRepo.findByIdContaining(stitle,id,paging);
 	}
 
 	@Override
@@ -75,5 +74,14 @@ public class PurchaseBillProductServiceImp implements PurchaseBillProductService
 		pbpRepo.updateRate(pbpid1,rate);
 		
 	}
+
+	@Override
+	public Page<List<Map<String, Object>>> getWarehouseProducts(String title, Pageable paging, int warehouseid) {
+		// TODO Auto-generated method stub
+		 String stitle = "%"+title+"%";
+		return pbpRepo.getWarehouseProducts(stitle, paging, warehouseid);
+	}
+
+	
 
 }

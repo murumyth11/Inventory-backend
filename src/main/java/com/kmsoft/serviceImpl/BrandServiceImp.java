@@ -1,13 +1,12 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.kmsoft.model.Brand;
 import com.kmsoft.repository.BrandRepository;
 import com.kmsoft.service.BrandService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BrandServiceImp implements BrandService {

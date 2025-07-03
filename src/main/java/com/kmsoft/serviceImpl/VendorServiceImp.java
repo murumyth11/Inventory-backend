@@ -1,15 +1,14 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-
+import com.kmsoft.model.Vendors;
+import com.kmsoft.repository.VendorRepository;
+import com.kmsoft.service.Vendorservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.Vendors;
-import com.kmsoft.repository.VendorRepository;
-import com.kmsoft.service.Vendorservice;
+import java.util.List;
 
 @Service
 public class VendorServiceImp implements Vendorservice{
@@ -38,7 +37,8 @@ public class VendorServiceImp implements Vendorservice{
 	@Override
 	public Page<Vendors> findByVendorNameContaining(String title, Pageable paging) {
 		// TODO Auto-generated method stub
-		return vendorRepo.findByVendorNameContaining(title, paging);
+		 String stitle = "%"+title+"%";
+		return vendorRepo.findByVendorNameContaining(stitle, paging);
 	}
 
 	@Override
@@ -51,7 +51,8 @@ public class VendorServiceImp implements Vendorservice{
 	@Override
 	public List<Vendors> getVendorLike(String namelike) {
 		// TODO Auto-generated method stub
-		return vendorRepo.getvendorsLike(namelike);
+		 String snamelike = "%"+namelike+"%";
+		return vendorRepo.getvendorsLike(snamelike);
 	}
 
 	@Override

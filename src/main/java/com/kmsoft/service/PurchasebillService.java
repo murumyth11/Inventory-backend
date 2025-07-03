@@ -1,12 +1,10 @@
 package com.kmsoft.service;
 
-import java.math.BigDecimal;
-
+import com.kmsoft.model.PurchaseBill;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
-import com.kmsoft.model.PurchaseBill;
+import java.math.BigDecimal;
 
 public interface PurchasebillService {
 

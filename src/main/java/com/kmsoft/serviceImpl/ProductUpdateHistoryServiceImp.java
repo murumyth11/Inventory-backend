@@ -1,15 +1,14 @@
 package com.kmsoft.serviceImpl;
 
-import java.util.List;
-
+import com.kmsoft.model.ProductUpdateHistory;
+import com.kmsoft.repository.ProductUpdateHistoryRepository;
+import com.kmsoft.service.ProductUpdateHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.kmsoft.model.ProductUpdateHistory;
-import com.kmsoft.repository.ProductUpdateHistoryRepository;
-import com.kmsoft.service.ProductUpdateHistoryService;
+import java.util.List;
 
 @Service
 public class ProductUpdateHistoryServiceImp implements ProductUpdateHistoryService {
@@ -33,8 +32,8 @@ public class ProductUpdateHistoryServiceImp implements ProductUpdateHistoryServi
 
 	@Override
 	public Page<List<ProductUpdateHistory>> findByUpdateDateContaining(String title, int id, Pageable paging) {
-		
-		return puhRepo.findByUpdateDateContaining(title,id, paging);
+		 String stitle = "%"+title+"%";
+		return puhRepo.findByUpdateDateContaining(stitle,id, paging);
 	}
 
 	@Override

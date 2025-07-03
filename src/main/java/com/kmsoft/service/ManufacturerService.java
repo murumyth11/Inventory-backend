@@ -1,7 +1,8 @@
 package com.kmsoft.service;
 
-import java.util.List;
 import com.kmsoft.model.Manufacturer;
+
+import java.util.List;
 
 public interface ManufacturerService {
 

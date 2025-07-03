@@ -1,26 +1,13 @@
 package com.kmsoft.model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 
 @Entity
@@ -76,6 +63,20 @@ public class PurchaseBillProduct {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	//@DateTimeFormat(pattern = "dd-MM-yyyy")
 	public Date expirydate;
+	
+	@ManyToOne()
+	@JoinColumn(name="warehouseFk",referencedColumnName = "warehouseId")
+	Warehouse warehouse;
+	
+	
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
+	}
 
 	public float getAvailablequantity() {
 		return availablequantity;
@@ -174,9 +175,11 @@ public class PurchaseBillProduct {
 		this.expirydate = expirydate;
 	}
 
+	
+
 	public PurchaseBillProduct(int pbpId, Product name, float quantity, float availablequantity, float rate,
 			float costprice, float amount, String code, String batch, String unit, Date manufacturedate,
-			Date expirydate) {
+			Date expirydate, Warehouse warehouse) {
 		super();
 		this.pbpId = pbpId;
 		this.name = name;
@@ -190,6 +193,7 @@ public class PurchaseBillProduct {
 		this.unit = unit;
 		this.manufacturedate = manufacturedate;
 		this.expirydate = expirydate;
+		this.warehouse = warehouse;
 	}
 
 	public PurchaseBillProduct() {

@@ -1,6 +1,8 @@
 package com.kmsoft.service;
-import java.util.List;
+
 import com.kmsoft.model.Brand;
+
+import java.util.List;
 
 public interface BrandService {
 

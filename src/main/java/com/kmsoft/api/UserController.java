@@ -1,21 +1,12 @@
 package com.kmsoft.api;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.kmsoft.model.Shop;
 import com.kmsoft.model.User;
-import com.kmsoft.repository.ShopRepository;
 import com.kmsoft.repository.UserRepository;
 import com.kmsoft.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -42,7 +33,7 @@ public class UserController {
 			}
 		}
 		
-		User userreg=registrationrepo.findById(1);
+		User userreg=registrationrepo.findByRoles("admin");
 		
 		User userobj=null;
 		if(userreg==null)

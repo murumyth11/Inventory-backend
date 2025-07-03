@@ -1,13 +1,11 @@
 package com.kmsoft.service;
 
-import java.util.List;
-import java.util.Map;
-
+import com.kmsoft.model.PurchaseBillProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.kmsoft.model.ProductUpdateHistory;
-import com.kmsoft.model.PurchaseBillProduct;
+import java.util.List;
+import java.util.Map;
 
 public interface PurchaseBillProductService {
 
@@ -28,6 +26,8 @@ public interface PurchaseBillProductService {
 	public void updatAvailableQty(int id,String qty);
 
 	public void updatRate(int pbpid1, String rate);
+
+	public Page<List<Map<String, Object>>> getWarehouseProducts(String title, Pageable paging, int warehouseid);
 
 
 
