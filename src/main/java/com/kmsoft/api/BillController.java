@@ -216,6 +216,13 @@ public class BillController  {
 	public List<Map<String,Object>> getCustomerBatchProduct(@RequestParam int cid,@RequestParam int pid){
 		return headerbillService.getcustomerbatchproduct(cid,pid);
 	}
+
+	@GetMapping("/testService")
+	public String getTestService()
+	{
+		return  "test_successfully";
+	}
+
 	
 	
 	

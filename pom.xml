@@ -12,7 +12,7 @@
 	<groupId>com.kmsoft</groupId>
 	<artifactId>kmsoftISoft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>inventory</name>
 	<description>KMSOFT ISOFT</description>
 
