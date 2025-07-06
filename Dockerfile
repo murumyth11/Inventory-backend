@@ -9,5 +9,5 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/kmsoftService.jar app.jar
-EXPOSE 8080 # Or whatever port your Spring Boot app listens on
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
