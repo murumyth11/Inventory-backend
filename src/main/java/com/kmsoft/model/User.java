@@ -3,7 +3,7 @@ package com.kmsoft.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="User")
+@Table(name="app_user")
 public class User {
 	
 	@Id
