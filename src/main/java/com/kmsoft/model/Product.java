@@ -100,7 +100,7 @@ public class Product {
 	@JsonDeserialize(using = DateDeserializer.class)
 	@JsonSerialize(using = DateSerializer.class)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="manufacturedate" ,columnDefinition="DATETIME")
+	@Column(name="manufacturedate" )
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	Date manufacturedate;
 	
@@ -108,7 +108,7 @@ public class Product {
 	@JsonDeserialize(using = DateDeserializer.class)
 	@JsonSerialize(using = DateSerializer.class)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="expirydate" ,columnDefinition="DATETIME")
+	@Column(name="expirydate" )
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	Date expirydate;
 	

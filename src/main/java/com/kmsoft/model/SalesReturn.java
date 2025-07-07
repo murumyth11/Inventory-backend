@@ -60,7 +60,7 @@ public class SalesReturn {
 
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@Column(name="date" ,columnDefinition="DATETIME")
+	@Column(name="date" )
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime date;
 	

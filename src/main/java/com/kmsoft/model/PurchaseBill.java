@@ -28,13 +28,13 @@ public class PurchaseBill {
 	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@Column(name="pbinvoicedate" ,columnDefinition="DATETIME")
+	@Column(name="pbinvoicedate" )
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime pbInvoiceDate;
 	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@Column(name="pbentrydate" ,columnDefinition="DATETIME")
+	@Column(name="pbentrydate" )
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime pbEntryDate;
 	

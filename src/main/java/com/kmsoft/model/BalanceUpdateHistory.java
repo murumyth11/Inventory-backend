@@ -22,7 +22,7 @@ public class BalanceUpdateHistory {
 	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@Column(name="balanceUpdateDate" ,columnDefinition="DATETIME")
+	@Column(name="balanceUpdateDate")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm a")
 	LocalDateTime balanceUpdateDate;
 	
