@@ -13,14 +13,11 @@ public class UserController {
 	
 	@Autowired
 	UserService registerationService;
-	 
-	
-	
 	
 	@Autowired
 	UserRepository registrationrepo;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/register")
 	public User registerUser(@RequestBody User user) throws Exception {
 		

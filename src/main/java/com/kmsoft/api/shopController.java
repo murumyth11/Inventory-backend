@@ -18,7 +18,7 @@ public class shopController {
 	ShopRepository shopRepo;
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/shop")
 	public Shop createShop(@RequestPart String data,@RequestPart MultipartFile Image) throws IOException {
 		
@@ -41,12 +41,12 @@ public class shopController {
 	
 	
 	@CrossOrigin("*")
-	@GetMapping("/shop")
+	//@GetMapping("/shop")
 	public Shop getShop() {
 		return shopRepo.findById(1).get();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/expiry")
 	public boolean checkExpiry() {
 	   
