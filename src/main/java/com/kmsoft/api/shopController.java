@@ -50,27 +50,28 @@ public class shopController {
 	@GetMapping("/expiry")
 	public boolean checkExpiry() {
 	   
-	 LocalDate d=LocalDate.now();
-	  Shop s=shopRepo.getOne(1);
-	  LocalDate exdate=s.getExpirydate();
-	  
-	 boolean isbefore;
-	 
-	 
-	
-	 
-	  
-	 if( d.isBefore(exdate)) {
-		 return true;
-	 }
-	 else  {
-		return false;
-	}
-		 
-	 
-	 
-	
-	
+//	 LocalDate d=LocalDate.now();
+//	  Shop s=shopRepo.getOne(1);
+//	  LocalDate exdate=s.getExpirydate();
+//
+//	 boolean isbefore;
+//
+//
+//
+//
+//
+//	 if( d.isBefore(exdate)) {
+//		 return true;
+//	 }
+//	 else  {
+//		return false;
+//	}
+//
+//
+//
+//
+//
+		return true;
 		
 	}
 
