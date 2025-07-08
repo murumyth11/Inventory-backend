@@ -20,7 +20,7 @@ public class BillproductController {
 	BillProductService billproductService;
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/billproduct")
 	public Billproduct createBillBody(@RequestBody Billproduct billProduct) {
 		return billproductService.createbillproduct(billProduct);
@@ -28,13 +28,13 @@ public class BillproductController {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/billproduct")
 	public List<Billproduct> getBillProduct() {
 		return billproductService.findall();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/salesByDate/{startDate}/{endDate}")
 	public Page<List<Map<String, Object>>> getProductSaleByDate(
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
@@ -64,7 +64,7 @@ public class BillproductController {
 
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/soldquantity")
 	public Map<String,Number> getTotalSoldQuantity(@RequestParam() int id) {
 		
@@ -72,7 +72,7 @@ public class BillproductController {
 	}
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/topMovingProductsByDate")
 	public Page<List<Map<String, Object>>> getTopMovingByDate(
 			@RequestParam(required =false) @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,

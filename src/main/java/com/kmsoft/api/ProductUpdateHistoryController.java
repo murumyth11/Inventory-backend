@@ -18,13 +18,13 @@ public class ProductUpdateHistoryController {
 	ProductUpdateHistoryService puhService;
 	
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/puh")
 	public ProductUpdateHistory createProductUpdateHistory(@RequestBody ProductUpdateHistory productupdtHst) {
 		return puhService.createProductUpdateHistory(productupdtHst);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/puh/{id}")
 	public Page<List<ProductUpdateHistory>> getPuh(
 			 @PathVariable int id,
@@ -53,7 +53,7 @@ public class ProductUpdateHistoryController {
 	    	  return pageTuts;}
 	     
 		}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/products/stockSold")
 	public int getStockSold() {
 		return puhService.getSTockSold();

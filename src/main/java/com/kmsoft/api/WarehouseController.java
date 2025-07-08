@@ -13,7 +13,7 @@ public class WarehouseController {
 	@Autowired
 	WarehouseRepository warehouseRepo;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/warehouse")
 	public Warehouse createWarehouse(@RequestBody Warehouse warehouse)
 	{
@@ -21,7 +21,7 @@ public class WarehouseController {
 	}
 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/warehouse")
 	public List<Warehouse> getAllWarehouse()
 	{

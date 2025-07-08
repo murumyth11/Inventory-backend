@@ -13,7 +13,7 @@ public class BrandController {
 	@Autowired
 	BrandService brandService;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/brand")
 	public Brand createBand(@RequestBody Brand brand ) {
 		
@@ -21,13 +21,13 @@ public class BrandController {
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/brand")
 	public List<Brand> getBrand(){
 		return brandService.findallbrand();
 		}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@DeleteMapping("/brand/{id}")
 	public void deleteBrand(@PathVariable Integer id) {
 		brandService.deleteBrand(id);

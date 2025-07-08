@@ -13,26 +13,26 @@ public class ProductGroupController {
 	@Autowired 
 	ProductGroupService pgService;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/productgroup")
 	public List<ProductGroup> getAllProductGroup() {
 		return pgService.getAllProductGroup();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/productgroup")
 	public ProductGroup createpg(@RequestBody ProductGroup productgroup) {
 		productgroup.setIsalivegroup(1);
 		return pgService.createpg(productgroup);
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/productgroup")
 	public ProductGroup updatepg(@RequestBody ProductGroup productgroup) {
 		return pgService.updatepg(productgroup);
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/deleteproductgroup")
 	public void deleteProductgroup(@RequestParam int id) {
 		pgService.deleteProductgroup(id);

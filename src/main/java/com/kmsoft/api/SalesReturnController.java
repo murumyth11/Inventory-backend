@@ -35,7 +35,7 @@ public class SalesReturnController {
 	
 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/salesreturn/referenceNo")
 	@ResponseBody
 	public String getReferenceNumber() {
@@ -43,7 +43,7 @@ public class SalesReturnController {
 		return salesReturnService.getRefNo();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/submitsalesreturn")
 	@jakarta.transaction.Transactional(rollbackOn = { Exception.class })
 	public SalesReturn submitsalesreturn(@RequestBody String data1) throws Exception{
@@ -104,7 +104,7 @@ public class SalesReturnController {
 	}
 }
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/salesreturn")
 	public Page<SalesReturn> getAllSalesReturn(@RequestParam(required = false) String title,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
@@ -124,7 +124,7 @@ public class SalesReturnController {
 
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/salesreturnid")
 	public SalesReturn getSalesReturnId(@RequestParam int id) {
 		return salesReturnService.getSalesReturnByid(id);

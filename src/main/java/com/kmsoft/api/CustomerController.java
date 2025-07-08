@@ -22,7 +22,7 @@ public class CustomerController {
 	@Autowired
 	BillRepository billRepo;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/customers")
 	public Customer createCustomer(@RequestBody Customer customer) throws Exception {
 		customer.setIsalive(1);
@@ -34,7 +34,7 @@ public class CustomerController {
 	}
 
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	  @GetMapping("/customers")
 	  public Page<Customer> getAllcustomers(
 	        @RequestParam(required = false) String title,
@@ -57,26 +57,26 @@ public class CustomerController {
 	     
 	  }
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/customerIsAlive")
 	public void deleteCustomer(@RequestParam String id)
 	{
 		customerRepo.deletecustomers(id);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/customers/{namelike}")
 	public List<Customer> getCustomerLike(@PathVariable String namelike){
 		String snamelike = "%" + namelike + "%";
 		return customerRepo.getCustomerLike(snamelike);
 	}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/customersPhone/{custPhone}")
 	public Customer getCustomerPhone(@PathVariable String custPhone){
 		return customerRepo.getCustomerPhone(custPhone);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/getcustomerbyid/{id}")
 	public Optional<Customer> getCustomerById(@PathVariable int id) {
 		return customerRepo.findById(id);

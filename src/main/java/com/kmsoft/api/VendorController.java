@@ -17,7 +17,7 @@ public class VendorController {
 	@Autowired
 	Vendorservice vendorservice;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/vendors")
 	public Vendors createVendors(@RequestBody Vendors vendors) throws Exception {
 		vendors.setIsalivevendor(1);
@@ -28,7 +28,7 @@ public class VendorController {
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	  @GetMapping("/vendors")
 	  public Page<Vendors> getAllVendors(
 	        @RequestParam(required = false) String title,
@@ -50,13 +50,13 @@ public class VendorController {
 	     
 	  }
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/deletevendors")
 	public void deleteCustomer(@RequestParam int id)
 	{
 		vendorservice.deleteVendorsById(id);
 	}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/vendors/{namelike}")
 	public List<Vendors> getVendorLike(@PathVariable String namelike){
 		return vendorservice.getVendorLike(namelike);

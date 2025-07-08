@@ -30,7 +30,7 @@ public class PurchasebillController {
 	@Autowired
 	ProductUpdateHistoryService productUpdateHistoryService;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/purchasebill/referenceNo")
 	@ResponseBody
 	public String getReferenceNumber() {
@@ -38,7 +38,7 @@ public class PurchasebillController {
 		return pbservice.getRefNo();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/savepurchasebill")
 	public void updatepurchasebill(@RequestBody String data) {
 
@@ -51,7 +51,7 @@ public class PurchasebillController {
 	 
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PatchMapping("/submit")
 	@Transactional(rollbackOn = { Exception.class })
 	public PurchaseBill submitBill(@RequestPart String data1 ,@RequestPart(required = false) MultipartFile img) throws Exception{
@@ -104,7 +104,7 @@ public class PurchasebillController {
 	
 	} 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/purchasebill")
 	public Page<PurchaseBill> getAllHeaderbills(@RequestParam(required = false) String title,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
@@ -124,13 +124,13 @@ public class PurchasebillController {
 
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/pbid")
 	public PurchaseBill getpurchasebillId(@RequestParam int id) {
 		return pbservice.getpurchasebillbyid(id);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/purchasehardcopy")
 	public byte[] getimage(@RequestParam int id) {
 		return pbservice.getimage(id);

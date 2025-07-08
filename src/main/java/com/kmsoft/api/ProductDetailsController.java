@@ -42,20 +42,20 @@ public class ProductDetailsController {
 	ProductValidatorsRepository pvRepo;
 	
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@RequestMapping("/products")
 	public List<Product> getAllProducts() {
 		return productservice.getAllProducts();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/products/{id}")
 	public Product getProductsById(@PathVariable Integer id) {
 		return productservice.getoneById(id);
 	}
 
 	// save product
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/products")
 	public Product createProduct(@Valid @RequestBody Product product) {
 		if (product.getPrimaryUnit() == null) {
@@ -75,14 +75,14 @@ public class ProductDetailsController {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/products/{id}")
 	public Product updateProduct( @PathVariable int id,@Valid @RequestBody Product product) {
 		return productservice.updateProduct(id, product);
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/deleteproducts")
 
 	public void deleteProduct(@RequestParam int id) {
@@ -91,31 +91,31 @@ public class ProductDetailsController {
 
 	
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/productsLike/{productlike}")
 	public List<Product> getproductlike(@PathVariable String productlike) {
 		return productservice.getproductlike(productlike);
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/products/lowstock")
 	public List<Product> getLowStock() {
 		return productservice.getLowStock();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/products/stockInHand")
 	public int getStockInHand() {
 		return productservice.getStockInHand();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/products/totalProductCount")
 	public int getTotalproductcount() {
 		return productservice.getTotalproductcount();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/prd")
 	public Page<Product> getAllProducts(@RequestParam(required = false) String title,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
@@ -133,13 +133,13 @@ public class ProductDetailsController {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@RequestMapping("/updatequantity/{id}")
 	public void updateQuantity(@PathVariable int id, @RequestParam() String qty) {
 		productservice.updateProductQuantity(id, qty,"purchase");
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/inventoryReports")
 	public Page<List<Map<String, Object>>> getInventoryReport(
 
@@ -164,19 +164,19 @@ public class ProductDetailsController {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/productValidators")
 	public ProductValidators createProductValidators(@RequestBody ProductValidators pv) {
 		return pvRepo.save(pv);
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/productValidators")
 	public Optional<ProductValidators> getPv() {
 		return pvRepo.findById(1);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PatchMapping("/adjustbatch")
 	@Transactional(rollbackOn = { Exception.class })
 	public void adjustbatch(@RequestBody String adjustbatch) {
@@ -222,14 +222,14 @@ public class ProductDetailsController {
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/topmovingproducts")
 	public List<Product> getTopMovingProducts(){
 		return productservice.getTopMovingproducts();
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/test")
 	public String getsample() {
 		return "test executed";

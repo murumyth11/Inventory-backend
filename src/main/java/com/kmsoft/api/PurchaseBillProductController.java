@@ -17,7 +17,7 @@ public class PurchaseBillProductController {
 	@Autowired
 	PurchaseBillProductService pbservice;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/purchasebillproduct")
 	public PurchaseBillProduct createPurchaseBillBody(@RequestBody PurchaseBillProduct billProduct) {
 		if(billProduct.getBatch()==null) {
@@ -27,7 +27,7 @@ public class PurchaseBillProductController {
 		}
 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/purchasebillproduct/{id}")
 	public List<PurchaseBillProduct> getpbpById(@PathVariable int id){
 		return pbservice.getpbpbyid(id);
@@ -37,13 +37,13 @@ public class PurchaseBillProductController {
 	
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/batchcode")
 	public List<PurchaseBillProduct> getbatchcode(@RequestParam int id){
 		return pbservice.getbatchcode(id);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/batchcodePW")
 	public Page<PurchaseBillProduct> getBatchDetails(
 			 @RequestParam int id,
@@ -70,7 +70,7 @@ public class PurchaseBillProductController {
 		
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/availableqty")
 	public PurchaseBillProduct getAvailableqty(
 			@RequestParam int id) {
@@ -78,14 +78,14 @@ public class PurchaseBillProductController {
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/totalstockinfo")
 	public Map<String, Number> getTotalStockValue(){
 		return pbservice.gettotalstockinfo();
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("productsbywarehouse")
 	public  Page<List<Map<String,Object>>> getWarehouseProducts(@RequestParam int warehouseid,@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "1") int size){

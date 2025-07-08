@@ -34,7 +34,7 @@ public class BillController  {
 	ProductUpdateHistoryService productUpdateHistoryService;
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/headerbill")
 	public HeaderBill createheaderBill(@RequestBody HeaderBill headerbill) {
 		return headerbillService.createHeaderBill(headerbill);
@@ -42,7 +42,7 @@ public class BillController  {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill")
 	public Page<HeaderBill> getAllHeaderbills(@RequestParam(required = false) String title,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
@@ -62,7 +62,7 @@ public class BillController  {
 
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill/{startDate}/{endDate}")
 	public Page<HeaderBill> getData_between(
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
@@ -83,20 +83,20 @@ public class BillController  {
 		return pageTuts;
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill/draft")
 	public List<HeaderBill> getdraftbill() {
 
 		return headerbillService.getDraftBill();
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@DeleteMapping("/headerbill/draft/{id}")
 	public void deletedraftbill(@PathVariable Integer id) {
 		headerbillService.deleteDraftbillByid(id);
 	}
 
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill/bydate/{startDate}/{endDate}")
 	public List<Map<String,Object>> getbillbydate(@PathVariable  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startDate,
 			@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date endDate ) {
@@ -105,7 +105,7 @@ public class BillController  {
 
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill/invoiceNo")
 	public int getInvoiceNumber() {
 
@@ -113,7 +113,7 @@ public class BillController  {
 	}
 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/headerbill/details")
 	public Map<String,Object> getHeaderBillDetails(@RequestParam(required = false)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date startdate, @RequestParam(required = false
 	)  @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a") Date enddate){
@@ -125,13 +125,13 @@ public class BillController  {
 		}
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PutMapping("/headerbill/{id}")
 	public HeaderBill updateHeaderBill(@PathVariable int id,@RequestBody HeaderBill headerbill) {
 		return headerbillService.updateHeaderBill(headerbill);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/submitBill")
 	@Transactional(rollbackOn = { Exception.class})
 	public HeaderBill submitBill(@RequestBody String sb) throws Exception{
@@ -182,7 +182,7 @@ public class BillController  {
 	
 	} 
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/customerproducts")
 	
 	public Page<List<Map<String, Object>>> getHeaderbillsCustomer(@RequestParam(required = false,defaultValue = " ") String title,
@@ -205,13 +205,13 @@ public class BillController  {
 		return pageTuts;
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/customerbilldetails")
 	public Map<String,Object> getCustomerbilldetails(@RequestParam int id){
 		return headerbillService.customerbilldetails(id);
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/customerbatchproduct")
 	public List<Map<String,Object>> getCustomerBatchProduct(@RequestParam int cid,@RequestParam int pid){
 		return headerbillService.getcustomerbatchproduct(cid,pid);

@@ -17,13 +17,13 @@ public class BalanceUpdateController {
 	@Autowired
 	BalanceUpdateHistoryService balanceUpdateHistoryService;
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/balanceupdate")
 	public  BalanceUpdateHistory saveBalanceUpdate(@RequestBody BalanceUpdateHistory balanceupdatehistory)
 	{ 
 		return balanceUpdateHistoryService.CreateBalanceUpdate(balanceupdatehistory);
 	}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/balanceupdate")
 	public Page<List<Map<String,Object>>> getBalanceUpdateHistory(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size)
@@ -41,7 +41,7 @@ public class BalanceUpdateController {
 		return data;
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/balanceupdatepurchase")
 	public Page<List<Map<String,Object>>> getBalanceUpdateHistoryPurchase(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size)
@@ -58,7 +58,7 @@ public class BalanceUpdateController {
 		}
 		return data;
 	}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/balanceupdatesalesreturn")
 	public Page<List<Map<String,Object>>> getBalanceUpdateHistorySalesReturn(@RequestParam(required = false) String title, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size)

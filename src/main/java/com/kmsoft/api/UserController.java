@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	UserRepository registrationrepo;
 	
-	//@CrossOrigin("*")
+	////@CrossOrigin("*")
 	@PostMapping("/register")
 	public User registerUser(@RequestBody User user) throws Exception {
 		
@@ -43,7 +43,7 @@ public class UserController {
 		
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/registerRole")
 	public User registerRole(@RequestBody User user) throws Exception{
 		String tempUserName=user.getUserName();
@@ -61,7 +61,7 @@ return userobj;
 
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@PostMapping("/login")
 	public User login(@RequestBody User user) throws Exception {
 	
@@ -77,13 +77,13 @@ return userobj;
 		}
 		return userObj;
 	}
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/userRoles")
 	public List<User> getAllUser(){
 		return registrationrepo.findAll();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@DeleteMapping("/userRoles/delete/{id}")
 	public  void deleteUserRole(@PathVariable int id) {
 		registrationrepo.deleteById(id);

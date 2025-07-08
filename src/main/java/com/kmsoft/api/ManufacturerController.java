@@ -13,20 +13,20 @@ public class ManufacturerController {
 	@Autowired
 	ManufacturerService manufacturerService;
 	
-	@CrossOrigin("*")	
+	//@CrossOrigin("*")
 	@PostMapping("/manufacturer")
 	public Manufacturer createManufacturer(@RequestBody Manufacturer manufacturer) {
 		return manufacturerService.createManufacturer(manufacturer);
 	}
 	
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@GetMapping("/manufacturer")
 	public List<Manufacturer> getManufacturer(){
 		return  manufacturerService.getManufacturer();
 	}
 	
-	@CrossOrigin("*")
+	//@CrossOrigin("*")
 	@DeleteMapping("/manufacturer/{id}")
 	public void deleteManufacturer(@PathVariable Integer id)
 	{
