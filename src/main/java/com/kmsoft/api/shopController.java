@@ -40,8 +40,8 @@ public class shopController {
 	
 	
 	
-	@CrossOrigin("*")
-	//@GetMapping("/shop")
+	//@CrossOrigin("*")
+	@GetMapping("/shop")
 	public Shop getShop() {
 		return shopRepo.findById(1).get();
 	}
