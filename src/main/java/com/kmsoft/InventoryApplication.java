@@ -27,31 +27,31 @@ UserRepository userRepo;
 @Autowired
 ShopRepository shopRepo;
 	
-//  @PostConstruct
-//	  public void init(){
-//
-//	  User user=new User();
-//		user.setUserName("kmsoftv1");
-//		user.setUserId(1);
-//		user.setRoles("system");
-//
-//		user.setPassword("tn52q0297");
-//		userRepo.save(user);
-//
-//		boolean s=shopRepo.existsById(1);
-//		if(s==false) {
-//		Shop shop=new Shop();
-//		shop.setShopid(1);
-//		shop.setShopName("DemoShop");
-//		LocalDate d=LocalDate.now();
-//		LocalDate exp=d.plusDays(7);
-//		shop.setExpirydate(exp);
-//		 shopRepo.saveAndFlush(shop);
-//		 }
-//		else {
-//
-//		}
-//	  }
+  @PostConstruct
+	  public void init(){
+
+	  User user=new User();
+		user.setUserName("kmsoftv1");
+		user.setUserId(1);
+		user.setRoles("system");
+
+		user.setPassword("tn52q0297");
+		userRepo.save(user);
+
+		boolean s=shopRepo.existsById(1);
+		if(s==false) {
+		Shop shop=new Shop();
+		shop.setShopid(1);
+		shop.setShopName("DemoShop");
+		LocalDate d=LocalDate.now();
+		LocalDate exp=d.plusDays(7);
+		shop.setExpirydate(exp);
+		 shopRepo.saveAndFlush(shop);
+		 }
+		else {
+
+		}
+	  }
   
 //  @Override  
 //  protected SpringApplicationBuilder configure(SpringApplicationBuilder application)   
