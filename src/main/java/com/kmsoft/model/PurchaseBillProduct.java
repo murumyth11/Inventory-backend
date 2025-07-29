@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="PurchaseBillProduct")
+@Table(name="purchase_bill_product")
 public class PurchaseBillProduct {
 
 	@Id
@@ -19,7 +19,6 @@ public class PurchaseBillProduct {
 	int pbpId;
 	
 	@ManyToOne
-	
 	@JoinColumn(name="productFk",referencedColumnName = "productId")
 	Product name;
 	

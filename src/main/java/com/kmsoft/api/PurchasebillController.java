@@ -72,10 +72,10 @@ public class PurchasebillController {
 		 { h.setPurchaseimage(img.getBytes());}
 		pbservice.createPurchaseBill(h);
 		
-		int i=0,j=0;
+
 		for(Object qtyData:updateQtyArray)
 		{
-			i++;
+
 			int id;
 			String qty;
 			String updatefrom;
@@ -89,7 +89,7 @@ public class PurchasebillController {
 			}
 		for(Object updatehistory:updateHistroryArray) {
 			
-		j++;
+
 			ProductUpdateHistory productUpdateHistory=objectMapper.readValue(updatehistory.toString(), ProductUpdateHistory.class);
 			productUpdateHistoryService.createProductUpdateHistory(productUpdateHistory);
 		}

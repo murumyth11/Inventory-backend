@@ -1,4 +1,4 @@
-package com.kmsoft.api;
+package com.kmsoft.security;
 
 // src/main/java/com/yourpackage/config/CorsConfig.java (adjust package as needed)
 
@@ -19,8 +19,8 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 // Allow requests from your Angular frontend domain
                 registry.addMapping("/**") // Apply CORS to all endpoints
-                        .allowedOrigins("https://invsoft-client.onrender.com") // <--- IMPORTANT: Replace with your actual Angular frontend URL
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow common HTTP methods
+                        .allowedOrigins("https://invsoft-client.onrender.com","http://localhost:4200") // <--- IMPORTANT: Replace with your actual Angular frontend URL
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH") // Allow common HTTP methods
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Allow sending cookies/auth headers
             }

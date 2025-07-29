@@ -15,369 +15,334 @@ import java.util.List;
 
 @Entity
 @Table(name = "Product")
-@JsonIgnoreProperties({ "productUpdateHistory","billproduct","purchasebillproduct" })
+@JsonIgnoreProperties({"productUpdateHistory", "billproduct", "purchasebillproduct"})
 
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int productId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int productId;
 
-	@Column(name = "productKey")
-	String productKey;
+    @Column(name = "productKey")
+    String productKey;
 
-	@Column(name = "productName")
-	String productName;
+    @Column(name = "productName")
+    String productName;
 
-	
-	
-	@Column(name = "productQuantity",columnDefinition="DECIMAL(10,2)")
-	
-	float productQuantity;
-	
-	@Column(name="weight")
-	int weight;
-	
-	@Column(name="entryDate")
+    @Column(name = "productQuantity", columnDefinition = "DECIMAL(10,2)")
+
+    float productQuantity;
+
+    @Column(name = "weight")
+    int weight;
+
+    @Column(name = "entryDate")
 //	@Temporal(TemporalType.TIMESTAMP)
 //  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss" ,timezone = "Asia/Kolkata")
     private String createDate;
-	
-	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL })
-		public List<Billproduct> billproduct=new ArrayList<Billproduct>();
-	
-	@OneToMany(mappedBy="name", cascade = { CascadeType.ALL })
-	public List<PurchaseBillProduct> purchasebillproduct=new ArrayList<PurchaseBillProduct>();
-		
-    
-	
-	public String getCreateDate() {
-		return createDate;
-	}
 
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
+    @OneToMany(mappedBy = "name", cascade = {CascadeType.ALL})
+    public List<Billproduct> billproduct = new ArrayList<Billproduct>();
 
-	public int getWeight() {
-		return weight;
-	}
+    @OneToMany(mappedBy = "name", cascade = {CascadeType.ALL})
+    public List<PurchaseBillProduct> purchasebillproduct = new ArrayList<PurchaseBillProduct>();
 
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	
-	@Column(name="dimension")
-	String dimension;
+    public String getCreateDate() {
+        return createDate;
+    }
 
-	public String getDimension() {
-		return dimension;
-	}
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setDimension(String dimension) {
-		this.dimension = dimension;
-	}
+    public int getWeight() {
+        return weight;
+    }
 
-	@Column(name="primaryunit")
-	
-	String primaryUnit;
-	
-	@Column(name="secondaryunit")
-	
-	String secondaryUnit;
-	
-	@Column(name="unitconversion")
-	
-	int unitConversion;
-	
-	@Column(name="batch")
-	String batch;
-	
-	
-	@Column(name="isaliveproduct",columnDefinition = "integer default '1'")
-	int isAliveProduct;
-	
-	@JsonDeserialize(using = DateDeserializer.class)
-	@JsonSerialize(using = DateSerializer.class)
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="manufacturedate" )
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	Date manufacturedate;
-	
-	
-	@JsonDeserialize(using = DateDeserializer.class)
-	@JsonSerialize(using = DateSerializer.class)
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="expirydate" )
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	Date expirydate;
-	
-	
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
-	
-	
-	public Date getManufacturedate() {
-		return manufacturedate;
-	}
+    @Column(name = "dimension")
+    String dimension;
 
-	public void setManufacturedate(Date manufacturedate) {
-		this.manufacturedate = manufacturedate;
-	}
+    public String getDimension() {
+        return dimension;
+    }
 
-	public Date getExpirydate() {
-		return expirydate;
-	}
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
 
-	public void setExpirydate(Date expirydate) {
-		this.expirydate = expirydate;
-	}
+    @Column(name = "primaryunit")
 
-	public List<PurchaseBillProduct> getPurchasebillproduct() {
-		return purchasebillproduct;
-	}
+    String primaryUnit;
 
-	public void setPurchasebillproduct(List<PurchaseBillProduct> purchasebillproduct) {
-		this.purchasebillproduct = purchasebillproduct;
-	}
+    @Column(name = "secondaryunit")
 
-	
+    String secondaryUnit;
 
-	public int getIsAliveProduct() {
-		return isAliveProduct;
-	}
+    @Column(name = "unitconversion")
 
-	public void setIsAliveProduct(int isAliveProduct) {
-		this.isAliveProduct = isAliveProduct;
-	}
+    int unitConversion;
 
-	public String getBatch() {
-		return batch;
-	}
+    @Column(name = "batch")
+    String batch;
 
-	public void setBatch(String batch) {
-		this.batch = batch;
-	}
+    @Column(name = "isaliveproduct", columnDefinition = "integer default '1'")
+    int isAliveProduct;
 
-	public List<Billproduct> getBillproduct() {
-		return billproduct;
-	}
+    @JsonDeserialize(using = DateDeserializer.class)
+    @JsonSerialize(using = DateSerializer.class)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "manufacturedate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    Date manufacturedate;
 
-	public void setBillproduct(List<Billproduct> billproduct) {
-		this.billproduct = billproduct;
-	}
+    @JsonDeserialize(using = DateDeserializer.class)
+    @JsonSerialize(using = DateSerializer.class)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "expirydate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    Date expirydate;
 
-	public String getPrimaryUnit() {
-		return primaryUnit;
-	}
+    public Date getManufacturedate() {
+        return manufacturedate;
+    }
 
-	public void setPrimaryUnit(String primaryUnit) {
-		this.primaryUnit = primaryUnit;
-	}
+    public void setManufacturedate(Date manufacturedate) {
+        this.manufacturedate = manufacturedate;
+    }
 
-	public String getSecondaryUnit() {
-		return secondaryUnit;
-	}
+    public Date getExpirydate() {
+        return expirydate;
+    }
 
-	public void setSecondaryUnit(String secondaryUnit) {
-		this.secondaryUnit = secondaryUnit;
-	}
+    public void setExpirydate(Date expirydate) {
+        this.expirydate = expirydate;
+    }
 
-	public int getUnitConversion() {
-		return unitConversion;
-	}
+    public List<PurchaseBillProduct> getPurchasebillproduct() {
+        return purchasebillproduct;
+    }
 
-	public void setUnitConversion(int unitConversion) {
-		this.unitConversion = unitConversion;
-	}
+    public void setPurchasebillproduct(List<PurchaseBillProduct> purchasebillproduct) {
+        this.purchasebillproduct = purchasebillproduct;
+    }
 
-	@Column(name = "costPrice")
-	BigDecimal costPrice;
-	
-	@Column(name="sellingPrice")
+    public int getIsAliveProduct() {
+        return isAliveProduct;
+    }
+
+    public void setIsAliveProduct(int isAliveProduct) {
+        this.isAliveProduct = isAliveProduct;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+
+    public List<Billproduct> getBillproduct() {
+        return billproduct;
+    }
+
+    public void setBillproduct(List<Billproduct> billproduct) {
+        this.billproduct = billproduct;
+    }
+
+    public String getPrimaryUnit() {
+        return primaryUnit;
+    }
+
+    public void setPrimaryUnit(String primaryUnit) {
+        this.primaryUnit = primaryUnit;
+    }
+
+    public String getSecondaryUnit() {
+        return secondaryUnit;
+    }
+
+    public void setSecondaryUnit(String secondaryUnit) {
+        this.secondaryUnit = secondaryUnit;
+    }
+
+    public int getUnitConversion() {
+        return unitConversion;
+    }
+
+    public void setUnitConversion(int unitConversion) {
+        this.unitConversion = unitConversion;
+    }
+
+    @Column(name = "costPrice")
+    BigDecimal costPrice;
+
+    @Column(name = "sellingPrice")
     BigDecimal sellingPrice;
-	
-	
-	
-	@Column(name="manufacturer")
-	String manufacturer;
-	
-	@Column(name="brand")
-	String brand;
-	
-	@Column(name="manufacturePartNumber")
-	String manufacturePartNumber;
-	
-	@Column(name="universalProductCode")
-	String universalProductCode;
-	
-	
-	@Column(name = "productType")
-	String productType;
 
-	@ManyToOne
-	@JoinColumn(name = "productGroupFk", referencedColumnName = "productGroupId")
-	ProductGroup productgroup;
-	
-	@OneToMany(mappedBy="product",cascade = CascadeType.ALL,
-        orphanRemoval = true)
-	
-		List<ProductUpdateHistory> productUpdateHistory=new ArrayList<ProductUpdateHistory>();
+    @Column(name = "manufacturer")
+    String manufacturer;
 
-	
-	
+    @Column(name = "brand")
+    String brand;
 
-	public List<ProductUpdateHistory> getProductUpdateHistory() {
-		return productUpdateHistory;
-	}
+    @Column(name = "manufacturePartNumber")
+    String manufacturePartNumber;
 
-	public void setProductUpdateHistory(List<ProductUpdateHistory> productUpdateHistory) {
-		this.productUpdateHistory = productUpdateHistory;
-	}
+    @Column(name = "universalProductCode")
+    String universalProductCode;
 
-	public BigDecimal getCostPrice() {
-		return costPrice;
-	}
+    @Column(name = "productType")
+    String productType;
 
-	public void setCostPrice(BigDecimal costPrice) {
-		this.costPrice = costPrice;
-	}
+    @ManyToOne
+    @JoinColumn(name = "productGroupFk", referencedColumnName = "productGroupId")
+    ProductGroup productgroup;
 
-	public BigDecimal getSellingPrice() {
-		return sellingPrice;
-	}
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 
-	public void setSellingPrice(BigDecimal sellingPrice) {
-		this.sellingPrice = sellingPrice;
-	}
+    List<ProductUpdateHistory> productUpdateHistory = new ArrayList<ProductUpdateHistory>();
 
-		public String getManufacturer() {
-		return manufacturer;
-	}
+    public List<ProductUpdateHistory> getProductUpdateHistory() {
+        return productUpdateHistory;
+    }
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+    public void setProductUpdateHistory(List<ProductUpdateHistory> productUpdateHistory) {
+        this.productUpdateHistory = productUpdateHistory;
+    }
 
-	public String getBrand() {
-		return brand;
-	}
+    public BigDecimal getCostPrice() {
+        return costPrice;
+    }
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
+    }
 
-	public String getManufacturePartNumber() {
-		return manufacturePartNumber;
-	}
+    public BigDecimal getSellingPrice() {
+        return sellingPrice;
+    }
 
-	public void setManufacturePartNumber(String manufacturePartNumber) {
-		this.manufacturePartNumber = manufacturePartNumber;
-	}
+    public void setSellingPrice(BigDecimal sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
 
-	public String getUniversalProductCode() {
-		return universalProductCode;
-	}
+    public String getManufacturer() {
+        return manufacturer;
+    }
 
-	public void setUniversalProductCode(String universalProductCode) {
-		this.universalProductCode = universalProductCode;
-	}
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
+    public String getBrand() {
+        return brand;
+    }
 
-	public ProductGroup getProductgroup() {
-		return productgroup;
-	}
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-	public void setProductgroup(ProductGroup productgroup) {
-		this.productgroup = productgroup;
-	}
+    public String getManufacturePartNumber() {
+        return manufacturePartNumber;
+    }
 
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public void setManufacturePartNumber(String manufacturePartNumber) {
+        this.manufacturePartNumber = manufacturePartNumber;
+    }
 
-	public int getProductId() {
-		return productId;
-	}
+    public String getUniversalProductCode() {
+        return universalProductCode;
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+    public void setUniversalProductCode(String universalProductCode) {
+        this.universalProductCode = universalProductCode;
+    }
 
-	public String getProductKey() {
-		return productKey;
-	}
+    public ProductGroup getProductgroup() {
+        return productgroup;
+    }
 
-	public void setProductKey(String productKey) {
-		this.productKey = productKey;
-	}
+    public void setProductgroup(ProductGroup productgroup) {
+        this.productgroup = productgroup;
+    }
 
-	public String getProductName() {
-		return productName;
-	}
+    public Product() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
+    public int getProductId() {
+        return productId;
+    }
 
-	
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
+    public String getProductKey() {
+        return productKey;
+    }
 
+    public void setProductKey(String productKey) {
+        this.productKey = productKey;
+    }
 
-	public String getProductType() {
-		return productType;
-	}
+    public String getProductName() {
+        return productName;
+    }
 
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	
+    public String getProductType() {
+        return productType;
+    }
 
-	public float getProductQuantity() {
-		return productQuantity;
-	}
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 
-	public void setProductQuantity(float productQuantity) {
-		this.productQuantity = productQuantity;
-	}
+    public float getProductQuantity() {
+        return productQuantity;
+    }
 
-	public Product(int productId, String productKey, String productName, float productQuantity, int weight,
-			String createDate, List<Billproduct> billproduct, List<PurchaseBillProduct> purchasebillproduct,
-			String dimension, String primaryUnit, String secondaryUnit, int unitConversion, String batch,
-			int isAliveProduct, Date manufacturedate, Date expirydate, BigDecimal costPrice,
-			BigDecimal sellingPrice, String manufacturer, String brand, String manufacturePartNumber,
-			String universalProductCode, String productType, ProductGroup productgroup,
-			List<ProductUpdateHistory> productUpdateHistory) {
-		super();
-		this.productId = productId;
-		this.productKey = productKey;
-		this.productName = productName;
-		this.productQuantity = productQuantity;
-		this.weight = weight;
-		this.createDate = createDate;
-		this.billproduct = billproduct;
-		this.purchasebillproduct = purchasebillproduct;
-		this.dimension = dimension;
-		this.primaryUnit = primaryUnit;
-		this.secondaryUnit = secondaryUnit;
-		this.unitConversion = unitConversion;
-		this.batch = batch;
-		this.isAliveProduct = isAliveProduct;
-		this.manufacturedate = manufacturedate;
-		this.expirydate = expirydate;
-		this.costPrice = costPrice;
-		this.sellingPrice = sellingPrice;
-		this.manufacturer = manufacturer;
-		this.brand = brand;
-		this.manufacturePartNumber = manufacturePartNumber;
-		this.universalProductCode = universalProductCode;
-		this.productType = productType;
-		this.productgroup = productgroup;
-		this.productUpdateHistory = productUpdateHistory;
-	}
+    public void setProductQuantity(float productQuantity) {
+        this.productQuantity = productQuantity;
+    }
 
-	
-	
-	
+    public Product(int productId, String productKey, String productName, float productQuantity, int weight, String createDate, List<Billproduct> billproduct, List<PurchaseBillProduct> purchasebillproduct, String dimension, String primaryUnit, String secondaryUnit, int unitConversion, String batch, int isAliveProduct, Date manufacturedate, Date expirydate, BigDecimal costPrice, BigDecimal sellingPrice, String manufacturer, String brand, String manufacturePartNumber, String universalProductCode, String productType, ProductGroup productgroup, List<ProductUpdateHistory> productUpdateHistory) {
+        super();
+        this.productId = productId;
+        this.productKey = productKey;
+        this.productName = productName;
+        this.productQuantity = productQuantity;
+        this.weight = weight;
+        this.createDate = createDate;
+        this.billproduct = billproduct;
+        this.purchasebillproduct = purchasebillproduct;
+        this.dimension = dimension;
+        this.primaryUnit = primaryUnit;
+        this.secondaryUnit = secondaryUnit;
+        this.unitConversion = unitConversion;
+        this.batch = batch;
+        this.isAliveProduct = isAliveProduct;
+        this.manufacturedate = manufacturedate;
+        this.expirydate = expirydate;
+        this.costPrice = costPrice;
+        this.sellingPrice = sellingPrice;
+        this.manufacturer = manufacturer;
+        this.brand = brand;
+        this.manufacturePartNumber = manufacturePartNumber;
+        this.universalProductCode = universalProductCode;
+        this.productType = productType;
+        this.productgroup = productgroup;
+        this.productUpdateHistory = productUpdateHistory;
+    }
+
 }

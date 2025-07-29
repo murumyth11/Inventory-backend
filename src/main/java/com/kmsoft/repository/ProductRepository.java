@@ -41,11 +41,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	 Page<Product> findAll(Pageable pageable);
 	
-	 @Query(value="SELECT * FROM product WHERE (product_name LIKE :title"+" OR product_quantity LIKE :title "
+	 @Query(value="SELECT * FROM product WHERE (product_name LIKE :title OR product_quantity LIKE :title "
 	 +" OR product_group_fk LIKE :title "
 			 +" OR primaryunit LIKE :title "
 	 +" OR entry_date LIKE :title "
-			 +" OR selling_price LIKE :title "+" OR cost_price LIKE :title "+" OR manufacturer LIKE :title "+
+			 +" OR selling_price LIKE :title OR cost_price LIKE :title OR manufacturer LIKE :title "+
 			 " OR brand LIKE :title ) and isaliveproduct=1"
 	 
 			 ,nativeQuery = true)

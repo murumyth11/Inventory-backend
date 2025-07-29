@@ -1,8 +1,10 @@
 package com.kmsoft.service;
 
 import com.kmsoft.model.Product;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -45,4 +47,5 @@ public Product createProduct(Product product);
 
 	public List<Product> getTopMovingproducts();
 
+	void uploadProductSheet(Workbook workbook);
 }

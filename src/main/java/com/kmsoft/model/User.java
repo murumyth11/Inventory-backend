@@ -1,10 +1,13 @@
 package com.kmsoft.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Entity
-@Table(name="app_user")
-public class User {
+@Table(name="user")
+public class User implements UserDetailsService {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -75,7 +78,9 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
-	
-	
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
+	}
 }
